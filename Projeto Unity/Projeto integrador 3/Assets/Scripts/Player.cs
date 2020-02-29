@@ -12,8 +12,10 @@ public class Player : MonoBehaviour
 
     float hori;
     float vert;
-    float SpeedLocal;
+    public float SpeedLocal;
 
+
+    int auxWhile = 0;
 
     void Start()
     {
@@ -33,7 +35,7 @@ public class Player : MonoBehaviour
         ///rb.AddForce(PontoFixo.transform.forward * vert * Speed);
         //rb.AddForce(PontoFixo.transform.right * hori * Speed);
 
-        rb.velocity = new Vector3(-vert,0, hori) * SpeedLocal;
+        rb.velocity = new Vector3(-hori,0, -vert) * SpeedLocal;
 
     }
 
@@ -47,12 +49,24 @@ public class Player : MonoBehaviour
         }
         if (other.CompareTag("PowerUpSpeed"))
         {
-            //while(SpeedLocal != PowerUpSpeed)
-            //{
-            //    SpeedLocal -= 1;
-            //    yield return new WaitForSeconds(3f);
-            //    rb.velocity = new Vector3(-vert, 0, hori) * PowerUpSpeed;
-            //}
+
+            SpeedLocal = PowerUpSpeed;
+            while(SpeedLocal > Speed)
+            {
+                rb.velocity = new Vector3(-hori, 0, -vert) * SpeedLocal;
+                SpeedLocal -= 1;
+                yield return new WaitForSeconds(0.01f);
+
+                print("aaa");
+
+
+
+                if (auxWhile > 100)
+                {
+                    break;
+                }
+                auxWhile++;
+            }
 
 
 
