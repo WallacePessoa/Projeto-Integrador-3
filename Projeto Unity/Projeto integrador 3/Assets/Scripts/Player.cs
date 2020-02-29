@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float Speed;
+    public float PowerUpSpeed;
     public GameObject PontoFixo;
 
     Rigidbody rb;
@@ -41,10 +42,23 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Laser"))
         {
             SpeedLocal -= 1;
+            yield return new WaitForSeconds(3f);
+            SpeedLocal += 1;
+        }
+        if (other.CompareTag("PowerUpSpeed"))
+        {
+            //while(SpeedLocal != PowerUpSpeed)
+            //{
+            //    SpeedLocal -= 1;
+            //    yield return new WaitForSeconds(3f);
+            //    rb.velocity = new Vector3(-vert, 0, hori) * PowerUpSpeed;
+            //}
+
+
+
+            print("aaa");
         }
 
-        yield return new WaitForSeconds(3f);
-        SpeedLocal += 1;
 
     }
 }
