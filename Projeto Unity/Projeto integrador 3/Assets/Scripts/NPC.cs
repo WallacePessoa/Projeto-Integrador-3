@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-
+    public Camera Camera;
     public float Speed;
     public GameObject PontoFixo;
 
@@ -13,6 +13,11 @@ public class NPC : MonoBehaviour
     float hori;
     float vert;
     public float SpeedLocal;
+
+
+    Ray ray;
+
+    RaycastHit hit;
 
 
 
@@ -26,8 +31,31 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
-        rb.AddTorque(PontoFixo.transform.right * SpeedLocal);
+        if (Physics.Raycast(transform.position,transform.forward * 20, out hit, Mathf.Infinity))
+        {
+            rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
+            Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z), Color.blue, 1);
+
+        }
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
+        {
+            rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
+            Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z), Color.yellow, 1);
+
+        }
+
+        if (Physics.Raycast(transform.position, transform.forward * -20, out hit, Mathf.Infinity))
+        {
+            rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
+            Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z), Color.green, 1);
+
+        }
+
+        rb.velocity = transform.forward * SpeedLocal;
+        //rb.AddTorque(transform.forward * SpeedLocal);
         //rb.AddForce(PontoFixo.transform.forward * SpeedLocal);
 
 
@@ -38,7 +66,7 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Laser"))
         {
 
-            if(rb.velocity.magnitude > 0)
+            if(SpeedLocal > 0)
                 SpeedLocal -= 0.1f;
 
         }

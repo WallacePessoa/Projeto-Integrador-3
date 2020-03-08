@@ -6,13 +6,22 @@ public class Player : MonoBehaviour
 {
     public float Speed;
     public float PowerUpSpeed;
-    public GameObject PontoFixo;
+    public float SpeedLocal;
+    public float SpeedRotation;
+
+    public GameObject Camera;
 
     Rigidbody rb;
 
     float hori;
     float vert;
-    public float SpeedLocal;
+
+
+    Vector3 MousePosition;
+
+    Ray ray;
+
+    RaycastHit hit;
 
 
     int auxWhile = 0;
@@ -32,10 +41,23 @@ public class Player : MonoBehaviour
         vert = Input.GetAxis("Vertical");
 
 
+        ray = Camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
+            Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z * -1), Color.red, 1);
+
+        }
+
         ///rb.AddForce(PontoFixo.transform.forward * vert * Speed);
         //rb.AddForce(PontoFixo.transform.right * hori * Speed);
 
-        rb.velocity = new Vector3(-hori,0, -vert) * SpeedLocal;
+        //rb.velocity = new Vector3(-hori,0, -vert) * SpeedLocal;
+
+        rb.velocity = transform.forward * vert * SpeedLocal;
+
+        //rb.transform.Rotate(new Vector3(0, hori, 0) * SpeedRotation);
 
     }
 
@@ -53,7 +75,8 @@ public class Player : MonoBehaviour
             SpeedLocal = PowerUpSpeed;
             while(SpeedLocal > Speed)
             {
-                rb.velocity = new Vector3(-hori, 0, -vert) * SpeedLocal;
+                //rb.velocity = new Vector3(-hori, 0, -vert) * SpeedLocal;
+                rb.velocity = transform.forward * vert * SpeedLocal;
                 SpeedLocal -= 1;
                 yield return new WaitForSeconds(0.01f);
 
