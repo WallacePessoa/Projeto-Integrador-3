@@ -1,63 +1,119 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
     public Camera Camera;
-    public float Speed;
-    public GameObject PontoFixo;
 
-    Rigidbody rb;
+    public float Speed;
+    public float SpeedLocal;
+    public float SpeedFire;
+
+    public Vector3 PosDestino;
+    public Vector3[] Posiçoes;
+
+    public GameObject PontoFixo;
+    public GameObject[] Positions;
+
+    public GameObject Fire;
+    public GameObject GunL;
+    public GameObject GunR;
+
+    GameObject fireLocal;
+
+    Rigidbody FireRb;
+
 
     float hori;
     float vert;
-    public float SpeedLocal;
+    int Destino = 0;
 
+    NavMeshAgent Nav;
 
     Ray ray;
 
     RaycastHit hit;
 
 
+    public enum StateMachine
+    {
+        Correr,
+        Curva,
+        Atirar
+    }
+
+    public StateMachine Estado;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
+        Nav = GetComponent<NavMeshAgent>();
+        Estado = StateMachine.Correr;
         SpeedLocal = Speed;
+
+        PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
+
+        for (int x = 0; x< Positions.Length;x++)
+            Posiçoes[x] = Positions[x].transform.position;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
 
-        if (Physics.Raycast(transform.position,transform.forward * 20, out hit, Mathf.Infinity))
+        switch (Estado)
         {
-            rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
-            Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z), Color.blue, 1);
+            case StateMachine.Correr:
 
-        }
 
-        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
-        {
-            rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
-            Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z), Color.yellow, 1);
+                Nav.destination = PosDestino;
 
-        }
+                if (Vector3.Distance(transform.position, PosDestino) < 5)
+                {
+                    Estado = StateMachine.Curva;
+                }
+                break;
 
-        if (Physics.Raycast(transform.position, transform.forward * -20, out hit, Mathf.Infinity))
-        {
-            rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
-            Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z), Color.green, 1);
+            case StateMachine.Curva:
 
-        }
 
-        rb.velocity = transform.forward * SpeedLocal;
-        //rb.AddTorque(transform.forward * SpeedLocal);
-        //rb.AddForce(PontoFixo.transform.forward * SpeedLocal);
 
+                if (Destino+1 < Positions.Length)
+                {
+                    Destino++;
+                }
+
+                PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
+                Estado = StateMachine.Correr;
+
+                break;
+
+            case StateMachine.Atirar:
+
+                Nav.destination = PosDestino;
+
+                fireLocal = Instantiate(Fire, GunL.transform.position, transform.rotation);
+
+                FireRb = fireLocal.GetComponent<Rigidbody>();
+
+                FireRb.velocity = transform.forward * SpeedFire;
+
+                fireLocal = Instantiate(Fire, GunR.transform.position, transform.rotation);
+
+                FireRb = fireLocal.GetComponent<Rigidbody>();
+
+                FireRb.velocity = transform.forward * SpeedFire;
+
+                if (Vector3.Distance(transform.position, PosDestino) < 5)
+                {
+                    Estado = StateMachine.Curva;
+                }
+
+                break;
+        }   
 
     }
 
@@ -66,14 +122,26 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Laser"))
         {
 
-            if(SpeedLocal > 0)
-                SpeedLocal -= 0.1f;
+            //if(SpeedLocal > 0)
+            //{
+
+            //}
+            //    SpeedLocal -= 1f;
+
+            if (Nav.speed > 0)
+            {
+                SpeedLocal -= 1;
+                Nav.speed -= 1;
+                yield return new WaitForSeconds(3f);
+                Nav.speed += 1;
+                SpeedLocal += 1;
+            }
 
         }
 
-        yield return new WaitForSeconds(3f);
-        if(SpeedLocal != Speed)
-            SpeedLocal += 0.1f;
+        //yield return new WaitForSeconds(3f);
+        //if(SpeedLocal != Speed)
+        //    SpeedLocal += 0.1f;
 
     }
 }

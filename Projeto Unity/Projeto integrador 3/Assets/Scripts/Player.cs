@@ -65,9 +65,15 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Laser"))
         {
-            SpeedLocal -= 1;
-            yield return new WaitForSeconds(3f);
-            SpeedLocal += 1;
+
+            if(SpeedLocal > 0)
+            {
+                SpeedLocal -= 1;
+                yield return new WaitForSeconds(3f);
+
+                SpeedLocal += 1;
+            }
+
         }
         if (other.CompareTag("PowerUpSpeed"))
         {

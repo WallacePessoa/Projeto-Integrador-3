@@ -12,6 +12,8 @@ public class LookArm : MonoBehaviour
 
     public float SpeedFire;
 
+    Rigidbody FireRb;
+
     GameObject fireLocal;
 
     Vector3 MousePosition;
@@ -22,7 +24,7 @@ public class LookArm : MonoBehaviour
 
     RaycastHit hit;
 
-    Rigidbody FireRb;
+
 
 
 
