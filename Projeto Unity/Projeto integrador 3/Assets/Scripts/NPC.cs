@@ -122,26 +122,14 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Laser"))
         {
 
-            //if(SpeedLocal > 0)
-            //{
-
-            //}
-            //    SpeedLocal -= 1f;
-
-            if (Nav.speed > 0)
+            if (Nav.speed > 0 || Nav.speed < 10)
             {
-                SpeedLocal -= 1;
-                Nav.speed -= 1;
+                Nav.speed -= 0.1f;
                 yield return new WaitForSeconds(3f);
-                Nav.speed += 1;
-                SpeedLocal += 1;
+                Nav.speed += 0.1f;
             }
 
         }
-
-        //yield return new WaitForSeconds(3f);
-        //if(SpeedLocal != Speed)
-        //    SpeedLocal += 0.1f;
 
     }
 }

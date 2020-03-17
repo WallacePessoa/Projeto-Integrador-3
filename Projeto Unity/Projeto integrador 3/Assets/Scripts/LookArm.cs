@@ -37,16 +37,7 @@ public class LookArm : MonoBehaviour
     void Update()
     {
 
-        //ray = Camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
 
-        //if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        //{
-        //    rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
-        //    Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z * -1), Color.red, 1);
-
-        //}
-
-        //transform.localPosition = Vector3.zero;
 
         if(Input.GetKey(KeyCode.Mouse0)){
 
