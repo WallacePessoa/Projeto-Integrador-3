@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Laser
   - PowerUpSpeed
+  - Jogador
   layers:
   - Default
   - TransparentFX

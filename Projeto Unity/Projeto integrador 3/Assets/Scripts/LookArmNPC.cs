@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class LookArmNPC : MonoBehaviour
 {
-
-
-    Rigidbody rb;
-    public GameObject PontoFixo;
-
+    public NPC NPC;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
 
 
     }
@@ -20,12 +15,23 @@ public class LookArmNPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.transform.LookAt(PontoFixo.transform);
 
-        transform.localPosition = Vector3.zero;
-
+    }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Jogador"))
+        {
+            NPC.Estado = NPC.StateMachine.Atirar;
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Jogador"))
+        {
+            NPC.Estado = NPC.StateMachine.Correr;
+        }
     }
 }
