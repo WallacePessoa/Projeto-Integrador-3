@@ -18,26 +18,19 @@ public class LookArm : MonoBehaviour
 
     Vector3 MousePosition;
 
-    Rigidbody rb;
-
     Ray ray;
 
     RaycastHit hit;
 
-
-
-
-
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
 
         if(Input.GetKey(KeyCode.Mouse0)){
 

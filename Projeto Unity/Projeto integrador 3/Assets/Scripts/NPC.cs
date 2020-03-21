@@ -17,11 +17,13 @@ public class NPC : MonoBehaviour
     public GameObject PontoFixo;
     public GameObject[] Positions;
 
-    public GameObject Fire;
+    public GameObject FirePadrao;
+    public GameObject PowerFire;
     public GameObject GunL;
     public GameObject GunR;
 
     GameObject fireLocal;
+    GameObject FireStandart;
 
     Rigidbody FireRb;
 
@@ -29,6 +31,7 @@ public class NPC : MonoBehaviour
     float hori;
     float vert;
     int Destino = 0;
+    int Sortear;
 
     NavMeshAgent Nav;
 
@@ -57,7 +60,7 @@ public class NPC : MonoBehaviour
         for (int x = 0; x< Positions.Length;x++)
             Posiçoes[x] = Positions[x].transform.position;
 
-        
+        FireStandart = FirePadrao;
     }
 
     // Update is called once per frame
@@ -95,13 +98,13 @@ public class NPC : MonoBehaviour
 
                 Nav.destination = PosDestino;
 
-                fireLocal = Instantiate(Fire, GunL.transform.position, transform.rotation);
+                fireLocal = Instantiate(FireStandart, GunL.transform.position, transform.rotation);
 
                 FireRb = fireLocal.GetComponent<Rigidbody>();
 
                 FireRb.velocity = transform.forward * SpeedFire;
 
-                fireLocal = Instantiate(Fire, GunR.transform.position, transform.rotation);
+                fireLocal = Instantiate(FireStandart, GunR.transform.position, transform.rotation);
 
                 FireRb = fireLocal.GetComponent<Rigidbody>();
 
@@ -122,13 +125,77 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Laser"))
         {
 
-            if (Nav.speed > 0 || Nav.speed < 10)
+            if (Nav.speed > 19)
             {
                 Nav.speed -= 0.1f;
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(2f);
                 Nav.speed += 0.1f;
             }
 
+            Destroy(other.gameObject);
+
+        }
+
+        if (other.CompareTag("PowerLaser"))
+        {
+
+            if (Nav.speed > 9)
+            {
+                Nav.speed -= 0.1f;
+                yield return new WaitForSeconds(2f);
+                Nav.speed += 0.1f;
+            }
+
+            Destroy(other.gameObject);
+
+        }
+
+        if (other.CompareTag("PowerUp"))
+        {
+            Sortear = Random.Range(1, 5);
+
+            switch (Sortear)
+            {
+                case 1:
+
+                    FireStandart = PowerFire;
+
+                    yield return new WaitForSeconds(3f);
+
+                    FireStandart = FirePadrao;
+
+                    break;
+
+                case 2:
+
+                    while(Nav.speed > 15)
+                    {
+                        Nav.speed -= 0.1f;
+                        yield return new WaitForSeconds(0.1f);
+                    }
+
+                    yield return new WaitForSeconds(3f);
+
+                    while (Nav.speed < 30)
+                    {
+                        Nav.speed += 0.1f;
+                        yield return new WaitForSeconds(0.1f);
+                    }
+
+                    break;
+
+                case 3:
+
+                    Nav.speed = 40;
+
+                    yield return new WaitForSeconds(3f);
+
+                    Nav.speed = 30;
+
+                    break;
+
+
+            }
         }
 
     }

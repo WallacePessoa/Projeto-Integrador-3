@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Laser
+  - PowerUpSpeed
+  - Jogador
+  - PowerLaser
+  - PowerUp
   layers:
   - Default
   - TransparentFX

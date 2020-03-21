@@ -8,14 +8,28 @@ public class Player : MonoBehaviour
     public float PowerUpSpeed;
     public float SpeedLocal;
     public float SpeedRotation;
+    public float SpeedFire;
 
+
+
+    public GameObject FirePadrao;
+    public GameObject GunL;
+    public GameObject GunR;
     public GameObject Camera;
+    public GameObject PowerFire;
 
     Rigidbody rb;
+    Rigidbody FireRb;
+
+    GameObject fireLocal;
+    GameObject FireStandart;
 
     float hori;
     float vert;
 
+    int Sortear;
+
+    bool ControlInvert = false;
 
     Vector3 MousePosition;
 
@@ -32,6 +46,8 @@ public class Player : MonoBehaviour
 
         SpeedLocal = Speed;
 
+        FireStandart = FirePadrao;
+
     }
 
     // Update is called once per frame
@@ -41,23 +57,38 @@ public class Player : MonoBehaviour
         vert = Input.GetAxis("Vertical");
 
 
-        ray = Camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+        //ray = Camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
-            Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z * -1), Color.red, 1);
+        //if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        //{
+        //    rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
+        //    Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z * -1), Color.red, 1);
 
-        }
-
-        ///rb.AddForce(PontoFixo.transform.forward * vert * Speed);
-        //rb.AddForce(PontoFixo.transform.right * hori * Speed);
-
-        //rb.velocity = new Vector3(-hori,0, -vert) * SpeedLocal;
+        //}
+        if(!ControlInvert)
+            transform.Rotate(new Vector3(0, hori, 0) * SpeedRotation);
+        else
+            transform.Rotate(new Vector3(0, -hori, 0) * SpeedRotation);
 
         rb.velocity = transform.forward * vert * SpeedLocal;
 
-        //rb.transform.Rotate(new Vector3(0, hori, 0) * SpeedRotation);
+
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+
+            fireLocal = Instantiate(FireStandart, GunL.transform.position, transform.rotation);
+
+            FireRb = fireLocal.GetComponent<Rigidbody>();
+
+            FireRb.velocity = transform.forward * SpeedFire;
+
+            fireLocal = Instantiate(FireStandart, GunR.transform.position, transform.rotation);
+
+            FireRb = fireLocal.GetComponent<Rigidbody>();
+
+            FireRb.velocity = transform.forward * SpeedFire;
+
+        }
 
     }
 
@@ -66,7 +97,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Laser"))
         {
 
-            if(SpeedLocal > 0)
+            if(SpeedLocal > 19)
             {
                 SpeedLocal -= 1;
                 yield return new WaitForSeconds(3f);
@@ -74,7 +105,25 @@ public class Player : MonoBehaviour
                 SpeedLocal += 1;
             }
 
+            Destroy(other.gameObject);
+
         }
+
+        if (other.CompareTag("PowerLaser"))
+        {
+
+            if (SpeedLocal > 9)
+            {
+                SpeedLocal -= 1;
+                yield return new WaitForSeconds(3f);
+
+                SpeedLocal += 1;
+            }
+
+            Destroy(other.gameObject);
+
+        }
+
         if (other.CompareTag("PowerUpSpeed"))
         {
 
@@ -86,10 +135,6 @@ public class Player : MonoBehaviour
                 SpeedLocal -= 1;
                 yield return new WaitForSeconds(0.01f);
 
-                print("aaa");
-
-
-
                 if (auxWhile > 100)
                 {
                     break;
@@ -97,9 +142,74 @@ public class Player : MonoBehaviour
                 auxWhile++;
             }
 
+        }
+
+        if (other.CompareTag("PowerUp"))
+        {
+            Sortear = Random.Range(1, 5);
+            print(Sortear);
+
+            switch (Sortear)
+            {
+                case 1:
+
+                    FireStandart = PowerFire;
+
+                    yield return new WaitForSeconds(3f);
+
+                    FireStandart = FirePadrao;
+
+                    break;
+
+                case 2:
+
+                    //while (SpeedLocal > 5)
+                    //{
+                    //    SpeedLocal -= 0.1f;
+                    //    yield return new WaitForSeconds(0.1f);
+                    //}
+
+                    //yield return new WaitForSeconds(3f);
+
+                    //while (SpeedLocal < Speed)
+                    //{
+                    //    SpeedLocal += 0.1f;
+                    //    yield return new WaitForSeconds(0.1f);
+                    //}
+
+                    SpeedLocal = 10;
+
+                    yield return new WaitForSeconds(3f);
+
+                    SpeedLocal = Speed;
+
+                    break;
+
+                case 3:
+
+                    SpeedLocal = 40;
+
+                    yield return new WaitForSeconds(3f);
+
+                    SpeedLocal = 20;
+
+                    break;
+
+                case 4:
 
 
-            print("aaa");
+                    ControlInvert = true;
+
+                    yield return new WaitForSeconds(3f);
+
+                    ControlInvert = false;
+                    break;
+
+
+
+            }
+
+
         }
 
 
