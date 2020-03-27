@@ -30,8 +30,10 @@ public class NPC : MonoBehaviour
 
     float hori;
     float vert;
+    public float Aceleração = 0;
     int Destino = 0;
     int Sortear;
+
 
     NavMeshAgent Nav;
 
@@ -51,10 +53,10 @@ public class NPC : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(Acelerar());
         Nav = GetComponent<NavMeshAgent>();
         Estado = StateMachine.Correr;
-        SpeedLocal = Speed;
-        Nav.speed = SpeedLocal;
+        
 
         PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
 
@@ -62,12 +64,13 @@ public class NPC : MonoBehaviour
             Posiçoes[x] = Positions[x].transform.position;
 
         FireStandart = FirePadrao;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        Nav.speed = Aceleração;
         switch (Estado)
         {
             case StateMachine.Correr:
@@ -119,6 +122,27 @@ public class NPC : MonoBehaviour
                 break;
         }   
 
+    }
+
+    private IEnumerator Acelerar()
+    {
+        print("a");
+        if (Aceleração < Speed)
+        {
+            Aceleração += 1f;
+
+            yield return new WaitForSeconds(0.05f);
+
+        }
+        else
+        {
+            Nav.speed = Speed;
+        }
+
+
+
+        yield return null;
+        StartCoroutine(Acelerar());
     }
 
     private IEnumerator OnTriggerEnter(Collider other)

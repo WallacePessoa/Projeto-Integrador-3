@@ -101,22 +101,30 @@ public class Player : MonoBehaviour
 
     private IEnumerator Acelerar()
     {
-        if(Aceleração < vert)
-        {
-            while (Aceleração < vert)
-            {
-                Aceleração += 0.1f;
-                yield return new WaitForSeconds(0.5f);
-            }
-        }else if(Aceleração > vert)
-        {
-            while (Aceleração < vert)
-            {
-                Aceleração -= 0.1f;
-                yield return new WaitForSeconds(0.5f);
-            }
-        }
 
+        print("ace");
+
+        print(Aceleração < vert);
+
+
+        if (Aceleração < vert && vert != 0)
+        {
+
+            print("ace");
+            Aceleração += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+
+        }
+        else if (Aceleração > vert)
+        {
+
+            Aceleração -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
+
+        }
+        else if (vert == 0)
+            Aceleração = 0;
+        yield return null;
         StartCoroutine(Acelerar());
     }
 

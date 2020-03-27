@@ -358,3 +358,5 @@ MonoBehaviour:
   Camera: {fileID: 0}
   PowerFire: {fileID: 2135718755163331667, guid: e42e140628a4b1e4bbb75c6dd7fe8fee,
     type: 3}
+  vert: 0
+  "Acelera\xE7\xE3o": 0
