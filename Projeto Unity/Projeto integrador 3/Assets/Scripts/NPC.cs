@@ -54,6 +54,7 @@ public class NPC : MonoBehaviour
         Nav = GetComponent<NavMeshAgent>();
         Estado = StateMachine.Correr;
         SpeedLocal = Speed;
+        Nav.speed = SpeedLocal;
 
         PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
 

@@ -25,7 +25,9 @@ public class Player : MonoBehaviour
     GameObject FireStandart;
 
     float hori;
-    float vert;
+    public float vert;
+
+    public float Aceleração = 0;
 
     int Sortear;
 
@@ -47,6 +49,8 @@ public class Player : MonoBehaviour
         SpeedLocal = Speed;
 
         FireStandart = FirePadrao;
+
+        StartCoroutine(Acelerar());
 
     }
 
@@ -70,7 +74,10 @@ public class Player : MonoBehaviour
         else
             transform.Rotate(new Vector3(0, -hori, 0) * SpeedRotation);
 
-        rb.velocity = transform.forward * vert * SpeedLocal;
+
+
+
+        rb.velocity = transform.forward * Aceleração * SpeedLocal;
 
 
         if (Input.GetKey(KeyCode.Mouse0))
@@ -90,6 +97,27 @@ public class Player : MonoBehaviour
 
         }
 
+    }
+
+    private IEnumerator Acelerar()
+    {
+        if(Aceleração < vert)
+        {
+            while (Aceleração < vert)
+            {
+                Aceleração += 0.1f;
+                yield return new WaitForSeconds(0.5f);
+            }
+        }else if(Aceleração > vert)
+        {
+            while (Aceleração < vert)
+            {
+                Aceleração -= 0.1f;
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        StartCoroutine(Acelerar());
     }
 
     private IEnumerator OnTriggerEnter(Collider other)
