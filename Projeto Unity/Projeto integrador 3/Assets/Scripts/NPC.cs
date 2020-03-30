@@ -12,7 +12,7 @@ public class NPC : MonoBehaviour
     public float SpeedFire;
 
     public Vector3 PosDestino;
-    public Vector3[] Posiçoes;
+
 
     public GameObject PontoFixo;
     public GameObject[] Positions;
@@ -24,6 +24,8 @@ public class NPC : MonoBehaviour
 
     GameObject fireLocal;
     GameObject FireStandart;
+
+    Vector3[] Posiçoes;
 
     Rigidbody FireRb;
 
@@ -56,7 +58,9 @@ public class NPC : MonoBehaviour
         StartCoroutine(Acelerar());
         Nav = GetComponent<NavMeshAgent>();
         Estado = StateMachine.Correr;
-        
+       
+        Positions = GameObject.FindGameObjectsWithTag("Nodes");
+
 
         PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
 
@@ -65,11 +69,15 @@ public class NPC : MonoBehaviour
 
         FireStandart = FirePadrao;
 
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+
         Nav.speed = Aceleração;
         switch (Estado)
         {

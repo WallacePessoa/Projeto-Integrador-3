@@ -62,7 +62,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 30
+  m_Speed: 25
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 300
@@ -87,34 +87,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
-  Speed: 1
+  Speed: 20
   SpeedLocal: 0
   SpeedFire: 70
   PosDestino: {x: 0, y: 0, z: 0}
-  "Posi\xE7oes":
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
   PontoFixo: {fileID: 2255831551703699797}
-  Positions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Positions: []
   FirePadrao: {fileID: 8963159288441548168, guid: 59e29afd88f84bb41bdf2038c3248e75,
     type: 3}
   PowerFire: {fileID: 2135718755163331667, guid: e42e140628a4b1e4bbb75c6dd7fe8fee,
     type: 3}
   GunL: {fileID: 7813674771192393464}
   GunR: {fileID: 7813674770118650268}
+  "Acelera\xE7\xE3o": 0
   Estado: 0
 --- !u!1 &5711154179260691656
 GameObject:

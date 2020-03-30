@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Player : MonoBehaviour
     public float SpeedRotation;
     public float SpeedFire;
 
-
+    public Text Classificação;
 
     public GameObject FirePadrao;
     public GameObject GunL;
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour
 
     GameObject fireLocal;
     GameObject FireStandart;
+
+    private static GameManager gameManager;
 
     float hori;
     public float vert;
@@ -51,6 +54,11 @@ public class Player : MonoBehaviour
         FireStandart = FirePadrao;
 
         StartCoroutine(Acelerar());
+
+        if (gameManager == null)
+        {
+            gameManager = FindObjectOfType<GameManager>();
+        }
 
     }
 
@@ -94,6 +102,15 @@ public class Player : MonoBehaviour
             FireRb = fireLocal.GetComponent<Rigidbody>();
 
             FireRb.velocity = transform.forward * SpeedFire;
+
+        }
+
+        for(int x = 0; x < gameManager.Classifição.Length; x++)
+        {
+            if (gameManager.Classifição[x].position == transform.position)
+            {
+                Classificação.text = gameManager.Classifição.Length + "/" + (x + 1);
+            }
 
         }
 
