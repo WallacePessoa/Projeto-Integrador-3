@@ -164,8 +164,12 @@ public class NPC : MonoBehaviour
                 yield return new WaitForSeconds(2f);
                 Nav.speed += 0.1f;
             }
+            if(other.gameObject != null)
+            {
+                Destroy(other.gameObject);
+            }
 
-            Destroy(other.gameObject);
+
 
         }
 

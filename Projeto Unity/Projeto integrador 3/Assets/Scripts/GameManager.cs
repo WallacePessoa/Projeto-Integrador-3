@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     float Distancia1;
     float Distancia2;
 
-    NavMesh nav;
+
 
 
     int PosPlayer;

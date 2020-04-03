@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
 
     int Sortear;
 
+    bool Slow = false;
+
     bool ControlInvert = false;
 
     Vector3 MousePosition;
@@ -162,6 +164,24 @@ public class Player : MonoBehaviour
 
         }
 
+        if (other.CompareTag("Obstaculo"))
+        {
+            Slow = true;
+            while(SpeedLocal > 5)
+            {
+
+                SpeedLocal--; 
+            }
+//            yield return new WaitForSeconds(0.5f);
+            Slow = false;
+            while (SpeedLocal < 20)
+            {
+                yield return new WaitForSeconds(0.2f);
+                SpeedLocal++;
+            }
+
+        }
+
         if (other.CompareTag("PowerLaser"))
         {
 
@@ -266,5 +286,25 @@ public class Player : MonoBehaviour
         }
 
 
+    }
+
+    private IEnumerator OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Obstaculo"))
+        {
+
+            if (other.CompareTag("Obstaculo"))
+            {
+                if(Slow == false)
+                {
+                    while (SpeedLocal < 20)
+                    {
+                        yield return new WaitForSeconds(0.2f);
+                        SpeedLocal++;
+                    }
+                }
+                
+            }
+        }
     }
 }
