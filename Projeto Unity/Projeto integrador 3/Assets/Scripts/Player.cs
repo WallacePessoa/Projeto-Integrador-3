@@ -121,15 +121,9 @@ public class Player : MonoBehaviour
     private IEnumerator Acelerar()
     {
 
-        print("ace");
-
-        print(Aceleração < vert);
-
 
         if (Aceleração < vert && vert != 0)
         {
-
-            print("ace");
             Aceleração += 0.1f;
             yield return new WaitForSeconds(0.1f);
 

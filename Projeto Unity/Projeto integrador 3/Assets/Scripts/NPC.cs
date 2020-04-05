@@ -25,7 +25,7 @@ public class NPC : MonoBehaviour
     GameObject fireLocal;
     GameObject FireStandart;
 
-    Vector3[] Posiçoes;
+    //Vector3[] Posiçoes;
 
     Rigidbody FireRb;
 
@@ -64,8 +64,8 @@ public class NPC : MonoBehaviour
 
         PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
 
-        for (int x = 0; x< Positions.Length;x++)
-            Posiçoes[x] = Positions[x].transform.position;
+        //for (int x = 0; x< Positions.Length;x++)
+        //    Posiçoes[x] = Positions[x].transform.position;
 
         FireStandart = FirePadrao;
 
@@ -134,7 +134,6 @@ public class NPC : MonoBehaviour
 
     private IEnumerator Acelerar()
     {
-        print("a");
         if (Aceleração < Speed)
         {
             Aceleração += 1f;

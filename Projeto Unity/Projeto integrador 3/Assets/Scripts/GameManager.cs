@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
+using UnityEngine.SceneManagement;
+using Photon.Realtime;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameManager Instace;
 
@@ -85,6 +88,59 @@ public class GameManager : MonoBehaviour
     }
 
 
-  
+    #region Photon Callbacks
+
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        //executa quando outro jogador entra na sala.
+        Debug.Log("O player " + newPlayer.NickName + " entrou na sala");
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("Você é o cliente mestre");
+            LoadArena();
+        }
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        //executa quando um jogador que não é o meu sai da sala;
+        Debug.Log("O player " + otherPlayer.NickName + " saiu da sala");
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("Você é o cliente mestre!!!");
+
+            LoadArena();
+
+        }
+    }
+
+    #endregion
+
+
+    #region Public Methods
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+    #endregion
+
+    #region Private Mathods
+    void LoadArena()
+    {
+
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            Debug.Log("Você não é o cliente Mestre");
+        }
+        PhotonNetwork.LoadLevel("Fase_" + PhotonNetwork.CurrentRoom.PlayerCount);
+    }
+    #endregion
 
 }
