@@ -5,10 +5,11 @@ using UnityEngine.AI;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public GameManager Instace;
+    public static GameManager Instace;
 
     public Transform[] Posiçõeslargada;
 
@@ -20,11 +21,15 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject IA;
 
     public Transform[] Classifição;
+    [SerializeField]
+    private Text Ganhador;
+    [SerializeField]
+    private Image Panel;
+    [SerializeField]
+    private Button Back;
 
     float Distancia1;
     float Distancia2;
-
-
 
 
     int PosPlayer;
@@ -59,6 +64,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void FixedUpdate()
     {
+
+
 
         foreach (Transform clas in Classifição)
         {
@@ -124,6 +131,20 @@ public class GameManager : MonoBehaviourPunCallbacks
 
 
     #region Public Methods
+    public void hudWim(string Name)
+    {
+        Time.timeScale = 0;
+        Ganhador.text = "O jogador " + Name + " venceu";
+
+        Panel.gameObject.SetActive(true);
+        Back.gameObject.SetActive(true);
+        Ganhador.gameObject.SetActive(true);
+    }
+
+    public void BackRoom()
+    {
+        PhotonNetwork.LoadLevel("Menu");
+    }
 
     public void LeaveRoom()
     {

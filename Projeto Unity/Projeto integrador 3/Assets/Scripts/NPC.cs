@@ -55,7 +55,7 @@ public class NPC : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Acelerar());
+        // StartCoroutine(Acelerar());
         Nav = GetComponent<NavMeshAgent>();
         Estado = StateMachine.Correr;
        
@@ -69,7 +69,7 @@ public class NPC : MonoBehaviour
 
         FireStandart = FirePadrao;
 
-
+        Nav.speed = 10;
 
     }
 
@@ -77,8 +77,20 @@ public class NPC : MonoBehaviour
     void Update()
     {
         
+        if(Physics.Raycast(transform.position, transform.forward, out hit))
+        {
+            print(hit.collider.name);
+            Debug.DrawRay(transform.position, hit.transform.forward * 20, Color.red);
+            if (hit.collider.CompareTag("Jogador") && hit.collider.gameObject != gameObject)
+                StartCoroutine(atirar());
+            else
+                StopCoroutine(atirar());
+        }
+        else
+            StopCoroutine(atirar());
 
-        Nav.speed = Aceleração;
+
+
         switch (Estado)
         {
             case StateMachine.Correr:
@@ -94,12 +106,12 @@ public class NPC : MonoBehaviour
 
             case StateMachine.Curva:
 
-
-
                 if (Destino+1 < Positions.Length)
                 {
                     Destino++;
                 }
+
+
 
                 PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
                 Estado = StateMachine.Correr;
@@ -110,17 +122,7 @@ public class NPC : MonoBehaviour
 
                 Nav.destination = PosDestino;
 
-                fireLocal = Instantiate(FireStandart, GunL.transform.position, transform.rotation);
 
-                FireRb = fireLocal.GetComponent<Rigidbody>();
-
-                FireRb.velocity = transform.forward * SpeedFire;
-
-                fireLocal = Instantiate(FireStandart, GunR.transform.position, transform.rotation);
-
-                FireRb = fireLocal.GetComponent<Rigidbody>();
-
-                FireRb.velocity = transform.forward * SpeedFire;
 
                 if (Vector3.Distance(transform.position, PosDestino) < 5)
                 {
@@ -132,10 +134,30 @@ public class NPC : MonoBehaviour
 
     }
 
+    private IEnumerator atirar()
+    {
+        fireLocal = Instantiate(FireStandart, GunL.transform.position, transform.rotation);
+
+        FireRb = fireLocal.GetComponent<Rigidbody>();
+
+        FireRb.velocity = transform.forward * SpeedFire;
+
+        fireLocal = Instantiate(FireStandart, GunR.transform.position, transform.rotation);
+
+        FireRb = fireLocal.GetComponent<Rigidbody>();
+
+        FireRb.velocity = transform.forward * SpeedFire;
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(atirar());
+    }
+
     private IEnumerator Acelerar()
     {
         if (Aceleração < Speed)
         {
+            print(Aceleração);
             Aceleração += 1f;
 
             yield return new WaitForSeconds(0.05f);
@@ -144,6 +166,7 @@ public class NPC : MonoBehaviour
         else
         {
             Nav.speed = Speed;
+            StopCoroutine(Acelerar());
         }
 
 
@@ -154,25 +177,22 @@ public class NPC : MonoBehaviour
 
     private IEnumerator OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Laser"))
+        if (other != null && other.CompareTag("Laser"))
         {
-
-            if (Nav.speed > 19)
+            //print(other.gameObject != null);
+            //print("A AI " + gameObject.name + " está lenta");
+            if (Nav.speed > 5)
             {
+                print("entrou");
                 Nav.speed -= 0.1f;
                 yield return new WaitForSeconds(2f);
                 Nav.speed += 0.1f;
             }
-            if(other.gameObject != null)
-            {
+            if(other != null)
                 Destroy(other.gameObject);
-            }
 
 
-
-        }
-
-        if (other.CompareTag("PowerLaser"))
+        }else if (other != null && other.CompareTag("PowerLaser"))
         {
 
             if (Nav.speed > 9)
@@ -182,11 +202,9 @@ public class NPC : MonoBehaviour
                 Nav.speed += 0.1f;
             }
 
-            Destroy(other.gameObject);
+            
 
-        }
-
-        if (other.CompareTag("PowerUp"))
+        }else if (other != null && other.CompareTag("PowerUp"))
         {
             Sortear = Random.Range(1, 5);
 
@@ -232,6 +250,10 @@ public class NPC : MonoBehaviour
 
 
             }
+        }
+        else if (other != null && other.CompareTag("Chegada"))
+        {
+            GameManager.Instace.hudWim(gameObject.name);
         }
 
     }

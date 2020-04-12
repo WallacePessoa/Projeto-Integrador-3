@@ -11,6 +11,7 @@ TagManager:
   - PowerUp
   - Nodes
   - Obstaculo
+  - Chegada
   layers:
   - Default
   - TransparentFX

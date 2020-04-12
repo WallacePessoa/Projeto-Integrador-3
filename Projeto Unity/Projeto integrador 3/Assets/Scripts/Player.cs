@@ -70,21 +70,12 @@ public class Player : MonoBehaviour
         hori = Input.GetAxis("Horizontal");
         vert = Input.GetAxis("Vertical");
 
+        transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
 
-        //ray = Camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-
-        //if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        //{
-        //    rb.transform.LookAt(new Vector3(hit.point.x, 0, hit.point.z));
-        //    Debug.DrawRay(transform.position, new Vector3(hit.point.x, hit.point.y, hit.point.z * -1), Color.red, 1);
-
-        //}
         if(!ControlInvert)
             transform.Rotate(new Vector3(0, hori, 0) * SpeedRotation);
         else
             transform.Rotate(new Vector3(0, -hori, 0) * SpeedRotation);
-
-
 
 
         rb.velocity = transform.forward * Aceleração * SpeedLocal;
@@ -97,13 +88,13 @@ public class Player : MonoBehaviour
 
             FireRb = fireLocal.GetComponent<Rigidbody>();
 
-            FireRb.velocity = transform.forward * SpeedFire;
+            FireRb.velocity = fireLocal.transform.forward * SpeedFire;
 
             fireLocal = Instantiate(FireStandart, GunR.transform.position, transform.rotation);
 
             FireRb = fireLocal.GetComponent<Rigidbody>();
 
-            FireRb.velocity = transform.forward * SpeedFire;
+            FireRb.velocity = fireLocal.transform.forward * SpeedFire;
 
         }
 
@@ -143,8 +134,9 @@ public class Player : MonoBehaviour
 
     private IEnumerator OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Laser"))
+        if (other != null && other.CompareTag("Laser"))
         {
+            //print("Estou lento (player)");
 
             if(SpeedLocal > 19)
             {
@@ -153,12 +145,13 @@ public class Player : MonoBehaviour
 
                 SpeedLocal += 1;
             }
+            if(other!= null)
+            {
+                Destroy(other.gameObject);
+            }
 
-            Destroy(other.gameObject);
 
-        }
-
-        if (other.CompareTag("Obstaculo"))
+        }else if (other != null && other.CompareTag("Obstaculo"))
         {
             Slow = true;
             while(SpeedLocal > 5)
@@ -174,9 +167,7 @@ public class Player : MonoBehaviour
                 SpeedLocal++;
             }
 
-        }
-
-        if (other.CompareTag("PowerLaser"))
+        } else if (other != null && other.CompareTag("PowerLaser"))
         {
 
             if (SpeedLocal > 9)
@@ -187,11 +178,9 @@ public class Player : MonoBehaviour
                 SpeedLocal += 1;
             }
 
-            Destroy(other.gameObject);
+            
 
-        }
-
-        if (other.CompareTag("PowerUpSpeed"))
+        }else if (other != null && other.CompareTag("PowerUpSpeed"))
         {
 
             SpeedLocal = PowerUpSpeed;
@@ -209,9 +198,7 @@ public class Player : MonoBehaviour
                 auxWhile++;
             }
 
-        }
-
-        if (other.CompareTag("PowerUp"))
+        } else if (other != null && other.CompareTag("PowerUp"))
         {
             Sortear = Random.Range(1, 5);
             print(Sortear);
@@ -229,20 +216,6 @@ public class Player : MonoBehaviour
                     break;
 
                 case 2:
-
-                    //while (SpeedLocal > 5)
-                    //{
-                    //    SpeedLocal -= 0.1f;
-                    //    yield return new WaitForSeconds(0.1f);
-                    //}
-
-                    //yield return new WaitForSeconds(3f);
-
-                    //while (SpeedLocal < Speed)
-                    //{
-                    //    SpeedLocal += 0.1f;
-                    //    yield return new WaitForSeconds(0.1f);
-                    //}
 
                     SpeedLocal = 10;
 
@@ -277,6 +250,10 @@ public class Player : MonoBehaviour
             }
 
 
+        }
+        else if (other != null && other.CompareTag("Chegada"))
+        {
+            GameManager.Instace.hudWim(gameObject.name);
         }
 
 

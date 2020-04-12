@@ -15,13 +15,16 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField]
     private Text PlayerCont;
     [SerializeField]
-    private float IntTime;
+    private float FloatTime = 10;
     [SerializeField]
     private Image LoadPanel;
 
 
     #endregion
     #region Private Fields
+
+    int IntTime = 10;
+
     string gameVersion = "1";
     bool isConnect;
     string Fase;
@@ -37,11 +40,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     void Start()
     {
 
-        IntTime = 10;
+
         TextTime.text = IntTime.ToString();
-
- 
-
 
     }
 
@@ -51,9 +51,13 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         if (PhotonNetwork.IsConnected)
         {//Está conectado... entra em uma sala aleatoriamente
-            IntTime -= Time.deltaTime;
-            TextTime.text = IntTime.ToString();
+            if(FloatTime < IntTime)
+            {
+                IntTime--;
+            }
 
+            FloatTime -= Time.deltaTime;
+            TextTime.text = IntTime.ToString();
         }
         if (IntTime <= 0 && !aux)
         {

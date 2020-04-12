@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8963159288441548173}
   - component: {fileID: 8963159288441548174}
   - component: {fileID: 8963159288441548175}
+  - component: {fileID: -1580538416959862595}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Laser
@@ -111,3 +112,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1580538416959862595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963159288441548168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f18d0e55e4e0442b57d0347540548e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
