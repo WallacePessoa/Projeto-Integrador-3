@@ -69,7 +69,7 @@ public class NPC : MonoBehaviour
 
         FireStandart = FirePadrao;
 
-        Nav.speed = 10;
+        Nav.speed = Speed;
 
     }
 
@@ -79,7 +79,6 @@ public class NPC : MonoBehaviour
         
         if(Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            print(hit.collider.name);
             Debug.DrawRay(transform.position, hit.transform.forward * 20, Color.red);
             if (hit.collider.CompareTag("Jogador") && hit.collider.gameObject != gameObject)
                 StartCoroutine(atirar());
@@ -157,7 +156,6 @@ public class NPC : MonoBehaviour
     {
         if (Aceleração < Speed)
         {
-            print(Aceleração);
             Aceleração += 1f;
 
             yield return new WaitForSeconds(0.05f);
@@ -183,7 +181,6 @@ public class NPC : MonoBehaviour
             //print("A AI " + gameObject.name + " está lenta");
             if (Nav.speed > 5)
             {
-                print("entrou");
                 Nav.speed -= 0.1f;
                 yield return new WaitForSeconds(2f);
                 Nav.speed += 0.1f;

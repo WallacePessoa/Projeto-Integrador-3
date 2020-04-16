@@ -98,14 +98,6 @@ public class Player : MonoBehaviour
 
         }
 
-        for(int x = 0; x < gameManager.Classifição.Length; x++)
-        {
-            if (gameManager.Classifição[x].position == transform.position)
-            {
-                Classificação.text = gameManager.Classifição.Length + "/" + (x + 1);
-            }
-
-        }
 
     }
 

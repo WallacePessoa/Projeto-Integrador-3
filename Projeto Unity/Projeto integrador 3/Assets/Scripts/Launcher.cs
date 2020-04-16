@@ -57,7 +57,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             }
 
             FloatTime -= Time.deltaTime;
-            TextTime.text = IntTime.ToString();
+            TextTime.text = "Iniciando a partida em: " +IntTime.ToString();
         }
         if (IntTime <= 0 && !aux)
         {
@@ -65,7 +65,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             OnJoinedRoom();
         }
 
-        PlayerCont.text = PhotonNetwork.CountOfPlayersOnMaster.ToString();
+        PlayerCont.text = "Jogadores online " +PhotonNetwork.CountOfPlayersOnMaster.ToString();
     }
     #endregion
 

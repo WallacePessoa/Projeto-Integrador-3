@@ -69,7 +69,7 @@ NavMeshAgent:
   m_AngularSpeed: 300
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 0
   m_Height: 1
   m_BaseOffset: 0
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
-  Speed: 20
+  Speed: 25
   SpeedLocal: 0
   SpeedFire: 70
   PosDestino: {x: 0, y: 0, z: 0}
@@ -127,6 +127,8 @@ GameObject:
   - component: {fileID: 4718599017263427710}
   - component: {fileID: 5420948866058593453}
   - component: {fileID: 3610117292528486493}
+  - component: {fileID: 8157111233423357875}
+  - component: {fileID: 5294660011774202187}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -195,6 +197,40 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!195 &8157111233423357875
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5711154179260691656}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 0
+  m_Acceleration: 0
+  avoidancePriority: 0
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 0.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 0
+--- !u!114 &5294660011774202187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5711154179260691656}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad3af8af4e46f84aa5d58438358c5f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7813674770062314522
 GameObject:
   m_ObjectHideFlags: 0

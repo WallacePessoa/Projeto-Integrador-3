@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public GameObject IA;
 
-    public Transform[] Classifição;
+    public List<float> Classifição = new List<float>();
+
     [SerializeField]
     private Text Ganhador;
     [SerializeField]
@@ -55,43 +56,15 @@ public class GameManager : MonoBehaviourPunCallbacks
                 Jogadores.Add(Player);
         }
 
-        for (int x = 0; x < Classifição.Length; x++)
-        {
-            Classifição[x] = Jogadores[x].transform;
-        }
+
 
     }
 
     private void FixedUpdate()
     {
 
-
-
-        foreach (Transform clas in Classifição)
-        {
-            Distancia1 = Vector3.Distance(clas.position, Chegada.transform.position);
-
-
-        }
-
-        for(int y =0; y < Classifição.Length; y++)
-        {
-            Distancia1 = Vector3.Distance(Classifição[y].position, Chegada.transform.position);
-
-            for (int x = 0; x < Classifição.Length; x++)
-            {
-                Distancia2 = Vector3.Distance(Classifição[x].position, Chegada.transform.position);
-
-                if (Distancia1 < Distancia2)
-                {
-                    Transform aux = Classifição[y];
-                    Classifição[y] = Classifição[x];
-                    Classifição[x] = aux;
-                }
-            }
-
-        }
-
+        Classifição.Sort();
+         
     }
 
 
