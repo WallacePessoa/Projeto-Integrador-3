@@ -15,20 +15,22 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField]
     private Text PlayerCont;
     [SerializeField]
-    private float FloatTime = 10;
+    private float FloatTime = 0;
     [SerializeField]
     private Image LoadPanel;
+    [SerializeField]
+    private Button BtnJoinScene;
 
 
     #endregion
     #region Private Fields
 
-    int IntTime = 10;
+    int IntTime = 0;
 
     string gameVersion = "1";
     bool isConnect;
     string Fase;
-    bool aux = false;
+    bool EntrarNaSala = false;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -42,45 +44,84 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 
         TextTime.text = IntTime.ToString();
+        StartCoroutine(contar());
 
+
+    }
+
+    public IEnumerator contar()
+    {
+        if (EntrarNaSala)
+        {
+            if (FloatTime > IntTime)
+            {
+                IntTime++;
+            }
+            FloatTime += 1f;
+            TextTime.text = "Tempo de espera: " + IntTime.ToString();
+
+
+
+            PlayerCont.text = "Jogadores online " + PhotonNetwork.CurrentRoom.PlayerCount.ToString();
+        }
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(contar());
     }
 
     void FixedUpdate()
     {
 
 
-        if (PhotonNetwork.IsConnected)
-        {//Está conectado... entra em uma sala aleatoriamente
-            if(FloatTime < IntTime)
-            {
-                IntTime--;
-            }
 
-            FloatTime -= Time.deltaTime;
-            TextTime.text = "Iniciando a partida em: " +IntTime.ToString();
-        }
-        if (IntTime <= 0 && !aux)
+        if (PhotonNetwork.IsConnected)
         {
-            aux = !aux;
+            //Está conectado... entra em uma sala
+
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                BtnJoinScene.gameObject.SetActive(true);
+            }
+            else
+                BtnJoinScene.gameObject.SetActive(false);
+
+
+
+        }
+        if (PhotonNetwork.CountOfPlayersOnMaster == 8)
+        {
             OnJoinedRoom();
         }
 
-        PlayerCont.text = "Jogadores online " +PhotonNetwork.CountOfPlayersOnMaster.ToString();
+
+
+
+
     }
     #endregion
 
     #region Public Methods
+
+    public void JoinScene()
+    {
+        PhotonNetwork.LoadLevel(Fase);
+    }
+
     public void Connect(string fase)
     {
         Fase = fase;
         LoadPanel.gameObject.SetActive(true);
 
+        print(PhotonNetwork.IsMasterClient);
+
 
 
         if (PhotonNetwork.IsConnected)
-        {//Está conectado... entra em uma sala aleatoriamente
+        {
+            //Está conectado... entra em uma sala
             //PhotonNetwork.JoinRandomRoom();
-            PhotonNetwork.JoinRoom(fase);
+            PhotonNetwork.JoinRoom(Fase);
+
 
         }
         else
@@ -101,6 +142,9 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             //PhotonNetwork.JoinRandomRoom();
             PhotonNetwork.JoinRoom(Fase);
+            //PhotonNetwork.CurrentRoom.IsOpen = false;
+
+            
             
             isConnect = false;
         }
@@ -116,6 +160,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Falhou ao se conectar com uma sala... Criando nova sala");
         PhotonNetwork.CreateRoom(Fase, new RoomOptions { MaxPlayers = maxPlayers });
+
     }
 
     //public override void OnJoinRandomFailed(short returnCode, string message)
@@ -126,17 +171,14 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        if(IntTime <= 0)
-        {
-            Debug.Log("Conectado na sala: " + PhotonNetwork.CurrentRoom);
-
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-                PhotonNetwork.LoadLevel(Fase);
-        }
 
 
-        
+        Debug.Log("Conectado na sala: " + PhotonNetwork.CurrentRoom);
 
+        //if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+
+
+        EntrarNaSala = true;
     }
     #endregion
 }

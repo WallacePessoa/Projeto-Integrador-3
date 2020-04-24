@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     public float Speed;
     public float PowerUpSpeed;
@@ -16,8 +17,9 @@ public class Player : MonoBehaviour
     public GameObject FirePadrao;
     public GameObject GunL;
     public GameObject GunR;
-    public GameObject Camera;
     public GameObject PowerFire;
+
+
 
     Rigidbody rb;
     Rigidbody FireRb;
@@ -26,6 +28,7 @@ public class Player : MonoBehaviour
     GameObject FireStandart;
 
     private static GameManager gameManager;
+    public static GameObject LocalPlayerInstance;
 
     float hori;
     public float vert;
@@ -46,6 +49,31 @@ public class Player : MonoBehaviour
 
 
     int auxWhile = 0;
+
+    private void Awake()
+    {
+
+        if (photonView.IsMine)
+        {
+            LocalPlayerInstance = this.gameObject;
+        }
+
+
+        CameraWork cameraWork = this.gameObject.GetComponent<CameraWork>();
+
+        if (cameraWork != null)
+        {
+            if (photonView.IsMine)
+            {
+                cameraWork.OnStartFollowing();
+            }
+        }
+        else
+        {
+            Debug.Log("Player está sem o script camerawork", this);
+        }
+
+    }
 
     void Start()
     {
@@ -269,5 +297,10 @@ public class Player : MonoBehaviour
                 
             }
         }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        throw new System.NotImplementedException();
     }
 }

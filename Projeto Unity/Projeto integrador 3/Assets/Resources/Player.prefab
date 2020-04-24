@@ -310,9 +310,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4910636918303840475}
   - component: {fileID: 98132017382476042}
+  - component: {fileID: 5846381663617157134}
   - component: {fileID: 98132017382476047}
   - component: {fileID: 98132017382476044}
+  - component: {fileID: 3895100674303213744}
   - component: {fileID: 98132017382476045}
+  - component: {fileID: 7799820988822163179}
   m_Layer: 0
   m_Name: Player
   m_TagString: Jogador
@@ -353,6 +356,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &5846381663617157134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249837617940376264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58f2aa4dd421d642a472ce49270068c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 53
+  height: 70
+  centerOffset: {x: 0, y: 0, z: 0}
+  followOnStart: 1
+  smoothSpeed: 1000
+  cameraTransform: {fileID: 0}
 --- !u!64 &98132017382476047
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -464,6 +485,29 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &3895100674303213744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249837617940376264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 7799820988822163179}
+  - {fileID: 98132017382476045}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!114 &98132017382476045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,8 +530,40 @@ MonoBehaviour:
     type: 3}
   GunL: {fileID: 98132017443840179}
   GunR: {fileID: 98132017951745463}
-  Camera: {fileID: 0}
   PowerFire: {fileID: 2135718755163331667, guid: e42e140628a4b1e4bbb75c6dd7fe8fee,
     type: 3}
   vert: 0
   "Acelera\xE7\xE3o": 0
+--- !u!114 &7799820988822163179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249837617940376264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 0
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0

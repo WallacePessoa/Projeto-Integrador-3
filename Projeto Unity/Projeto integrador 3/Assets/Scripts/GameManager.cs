@@ -15,12 +15,17 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public List<GameObject> Jogadores = new List<GameObject>();
 
-    public GameObject Player;
+    public GameObject PlayerPrefab;
     public GameObject Chegada;
+
 
     public GameObject IA;
 
     public List<float> Classifição = new List<float>();
+
+    public GameObject[] JogadoresOnline;
+
+    GameObject MeuPlayer;
 
     [SerializeField]
     private Text Ganhador;
@@ -32,6 +37,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     float Distancia1;
     float Distancia2;
 
+    int AuxAlterarPosição;
+    int AuxJogador;
 
     int PosPlayer;
 
@@ -42,26 +49,43 @@ public class GameManager : MonoBehaviourPunCallbacks
             Instace = this;
         }
 
-        PosPlayer = Random.Range(0, Posiçõeslargada.Length);
+      
 
-        Player.transform.position = Posiçõeslargada[PosPlayer].position;
-
-        foreach(Transform pos in Posiçõeslargada)
+        if (PlayerPrefab != null)
         {
-            if (pos.position != Player.transform.position)
-            {
-                Jogadores.Add(Instantiate(IA, pos.position, transform.rotation));
-            }
-            else
-                Jogadores.Add(Player);
+            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(0, 0, 0), transform.rotation);
+            Debug.Log("Player intanciado em " + Application.loadedLevelName);
+            
         }
 
+        JogadoresOnline = GameObject.FindGameObjectsWithTag("Jogador");
+
+
+        foreach (GameObject game in JogadoresOnline)
+        {
+            game.transform.position = Posiçõeslargada[Random.Range(0, Posiçõeslargada.Length)].transform.position;
+        }
+
+        foreach (Transform trans in Posiçõeslargada)
+        {
+             for(int x = 0; x < JogadoresOnline.Length; x++)
+             {
+                if(JogadoresOnline[x].transform.position != trans.position)
+                {
+                    Jogadores.Add(Instantiate(IA, trans.position, transform.rotation));
+                }
+             }
+
+        }
 
 
     }
 
     private void FixedUpdate()
     {
+
+
+
 
         Classifição.Sort();
          
@@ -95,7 +119,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Você é o cliente mestre!!!");
 
-            LoadArena();
+            //LoadArena();
 
         }
     }
