@@ -22,18 +22,18 @@ public class ControlVol : MonoBehaviour
         
     }
 
-    public void VolumMaster(float volum)
+    public void VolumMaster(float volume)
     {
-        volumMaster = volum;
+        volumMaster = volume;
         AudioListener.volume = volumMaster;
 
         PlayerPrefs.SetFloat("Master", volumMaster);
     }
 
-    public void VolumFX(float volum)
+    public void VolumFX(float volume)
     {
-        volumFX = volum;
-        GameObject[] Fxs = GameObject.FindGameObjectsWithTag("Coletavel");
+        volumFX = volume;
+        GameObject[] Fxs = GameObject.FindGameObjectsWithTag("FX");
 
         for(int i = 0; i < Fxs.Length; i++)
         {
@@ -43,9 +43,9 @@ public class ControlVol : MonoBehaviour
         PlayerPrefs.SetFloat("FX", volumFX);
     }
 
-    public void VolumMusic(float volum)
+    public void VolumMusic(float volume)
     {
-        volumMusic = volum;
+        volumMusic = volume;
         GameObject[] Musics = GameObject.FindGameObjectsWithTag("Music");
 
         for (int i = 0; i < Musics.Length; i++)

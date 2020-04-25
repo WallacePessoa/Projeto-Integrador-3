@@ -12,6 +12,9 @@ TagManager:
   - Nodes
   - Obstaculo
   - Chegada
+  - Music
+  - FX
+  - Master
   layers:
   - Default
   - TransparentFX
