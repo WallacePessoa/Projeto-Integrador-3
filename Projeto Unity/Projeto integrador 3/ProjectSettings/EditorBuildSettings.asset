@@ -32,4 +32,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_4.unity
     guid: ce558e28b250efe4a85cef7e4684d1c0
+  - enabled: 1
+    path: Assets/Scenes/ControlVolum.unity
+    guid: 86b2f123888f2804aad9e07c987647b6
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 01e9d60d79f99cd488995fc458efa6c7
+  - enabled: 1
+    path: Assets/Scenes/Screen.unity
+    guid: ff5f9959408776e419c1ef1a26d8c88c
   m_configObjects: {}
