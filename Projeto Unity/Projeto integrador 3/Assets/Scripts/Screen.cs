@@ -1,18 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+using UnityEditor;
 
 public class Screen : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        PlayerSettings.displayResolutionDialog = ResolutionDialogSetting.Disabled;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //public void Resolution01()
+    //{
+    //    Screen.SetResolution(1920, 1080, true);
+    //}
+
+    //public void Resolution02()
+    //{
+    //    Screen.SetResolution(1920, 1080, true);
+    //}
+    
 }
