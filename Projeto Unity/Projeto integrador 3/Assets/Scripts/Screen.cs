@@ -9,7 +9,7 @@ public class Screen : MonoBehaviour
 {
     private void Start()
     {
-        PlayerSettings.displayResolutionDialog = ResolutionDialogSetting.Disabled;
+        // PlayerSettings.displayResolutionDialog = ResolutionDialogSetting.Disabled;
     }
 
     //public void Resolution01()

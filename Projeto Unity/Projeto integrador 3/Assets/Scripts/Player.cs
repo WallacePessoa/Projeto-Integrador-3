@@ -56,73 +56,99 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine)
         {
             LocalPlayerInstance = this.gameObject;
-        }
 
+            CameraWork cameraWork = this.gameObject.GetComponent<CameraWork>();
 
-        CameraWork cameraWork = this.gameObject.GetComponent<CameraWork>();
-
-        if (cameraWork != null)
-        {
-            if (photonView.IsMine)
+            if (cameraWork != null)
             {
-                cameraWork.OnStartFollowing();
+                if (photonView.IsMine)
+                {
+                    cameraWork.OnStartFollowing();
+                }
+            }
+            else
+            {
+                Debug.Log("Player está sem o script camerawork", this);
             }
         }
-        else
-        {
-            Debug.Log("Player está sem o script camerawork", this);
-        }
+
+
+
 
     }
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
 
-        SpeedLocal = Speed;
-
-        FireStandart = FirePadrao;
-
-        StartCoroutine(Acelerar());
-
-        if (gameManager == null)
+        if (photonView.IsMine)
         {
-            gameManager = FindObjectOfType<GameManager>();
+
+            CameraWork cameraWork = this.gameObject.GetComponent<CameraWork>();
+            rb = GetComponent<Rigidbody>();
+
+            SpeedLocal = Speed;
+
+            FireStandart = FirePadrao;
+
+            StartCoroutine(Acelerar());
+
+            if (gameManager == null)
+            {
+                gameManager = FindObjectOfType<GameManager>();
+            }
+
+            if (cameraWork != null)
+            {
+                if (photonView.IsMine)
+                {
+                    cameraWork.OnStartFollowing();
+                }
+            }
+            else
+            {
+                Debug.Log("Player está sem o script camerawork", this);
+            }
         }
 
+      
     }
 
     // Update is called once per frame
     void Update()
     {
-        hori = Input.GetAxis("Horizontal");
-        vert = Input.GetAxis("Vertical");
-
-        transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
-
-        if(!ControlInvert)
-            transform.Rotate(new Vector3(0, hori, 0) * SpeedRotation);
-        else
-            transform.Rotate(new Vector3(0, -hori, 0) * SpeedRotation);
-
-
-        rb.velocity = transform.forward * Aceleração * SpeedLocal;
-
-
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (photonView.IsMine)
         {
 
-            fireLocal = Instantiate(FireStandart, GunL.transform.position, transform.rotation);
+            hori = Input.GetAxis("Horizontal");
+            vert = Input.GetAxis("Vertical");
 
-            FireRb = fireLocal.GetComponent<Rigidbody>();
+            transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
 
-            FireRb.velocity = fireLocal.transform.forward * SpeedFire;
+            if (!ControlInvert)
+                transform.Rotate(new Vector3(0, hori, 0) * SpeedRotation);
+            else
+                transform.Rotate(new Vector3(0, -hori, 0) * SpeedRotation);
 
-            fireLocal = Instantiate(FireStandart, GunR.transform.position, transform.rotation);
 
-            FireRb = fireLocal.GetComponent<Rigidbody>();
+            rb.velocity = transform.forward * Aceleração * SpeedLocal;
 
-            FireRb.velocity = fireLocal.transform.forward * SpeedFire;
+
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+
+                fireLocal = Instantiate(FireStandart, GunL.transform.position, transform.rotation);
+
+                FireRb = fireLocal.GetComponent<Rigidbody>();
+
+                FireRb.velocity = fireLocal.transform.forward * SpeedFire;
+
+                fireLocal = Instantiate(FireStandart, GunR.transform.position, transform.rotation);
+
+                FireRb = fireLocal.GetComponent<Rigidbody>();
+
+                FireRb.velocity = fireLocal.transform.forward * SpeedFire;
+
+            }
 
         }
 
@@ -301,6 +327,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        throw new System.NotImplementedException();
+        
+
+
     }
 }

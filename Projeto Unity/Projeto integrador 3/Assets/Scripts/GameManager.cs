@@ -49,16 +49,12 @@ public class GameManager : MonoBehaviourPunCallbacks
             Instace = this;
         }
 
-      
-
-        if (PlayerPrefab != null)
+        if (Player.LocalPlayerInstance == null)
         {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(0, 0, 0), transform.rotation);
+            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(0, 1, 0), Quaternion.identity);
             Debug.Log("Player intanciado em " + Application.loadedLevelName);
             
         }
-
-        JogadoresOnline = GameObject.FindGameObjectsWithTag("Jogador");
 
 
         foreach (GameObject game in JogadoresOnline)
@@ -72,7 +68,7 @@ public class GameManager : MonoBehaviourPunCallbacks
              {
                 if(JogadoresOnline[x].transform.position != trans.position)
                 {
-                    Jogadores.Add(Instantiate(IA, trans.position, transform.rotation));
+                    
                 }
              }
 

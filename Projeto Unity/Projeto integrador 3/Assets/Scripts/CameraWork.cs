@@ -48,6 +48,8 @@ public class CameraWork : MonoBehaviour
     void Start()
     {
         // Start following the target if wanted.
+
+
         if (followOnStart)
         {
             OnStartFollowing();

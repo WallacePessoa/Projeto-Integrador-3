@@ -371,7 +371,7 @@ MonoBehaviour:
   distance: 53
   height: 70
   centerOffset: {x: 0, y: 0, z: 0}
-  followOnStart: 1
+  followOnStart: 0
   smoothSpeed: 1000
   cameraTransform: {fileID: 0}
 --- !u!64 &98132017382476047
@@ -504,7 +504,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 7799820988822163179}
-  - {fileID: 98132017382476045}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -547,7 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PositionModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 2
@@ -558,12 +557,12 @@ MonoBehaviour:
     ExtrapolateIncludingRoundTripTime: 1
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 1
     InterpolateRotateTowardsSpeed: 180
     InterpolateLerpSpeed: 5
   m_ScaleModel:
-    SynchronizeEnabled: 0
+    SynchronizeEnabled: 1
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0

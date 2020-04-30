@@ -86,6 +86,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                 BtnJoinScene.gameObject.SetActive(false);
 
 
+            Debug.Log("Conectado na sala: " + PhotonNetwork.CurrentRoom);
 
         }
         if (PhotonNetwork.CountOfPlayersOnMaster == 8)
@@ -114,22 +115,16 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         print(PhotonNetwork.IsMasterClient);
 
-
-
         if (PhotonNetwork.IsConnected)
         {
             //Está conectado... entra em uma sala
-            //PhotonNetwork.JoinRandomRoom();
             PhotonNetwork.JoinRoom(Fase);
-
-
         }
         else
         {
             //não está conectado... cria a conexão com o Photon Server
             isConnect = PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = gameVersion;
-
         }
     }
     #endregion
@@ -143,16 +138,12 @@ public class Launcher : MonoBehaviourPunCallbacks
             //PhotonNetwork.JoinRandomRoom();
             PhotonNetwork.JoinRoom(Fase);
             //PhotonNetwork.CurrentRoom.IsOpen = false;
-
-            
-            
             isConnect = false;
         }
 
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
-
         Debug.LogWarning("Desconectado. Causa: " + cause);
     }
 
@@ -163,19 +154,13 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     }
 
-    //public override void OnJoinRandomFailed(short returnCode, string message)
-    //{
-    //    Debug.Log("Falhou ao se conectar com uma sala... Criando nova sala");
-    //    PhotonNetwork.CreateRoom(Fase, new RoomOptions { MaxPlayers = maxPlayers});
-    //}
-
     public override void OnJoinedRoom()
     {
 
 
         Debug.Log("Conectado na sala: " + PhotonNetwork.CurrentRoom);
 
-        //if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+       
 
 
         EntrarNaSala = true;
