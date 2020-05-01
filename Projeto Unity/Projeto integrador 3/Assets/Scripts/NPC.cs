@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
 
-public class NPC : MonoBehaviour
+public class NPC : MonoBehaviourPun, IPunObservable
 {
     public Camera Camera;
 
@@ -29,6 +30,9 @@ public class NPC : MonoBehaviour
 
     Rigidbody FireRb;
 
+    bool IsFiring;
+
+    bool IsFiringAux;
 
     float hori;
     float vert;
@@ -76,65 +80,90 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(Physics.Raycast(transform.position, transform.forward, out hit))
+        if (PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient)
         {
-            Debug.DrawRay(transform.position, hit.transform.forward * 20, Color.red);
-            if (hit.collider.CompareTag("Jogador") && hit.collider.gameObject != gameObject)
-                StartCoroutine(atirar());
+            if (Physics.Raycast(transform.position, transform.forward, out hit))
+            {
+                Debug.DrawRay(transform.position, hit.transform.forward * 20, Color.red);
+
+                if (hit.collider.CompareTag("Jogador") && hit.collider.gameObject != gameObject && !IsFiring)
+                {
+                    IsFiring = true;
+                    StartCoroutine(atirar());
+                }
+                else if(!IsFiring)
+                {
+                    IsFiring = false;
+                    StopCoroutine(atirar());
+                }
+
+            }
             else
+            {
+                IsFiring = false;
                 StopCoroutine(atirar());
+            }
+
+            if (IsFiring && !IsFiringAux)
+            {
+                IsFiringAux = true;
+                StartCoroutine(atirar());
+            }
+
+            else if (!IsFiring)
+            {
+                IsFiringAux = false;
+                StopCoroutine(atirar());
+            }
+
+
+            switch (Estado)
+            {
+                case StateMachine.Correr:
+
+
+                    Nav.destination = PosDestino;
+
+                    if (Vector3.Distance(transform.position, PosDestino) < 5)
+                    {
+                        Estado = StateMachine.Curva;
+                    }
+                    break;
+
+                case StateMachine.Curva:
+
+                    if (Destino + 1 < Positions.Length)
+                    {
+                        Destino++;
+                    }
+
+
+
+                    PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
+                    Estado = StateMachine.Correr;
+
+                    break;
+
+                case StateMachine.Atirar:
+
+                    Nav.destination = PosDestino;
+
+
+
+                    if (Vector3.Distance(transform.position, PosDestino) < 5)
+                    {
+                        Estado = StateMachine.Curva;
+                    }
+
+                    break;
+            }
+
         }
-        else
-            StopCoroutine(atirar());
-
-
-
-        switch (Estado)
-        {
-            case StateMachine.Correr:
-
-
-                Nav.destination = PosDestino;
-
-                if (Vector3.Distance(transform.position, PosDestino) < 5)
-                {
-                    Estado = StateMachine.Curva;
-                }
-                break;
-
-            case StateMachine.Curva:
-
-                if (Destino+1 < Positions.Length)
-                {
-                    Destino++;
-                }
-
-
-
-                PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
-                Estado = StateMachine.Correr;
-
-                break;
-
-            case StateMachine.Atirar:
-
-                Nav.destination = PosDestino;
-
-
-
-                if (Vector3.Distance(transform.position, PosDestino) < 5)
-                {
-                    Estado = StateMachine.Curva;
-                }
-
-                break;
-        }   
-
     }
 
     private IEnumerator atirar()
     {
+
         fireLocal = Instantiate(FireStandart, GunL.transform.position, transform.rotation);
 
         FireRb = fireLocal.GetComponent<Rigidbody>();
@@ -149,7 +178,8 @@ public class NPC : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        StartCoroutine(atirar());
+        if (IsFiring)
+            StartCoroutine(atirar());
     }
 
     private IEnumerator Acelerar()
@@ -177,19 +207,19 @@ public class NPC : MonoBehaviour
     {
         if (other != null && other.CompareTag("Laser"))
         {
-            //print(other.gameObject != null);
-            //print("A AI " + gameObject.name + " está lenta");
+           
             if (Nav.speed > 5)
             {
                 Nav.speed -= 0.1f;
                 yield return new WaitForSeconds(2f);
                 Nav.speed += 0.1f;
             }
-            if(other != null)
+            if (other != null)
                 Destroy(other.gameObject);
 
 
-        }else if (other != null && other.CompareTag("PowerLaser"))
+        }
+        else if (other != null && other.CompareTag("PowerLaser"))
         {
 
             if (Nav.speed > 9)
@@ -199,9 +229,10 @@ public class NPC : MonoBehaviour
                 Nav.speed += 0.1f;
             }
 
-            
 
-        }else if (other != null && other.CompareTag("PowerUp"))
+
+        }
+        else if (other != null && other.CompareTag("PowerUp"))
         {
             Sortear = Random.Range(1, 5);
 
@@ -219,7 +250,7 @@ public class NPC : MonoBehaviour
 
                 case 2:
 
-                    while(Nav.speed > 15)
+                    while (Nav.speed > 15)
                     {
                         Nav.speed -= 0.1f;
                         yield return new WaitForSeconds(0.1f);
@@ -253,5 +284,17 @@ public class NPC : MonoBehaviour
             GameManager.Instace.hudWim(gameObject.name);
         }
 
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(IsFiring);
+        }
+        else
+        {
+            this.IsFiring = (bool)stream.ReceiveNext();
+        }
     }
 }

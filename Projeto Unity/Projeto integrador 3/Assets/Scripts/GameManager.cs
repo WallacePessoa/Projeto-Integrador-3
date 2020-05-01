@@ -7,17 +7,18 @@ using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviourPunCallbacks
+public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     public static GameManager Instace;
 
-    public Transform[] Posiçõeslargada;
+    public GameObject[] Posiçõeslargada;
 
     public List<GameObject> Jogadores = new List<GameObject>();
 
     public GameObject PlayerPrefab;
     public GameObject Chegada;
 
+    public int PlayerID;
 
     public GameObject IA;
 
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     private Image Panel;
     [SerializeField]
     private Button Back;
+    [SerializeField]
+    private Text StartRum;
 
     float Distancia1;
     float Distancia2;
@@ -42,6 +45,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     int PosPlayer;
 
+    
+
     private void Awake()
     {
         if(Instace == null)
@@ -49,41 +54,36 @@ public class GameManager : MonoBehaviourPunCallbacks
             Instace = this;
         }
 
+        int aux = PlayerIndex.instancePlayerIndex.playerId - 1;
+
+        Debug.Log(aux);
         if (Player.LocalPlayerInstance == null)
         {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(0, 1, 0), Quaternion.identity);
+            PhotonNetwork.Instantiate(PlayerPrefab.name, Posiçõeslargada[aux].transform.position, Posiçõeslargada[aux].transform.rotation);
             Debug.Log("Player intanciado em " + Application.loadedLevelName);
             
         }
 
-
-        foreach (GameObject game in JogadoresOnline)
+        if (PhotonNetwork.IsMasterClient)
         {
-            game.transform.position = Posiçõeslargada[Random.Range(0, Posiçõeslargada.Length)].transform.position;
+
+            int x = PhotonNetwork.CurrentRoom.PlayerCount;
+
+            for(int y = x; y < Posiçõeslargada.Length; y++)
+            {
+                PhotonNetwork.Instantiate("IA", Posiçõeslargada[y].transform.position, Posiçõeslargada[y].transform.rotation);
+            }
         }
+    }
 
-        foreach (Transform trans in Posiçõeslargada)
-        {
-             for(int x = 0; x < JogadoresOnline.Length; x++)
-             {
-                if(JogadoresOnline[x].transform.position != trans.position)
-                {
-                    
-                }
-             }
-
-        }
-
-
+    private void Start()
+    {
+        
     }
 
     private void FixedUpdate()
     {
 
-
-
-
-        Classifição.Sort();
          
     }
 
@@ -154,6 +154,14 @@ public class GameManager : MonoBehaviourPunCallbacks
             Debug.Log("Você não é o cliente Mestre");
         }
         PhotonNetwork.LoadLevel("Fase_" + PhotonNetwork.CurrentRoom.PlayerCount);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        
+
+
+
     }
     #endregion
 

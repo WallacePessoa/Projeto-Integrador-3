@@ -157,10 +157,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
 
-
         Debug.Log("Conectado na sala: " + PhotonNetwork.CurrentRoom);
 
-       
+        PlayerIndex.instancePlayerIndex.playerId = PhotonNetwork.CurrentRoom.PlayerCount;
 
 
         EntrarNaSala = true;

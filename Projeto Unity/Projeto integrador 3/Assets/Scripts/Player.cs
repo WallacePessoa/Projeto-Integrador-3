@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Cinemachine;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -41,11 +42,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     bool ControlInvert = false;
 
+    bool IsFiring;
+
+    bool IsFiringAux;
+
     Vector3 MousePosition;
 
     Ray ray;
 
     RaycastHit hit;
+
+    public CinemachineVirtualCamera camera;
 
 
     int auxWhile = 0;
@@ -55,6 +62,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (photonView.IsMine)
         {
+            camera = GameObject.FindGameObjectWithTag("cine").GetComponent<CinemachineVirtualCamera>();
+            camera.Follow = transform;
+            camera.LookAt = transform;
+
             LocalPlayerInstance = this.gameObject;
 
             CameraWork cameraWork = this.gameObject.GetComponent<CameraWork>();
@@ -71,10 +82,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 Debug.Log("Player está sem o script camerawork", this);
             }
         }
-
-
-
-
     }
 
     void Start()
@@ -133,25 +140,52 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             rb.velocity = transform.forward * Aceleração * SpeedLocal;
 
 
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !IsFiring)
             {
+                IsFiring = true;
+                StartCoroutine(Atirar());
 
-                fireLocal = Instantiate(FireStandart, GunL.transform.position, transform.rotation);
-
-                FireRb = fireLocal.GetComponent<Rigidbody>();
-
-                FireRb.velocity = fireLocal.transform.forward * SpeedFire;
-
-                fireLocal = Instantiate(FireStandart, GunR.transform.position, transform.rotation);
-
-                FireRb = fireLocal.GetComponent<Rigidbody>();
-
-                FireRb.velocity = fireLocal.transform.forward * SpeedFire;
-
+            }else if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                IsFiring = false;
+                StopCoroutine(Atirar());
             }
+        }
+        else
+        {
 
+            if (IsFiring && !IsFiringAux)
+            {
+                IsFiringAux = true;
+                StartCoroutine("Atirar");
+            }
+            else if(!IsFiring)
+            {
+                IsFiringAux = false; 
+            }
         }
 
+
+    }
+
+    public IEnumerator Atirar()
+    {
+
+        fireLocal = Instantiate(FirePadrao, GunL.transform.position, transform.rotation);
+
+        FireRb = fireLocal.GetComponent<Rigidbody>();
+
+        FireRb.velocity = fireLocal.transform.forward * SpeedFire;
+
+        fireLocal = Instantiate(FirePadrao, GunR.transform.position, transform.rotation);
+
+        FireRb = fireLocal.GetComponent<Rigidbody>();
+
+        FireRb.velocity = fireLocal.transform.forward * SpeedFire;
+
+        yield return new WaitForSeconds(0.3f);
+        if(IsFiring)
+            StartCoroutine(Atirar());
 
     }
 
@@ -327,8 +361,15 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        
+        if (stream.IsWriting)
+        {
+            stream.SendNext(IsFiring);
 
+        }
+        else
+        {
+            this.IsFiring = (bool)stream.ReceiveNext();
+        }
 
     }
 }
