@@ -955,8 +955,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Voc\xEA poder\xE1 utilizar W, A, S, D ou as teclas direcionais para moviementa\xE7\xE3o
-    da nave e a barra de espa\xE7o para atirar em seus oponentes."
+  m_Text: "Voc\xEA poder\xE1 utilizar as teclas W, A, S, D ou as teclas direcionais
+    para a movimenta\xE7\xE3o da nave e a barra de espa\xE7o para atirar em seus
+    oponentes."
 --- !u!222 &1236377929
 CanvasRenderer:
   m_ObjectHideFlags: 0
