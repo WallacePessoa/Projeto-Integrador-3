@@ -21,10 +21,14 @@ MonoBehaviour:
     y: 30
     width: 1366
     height: 635
-  m_MinSize: {x: 677, y: 442}
-  m_MaxSize: {x: 12002, y: 8042}
+  m_MinSize: {x: 678, y: 442}
+  m_MaxSize: {x: 12003, y: 8042}
   vertical: 0
+<<<<<<< HEAD
   controlID: 7973
+=======
+  controlID: 1304
+>>>>>>> parent of c7273793... sincronização servidor
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -47,7 +51,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 336
+    y: 390
     width: 941
     height: 297
   m_ViewDataDictionary: {fileID: 0}
@@ -83,7 +87,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -138,7 +142,11 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 442}
   m_MaxSize: {x: 8002, y: 8042}
   vertical: 1
+<<<<<<< HEAD
   controlID: 7974
+=======
+  controlID: 1250
+>>>>>>> parent of c7273793... sincronização servidor
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -163,7 +171,11 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 221}
   m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
+<<<<<<< HEAD
   controlID: 7947
+=======
+  controlID: 1251
+>>>>>>> parent of c7273793... sincronização servidor
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -183,8 +195,8 @@ MonoBehaviour:
     y: 0
     width: 244
     height: 317
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -221,7 +233,11 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
+<<<<<<< HEAD
       m_ExpandedIDs: 94d0ffffc2d1fffff8f3fffffaf3ffff06f4ffff24f4ffff26f4ffff32f4ffff50f4ffff52f4ffff5ef4ffff66f4ffff70f9ffff6efbffffda410000724d0000ac5a0000
+=======
+      m_ExpandedIDs: e4b6ffff3eb9fffff0baffffb6bdffff74630000246d0000
+>>>>>>> parent of c7273793... sincronização servidor
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -264,8 +280,8 @@ MonoBehaviour:
     y: 0
     width: 698
     height: 317
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 10}
   m_Panes:
   - {fileID: 8}
@@ -433,9 +449,15 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
     m_Target: {x: 364.08768, y: 139.87227, z: -33.964752}
     speed: 2
     m_Value: {x: 364.08768, y: 139.87227, z: -33.964752}
+=======
+    m_Target: {x: 324.08002, y: 240, z: 0}
+    speed: 2
+    m_Value: {x: 324.08002, y: 240, z: 0}
+>>>>>>> parent of c7273793... sincronização servidor
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -485,9 +507,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.03628977, y: -0.025485575, z: 0.00092603476, w: 0.9990159}
   m_Size:
+<<<<<<< HEAD
     m_Target: 175.72514
     speed: 2
     m_Value: 175.72514
+=======
+    m_Target: 1391.9095
+    speed: 2
+    m_Value: 1391.9095
+>>>>>>> parent of c7273793... sincronização servidor
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -531,8 +559,8 @@ MonoBehaviour:
     y: 317
     width: 942
     height: 318
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 12}
@@ -591,10 +619,17 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 71}
     m_SelectedIDs: 8e3f0000
     m_LastClickedID: 16270
     m_ExpandedIDs: 00000000b83d0000ba3d0000bc3d0000be3d0000c03d0000c23d0000c43d0000c63d0000c83d0000ca3d0000cc3d0000ce3d000000ca9a3b
+=======
+    scrollPos: {x: 0, y: 11}
+    m_SelectedIDs: 565c0000
+    m_LastClickedID: 23638
+    m_ExpandedIDs: 000000008c5a00008e5a0000905a0000925a0000945a000000ca9a3b
+>>>>>>> parent of c7273793... sincronização servidor
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -622,7 +657,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000b83d0000ba3d0000bc3d0000be3d0000c03d0000c23d0000c43d0000c63d0000c83d0000ca3d0000cc3d0000ce3d000000ca9a3b
+=======
+    m_ExpandedIDs: 000000008c5a00008e5a0000905a0000925a0000945a000000ca9a3b
+>>>>>>> parent of c7273793... sincronização servidor
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -647,8 +686,13 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
+<<<<<<< HEAD
     m_SelectedInstanceIDs: 6a410000
     m_LastClickedInstanceID: 16746
+=======
+    m_SelectedInstanceIDs: f66c0000
+    m_LastClickedInstanceID: 27894
+>>>>>>> parent of c7273793... sincronização servidor
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300005442000000000000
     m_RenameOverlay:
@@ -732,7 +776,11 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
+<<<<<<< HEAD
   m_LastSelectedObjectID: -3084
+=======
+  m_LastSelectedObjectID: 25490
+>>>>>>> parent of c7273793... sincronização servidor
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -797,7 +845,11 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
+<<<<<<< HEAD
   m_LastInspectedObjectInstanceID: 16746
+=======
+  m_LastInspectedObjectInstanceID: 27894
+>>>>>>> parent of c7273793... sincronização servidor
   m_LastVerticalScrollValue: 0
 --- !u!114 &17
 MonoBehaviour:

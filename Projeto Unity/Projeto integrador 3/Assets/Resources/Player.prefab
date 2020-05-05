@@ -310,7 +310,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4910636918303840475}
   - component: {fileID: 98132017382476042}
-  - component: {fileID: 5846381663617157134}
   - component: {fileID: 98132017382476047}
   - component: {fileID: 98132017382476044}
   - component: {fileID: 3895100674303213744}
@@ -356,24 +355,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!114 &5846381663617157134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8249837617940376264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d58f2aa4dd421d642a472ce49270068c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 53
-  height: 70
-  centerOffset: {x: 0, y: 0, z: 0}
-  followOnStart: 0
-  smoothSpeed: 1000
-  cameraTransform: {fileID: 0}
 --- !u!64 &98132017382476047
 MeshCollider:
   m_ObjectHideFlags: 0

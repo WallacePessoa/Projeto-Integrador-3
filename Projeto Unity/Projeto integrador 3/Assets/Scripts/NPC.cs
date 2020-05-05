@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Photon.Pun;
 
-public class NPC : MonoBehaviour
+public class NPC : MonoBehaviourPun, IPunObservable
 {
     public Camera Camera;
 
@@ -35,6 +36,10 @@ public class NPC : MonoBehaviour
     public float Aceleração = 0;
     int Destino = 0;
     int Sortear;
+
+    bool IsFiring;
+
+    bool IsFiringAux;
 
 
     NavMeshAgent Nav;
@@ -76,17 +81,45 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(Physics.Raycast(transform.position, transform.forward, out hit))
+
+        if (PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient)
         {
-            Debug.DrawRay(transform.position, hit.transform.forward * 20, Color.red);
-            if (hit.collider.CompareTag("Jogador") && hit.collider.gameObject != gameObject)
-                StartCoroutine(atirar());
+
+            if (Physics.Raycast(transform.position, transform.forward, out hit))
+            {
+                Debug.DrawRay(transform.position, hit.transform.forward * 20, Color.red);
+
+                if (hit.collider.CompareTag("Jogador") && hit.collider.gameObject != gameObject && !IsFiring)
+                {
+                    IsFiring = true;
+                    StartCoroutine(atirar());
+                }
+                else if (!IsFiring)
+                {
+                    IsFiring = false;
+                    StopCoroutine(atirar());
+                }
+
+            }
             else
+            {
+                IsFiring = false;
                 StopCoroutine(atirar());
+            }
+
         }
-        else
+
+        if (IsFiring && !IsFiringAux)
+        {
+            IsFiringAux = true;
+            StartCoroutine(atirar());
+        }
+
+        else if (!IsFiring)
+        {
+            IsFiringAux = false;
             StopCoroutine(atirar());
+        }
 
 
 
@@ -149,7 +182,8 @@ public class NPC : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        StartCoroutine(atirar());
+        if (IsFiring)
+            StartCoroutine(atirar());
     }
 
     private IEnumerator Acelerar()
@@ -253,5 +287,17 @@ public class NPC : MonoBehaviour
             GameManager.Instace.hudWim(gameObject.name);
         }
 
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(IsFiring);
+        }
+        else
+        {
+            this.IsFiring = (bool)stream.ReceiveNext();
+        }
     }
 }

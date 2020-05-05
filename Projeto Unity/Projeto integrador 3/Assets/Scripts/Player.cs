@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Cinemachine;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -30,10 +31,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     private static GameManager gameManager;
     public static GameObject LocalPlayerInstance;
 
+    CinemachineVirtualCamera camera;
+
     float hori;
     public float vert;
 
     public float Aceleração = 0;
+
+    bool IsFiring;
+
+    bool IsFiringAux;
 
     int Sortear;
 
@@ -55,21 +62,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (photonView.IsMine)
         {
+            camera = GameObject.FindGameObjectWithTag("cine").GetComponent<CinemachineVirtualCamera>();
+            camera.Follow = transform;
+            camera.LookAt = transform;
+
+
             LocalPlayerInstance = this.gameObject;
 
-            CameraWork cameraWork = this.gameObject.GetComponent<CameraWork>();
-
-            if (cameraWork != null)
-            {
-                if (photonView.IsMine)
-                {
-                    cameraWork.OnStartFollowing();
-                }
-            }
-            else
-            {
-                Debug.Log("Player está sem o script camerawork", this);
-            }
         }
 
 
@@ -122,7 +121,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             hori = Input.GetAxis("Horizontal");
             vert = Input.GetAxis("Vertical");
 
-            transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
+   
 
             if (!ControlInvert)
                 transform.Rotate(new Vector3(0, hori, 0) * SpeedRotation);
@@ -132,28 +131,50 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             rb.velocity = transform.forward * Aceleração * SpeedLocal;
 
-
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !IsFiring)
             {
-
-                fireLocal = Instantiate(FireStandart, GunL.transform.position, transform.rotation);
-
-                FireRb = fireLocal.GetComponent<Rigidbody>();
-
-                FireRb.velocity = fireLocal.transform.forward * SpeedFire;
-
-                fireLocal = Instantiate(FireStandart, GunR.transform.position, transform.rotation);
-
-                FireRb = fireLocal.GetComponent<Rigidbody>();
-
-                FireRb.velocity = fireLocal.transform.forward * SpeedFire;
+                IsFiring = true;
+                StartCoroutine(Atirar());
 
             }
+            else if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                IsFiring = false;
+                StopCoroutine(Atirar());
+            }
+        }
+        else
+        {
 
+            if (IsFiring && !IsFiringAux)
+            {
+                IsFiringAux = true;
+                StartCoroutine("Atirar");
+            }
+            else if (!IsFiring)
+            {
+                IsFiringAux = false;
+            }
         }
 
+    }
+
+    public IEnumerator Atirar()
+    {
+
+        fireLocal = Instantiate(FirePadrao, GunL.transform.position, transform.rotation);
+        FireRb = fireLocal.GetComponent<Rigidbody>();
+        FireRb.velocity = fireLocal.transform.forward * SpeedFire;
+        fireLocal = Instantiate(FirePadrao, GunR.transform.position, transform.rotation);
+        FireRb = fireLocal.GetComponent<Rigidbody>();
+        FireRb.velocity = fireLocal.transform.forward * SpeedFire;
+
+        yield return new WaitForSeconds(0.3f);
+        if (IsFiring)
+            StartCoroutine(Atirar());
 
     }
+
 
     private IEnumerator Acelerar()
     {
@@ -327,8 +348,16 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        
 
+        if (stream.IsWriting)
+        {
+            stream.SendNext(IsFiring);
+
+        }
+        else
+        {
+            this.IsFiring = (bool)stream.ReceiveNext();
+        }
 
     }
 }

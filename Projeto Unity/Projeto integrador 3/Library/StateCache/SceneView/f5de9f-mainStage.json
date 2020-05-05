@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":364.0876770019531,"y":139.8722686767578,"z":-33.964752197265628},"rotation":{"x":0.036289870738983157,"y":-0.025485645979642869,"z":0.0009260373190045357,"w":0.999018669128418},"size":175.7251434326172,"orthographic":false}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":324.08001708984377,"y":240.0,"z":0.0},"rotation":{"x":0.3105154037475586,"y":0.07688012719154358,"z":-0.02520545944571495,"w":0.947119414806366},"size":1391.9095458984375,"orthographic":false}
+>>>>>>> parent of c7273793... sincronização servidor

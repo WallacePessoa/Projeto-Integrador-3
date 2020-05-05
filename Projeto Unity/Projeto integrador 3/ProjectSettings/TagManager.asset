@@ -15,6 +15,7 @@ TagManager:
   - Music
   - FX
   - Master
+  - cine
   layers:
   - Default
   - TransparentFX
