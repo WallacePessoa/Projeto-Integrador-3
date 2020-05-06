@@ -512,6 +512,7 @@ MonoBehaviour:
   GunR: {fileID: 98132017951745463}
   PowerFire: {fileID: 2135718755163331667, guid: e42e140628a4b1e4bbb75c6dd7fe8fee,
     type: 3}
+  AnimatorBufDebuf: {fileID: 0}
   vert: 0
   "Acelera\xE7\xE3o": 0
 --- !u!114 &7799820988822163179

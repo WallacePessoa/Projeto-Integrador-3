@@ -41,6 +41,8 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
     bool IsFiringAux;
 
+    bool AuxStart = false;
+
 
     NavMeshAgent Nav;
 
@@ -60,110 +62,118 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
     void Start()
     {
-        // StartCoroutine(Acelerar());
-        Nav = GetComponent<NavMeshAgent>();
-        Estado = StateMachine.Correr;
-       
-        Positions = GameObject.FindGameObjectsWithTag("Nodes");
-
-
-        PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
-
-        //for (int x = 0; x< Positions.Length;x++)
-        //    Posiçoes[x] = Positions[x].transform.position;
-
-        FireStandart = FirePadrao;
-
-        Nav.speed = Speed;
-
+        StartCoroutine(StartRun());
     }
 
     // Update is called once per frame
-    void Update()
+    void  FixedUpdate()
     {
-
-        if (PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient)
+        if (GameManager.Instace.StartGame == true && AuxStart)
         {
-
-            if (Physics.Raycast(transform.position, transform.forward, out hit))
+            if (PhotonNetwork.IsConnected && PhotonNetwork.IsMasterClient)
             {
-                Debug.DrawRay(transform.position, hit.transform.forward * 20, Color.red);
-
-                if (hit.collider.CompareTag("Jogador") && hit.collider.gameObject != gameObject && !IsFiring)
+                if (Physics.Raycast(transform.position, transform.forward, out hit))
                 {
-                    IsFiring = true;
-                    StartCoroutine(atirar());
+                    Debug.DrawRay(transform.position, hit.transform.forward * 20, Color.red);
+
+                    if (hit.collider.CompareTag("Jogador") && hit.collider.gameObject != gameObject && !IsFiring)
+                    {
+                        IsFiring = true;
+                        StartCoroutine(atirar());
+                    }
+                    else if (!IsFiring)
+                    {
+                        IsFiring = false;
+                        StopCoroutine(atirar());
+                    }
+
                 }
-                else if (!IsFiring)
+                else
                 {
                     IsFiring = false;
                     StopCoroutine(atirar());
                 }
 
             }
-            else
+
+            if (IsFiring && !IsFiringAux)
             {
-                IsFiring = false;
+                IsFiringAux = true;
+                StartCoroutine(atirar());
+            }
+
+            else if (!IsFiring)
+            {
+                IsFiringAux = false;
                 StopCoroutine(atirar());
             }
 
+            switch (Estado)
+            {
+                case StateMachine.Correr:
+
+
+                    Nav.destination = PosDestino;
+
+                    if (Vector3.Distance(transform.position, PosDestino) < 5)
+                    {
+                        Estado = StateMachine.Curva;
+                    }
+                    break;
+
+                case StateMachine.Curva:
+
+                    if (Destino + 1 < Positions.Length)
+                    {
+                        Destino++;
+                    }
+
+
+
+                    PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
+                    Estado = StateMachine.Correr;
+
+                    break;
+
+                case StateMachine.Atirar:
+
+                    Nav.destination = PosDestino;
+
+
+
+                    if (Vector3.Distance(transform.position, PosDestino) < 5)
+                    {
+                        Estado = StateMachine.Curva;
+                    }
+
+                    break;
+            }
         }
+    }
 
-        if (IsFiring && !IsFiringAux)
+    private IEnumerator StartRun()
+    {
+        if (GameManager.Instace.StartGame == true)
         {
-            IsFiringAux = true;
-            StartCoroutine(atirar());
+
+            Nav = GetComponent<NavMeshAgent>();
+            Estado = StateMachine.Correr;
+
+            Positions = GameObject.FindGameObjectsWithTag("Nodes");
+
+
+            PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
+
+            FireStandart = FirePadrao;
+
+            Nav.speed = Speed;
+            AuxStart = true;
         }
-
-        else if (!IsFiring)
+        else
         {
-            IsFiringAux = false;
-            StopCoroutine(atirar());
+            yield return null;
+            StartCoroutine(StartRun());
         }
-
-
-
-        switch (Estado)
-        {
-            case StateMachine.Correr:
-
-
-                Nav.destination = PosDestino;
-
-                if (Vector3.Distance(transform.position, PosDestino) < 5)
-                {
-                    Estado = StateMachine.Curva;
-                }
-                break;
-
-            case StateMachine.Curva:
-
-                if (Destino+1 < Positions.Length)
-                {
-                    Destino++;
-                }
-
-
-
-                PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
-                Estado = StateMachine.Correr;
-
-                break;
-
-            case StateMachine.Atirar:
-
-                Nav.destination = PosDestino;
-
-
-
-                if (Vector3.Distance(transform.position, PosDestino) < 5)
-                {
-                    Estado = StateMachine.Curva;
-                }
-
-                break;
-        }   
-
     }
 
     private IEnumerator atirar()

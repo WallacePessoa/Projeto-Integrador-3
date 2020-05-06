@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public GameObject[] JogadoresOnline;
 
+    public bool StartGame = false;
+
 
 
     GameObject MeuPlayer;
@@ -37,18 +39,21 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     private Button Back;
     [SerializeField]
-    private Text StartRum;
+    private Text TextStartTime;
 
     float Distancia1;
     float Distancia2;
 
     int AuxAlterarPosição;
     int AuxJogador;
-
+    int IntStartTime = 5;
     int PosPlayer;
 
     private void Awake()
     {
+        StartGame = false;
+
+
         if(Instace == null)
         {
             Instace = this;
@@ -73,7 +78,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             PhotonNetwork.Instantiate(IA.name, Posiçõeslargada[y].transform.position, Posiçõeslargada[y].transform.rotation);
         }
 
-
+        StartCoroutine(StarTime());
     }
 
     private void FixedUpdate()
@@ -119,6 +124,25 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
     #region Public Methods
+
+    public IEnumerator StarTime()
+    {
+        TextStartTime.text = IntStartTime.ToString();
+
+        yield return new WaitForSeconds(1f);
+        IntStartTime--;
+
+        if(IntStartTime !=0)
+        {
+            StartCoroutine(StarTime());
+        }
+        else
+        {
+            TextStartTime.gameObject.SetActive(false);
+            StartGame = true;
+        }
+
+    }
     public void hudWim(string Name)
     {
         Time.timeScale = 0;
@@ -138,9 +162,16 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         PhotonNetwork.LeaveRoom();
     }
+
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        
+    }
     #endregion
 
     #region Private Mathods
+
     void LoadArena()
     {
 
@@ -149,11 +180,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             Debug.Log("Você não é o cliente Mestre");
         }
         PhotonNetwork.LoadLevel("Fase_" + PhotonNetwork.CurrentRoom.PlayerCount);
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        
     }
     #endregion
 

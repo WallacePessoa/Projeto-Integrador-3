@@ -21,17 +21,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject PowerFire;
 
 
+    public static GameObject LocalPlayerInstance;
 
     Rigidbody rb;
     Rigidbody FireRb;
 
     GameObject fireLocal;
     GameObject FireStandart;
+    GameObject ObjectSpriteBufDebuf;
 
     private static GameManager gameManager;
-    public static GameObject LocalPlayerInstance;
 
-    CinemachineVirtualCamera camera;
+
+    CinemachineVirtualCamera Camera;
+
+    Image ImageBufDebuf;
+    public Animator AnimatorBufDebuf;
 
     float hori;
     public float vert;
@@ -54,7 +59,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     RaycastHit hit;
 
-
+    int AuxAnim;
     int auxWhile = 0;
 
     private void Awake()
@@ -62,101 +67,106 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (photonView.IsMine)
         {
-            camera = GameObject.FindGameObjectWithTag("cine").GetComponent<CinemachineVirtualCamera>();
-            camera.Follow = transform;
-            camera.LookAt = transform;
+            Camera = GameObject.FindGameObjectWithTag("cine").GetComponent<CinemachineVirtualCamera>();
+            Camera.Follow = transform;
+            Camera.LookAt = transform;
 
+            CameraWork cameraWork = this.gameObject.GetComponent<CameraWork>();
+
+            rb = GetComponent<Rigidbody>();
+
+            ObjectSpriteBufDebuf = GameObject.Find("ImgDufDebuf");
+
+            ImageBufDebuf = ObjectSpriteBufDebuf.GetComponent<Image>();
+
+            AnimatorBufDebuf = ObjectSpriteBufDebuf.GetComponent<Animator>();
+
+            ObjectSpriteBufDebuf.SetActive(false);
 
             LocalPlayerInstance = this.gameObject;
 
         }
 
-
-
-
     }
 
     void Start()
     {
+        StartCoroutine(StartRun());
+    }
 
-        if (photonView.IsMine)
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if(GameManager.Instace.StartGame == true)
         {
-
-            CameraWork cameraWork = this.gameObject.GetComponent<CameraWork>();
-            rb = GetComponent<Rigidbody>();
-
-            SpeedLocal = Speed;
-
-            FireStandart = FirePadrao;
-
-            StartCoroutine(Acelerar());
-
-            if (gameManager == null)
+            if (photonView.IsMine)
             {
-                gameManager = FindObjectOfType<GameManager>();
-            }
 
-            if (cameraWork != null)
-            {
-                if (photonView.IsMine)
+                hori = Input.GetAxis("Horizontal");
+                vert = Input.GetAxis("Vertical");
+
+
+
+                if (!ControlInvert)
+                    transform.Rotate(new Vector3(0, hori, 0) * SpeedRotation);
+                else
+                    transform.Rotate(new Vector3(0, -hori, 0) * SpeedRotation);
+
+
+                rb.velocity = transform.forward * Aceleração * SpeedLocal;
+
+                if (Input.GetKeyDown(KeyCode.Mouse0) && !IsFiring)
                 {
-                    cameraWork.OnStartFollowing();
+                    IsFiring = true;
+                    StartCoroutine(Atirar());
+
+                }
+                else if (Input.GetKeyUp(KeyCode.Mouse0))
+                {
+                    IsFiring = false;
+                    StopCoroutine(Atirar());
                 }
             }
             else
             {
-                Debug.Log("Player está sem o script camerawork", this);
+
+                if (IsFiring && !IsFiringAux)
+                {
+                    IsFiringAux = true;
+                    StartCoroutine("Atirar");
+                }
+                else if (!IsFiring)
+                {
+                    IsFiringAux = false;
+                }
             }
         }
-
-      
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator StartRun()
     {
-        if (photonView.IsMine)
+        if (GameManager.Instace.StartGame == true)
         {
-
-            hori = Input.GetAxis("Horizontal");
-            vert = Input.GetAxis("Vertical");
-
-   
-
-            if (!ControlInvert)
-                transform.Rotate(new Vector3(0, hori, 0) * SpeedRotation);
-            else
-                transform.Rotate(new Vector3(0, -hori, 0) * SpeedRotation);
-
-
-            rb.velocity = transform.forward * Aceleração * SpeedLocal;
-
-            if (Input.GetKeyDown(KeyCode.Mouse0) && !IsFiring)
+            if (photonView.IsMine)
             {
-                IsFiring = true;
-                StartCoroutine(Atirar());
 
+                SpeedLocal = Speed;
+
+                FireStandart = FirePadrao;
+                StartCoroutine(Acelerar());
+
+                if (gameManager == null)
+                {
+                    gameManager = FindObjectOfType<GameManager>();
+                }
             }
-            else if (Input.GetKeyUp(KeyCode.Mouse0))
-            {
-                IsFiring = false;
-                StopCoroutine(Atirar());
-            }
+
         }
         else
         {
-
-            if (IsFiring && !IsFiringAux)
-            {
-                IsFiringAux = true;
-                StartCoroutine("Atirar");
-            }
-            else if (!IsFiring)
-            {
-                IsFiringAux = false;
-            }
+            yield return null;
+            StartCoroutine(StartRun());
         }
-
     }
 
     public IEnumerator Atirar()
@@ -178,8 +188,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     private IEnumerator Acelerar()
     {
-
-
         if (Aceleração < vert && vert != 0)
         {
             Aceleração += 0.1f;
@@ -267,56 +275,71 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         } else if (other != null && other.CompareTag("PowerUp"))
         {
-            Sortear = Random.Range(1, 5);
-            print(Sortear);
+            ObjectSpriteBufDebuf.SetActive(true);
 
-            switch (Sortear)
+            
+
+            yield return new WaitForSeconds(Random.Range(1f, 3f));
+            AuxAnim = Random.Range(1, 5);
+            AnimatorBufDebuf.SetBool(AuxAnim.ToString(), true);
+
+
+            
+            if(AuxAnim == 3)
             {
-                case 1:
+                FireStandart = PowerFire;
 
-                    FireStandart = PowerFire;
+                yield return new WaitForSeconds(3f);
 
-                    yield return new WaitForSeconds(3f);
+                FireStandart = FirePadrao;
 
-                    FireStandart = FirePadrao;
+                yield return new WaitForSeconds(1f);
 
-                    break;
+                ObjectSpriteBufDebuf.SetActive(false);
+            }
+            else if (AuxAnim == 2)
+            {
+                SpeedLocal = 10;
 
-                case 2:
+                yield return new WaitForSeconds(3f);
 
-                    SpeedLocal = 10;
+                SpeedLocal = Speed;
 
-                    yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(1f);
 
-                    SpeedLocal = Speed;
+                ObjectSpriteBufDebuf.SetActive(false);
+            }
+            else if (AuxAnim == 1)
+            {
+                SpeedLocal = 40;
 
-                    break;
+                yield return new WaitForSeconds(3f);
 
-                case 3:
+                SpeedLocal = 20;
 
-                    SpeedLocal = 40;
+                yield return new WaitForSeconds(1f);
 
-                    yield return new WaitForSeconds(3f);
+                ObjectSpriteBufDebuf.SetActive(false);
+            }
+            else if (AuxAnim == 4)
+            {
+                ControlInvert = true;
 
-                    SpeedLocal = 20;
+                yield return new WaitForSeconds(3f);
 
-                    break;
+                ControlInvert = false;
 
-                case 4:
+                yield return new WaitForSeconds(1f);
 
-
-                    ControlInvert = true;
-
-                    yield return new WaitForSeconds(3f);
-
-                    ControlInvert = false;
-                    break;
-
-
-
+                ObjectSpriteBufDebuf.SetActive(false);
+            }
+            else
+            {
+                print("BufDebuf não encontrado");
+                print(ImageBufDebuf.name);
             }
 
-
+           
         }
         else if (other != null && other.CompareTag("Chegada"))
         {
