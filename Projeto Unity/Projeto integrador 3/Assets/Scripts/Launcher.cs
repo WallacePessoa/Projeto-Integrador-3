@@ -21,6 +21,12 @@ public class Launcher : MonoBehaviourPunCallbacks
     private Image LoadPanel;
     [SerializeField]
     private Button BtnJoinScene;
+    [SerializeField]
+    private Text TextJogadores;
+    [SerializeField]
+    private InputField InputFieldMensagem;
+    [SerializeField]
+    private GameObject ObjectChat;
 
 
     #endregion
@@ -89,6 +95,18 @@ public class Launcher : MonoBehaviourPunCallbacks
 
             Debug.Log("Conectado na sala: " + PhotonNetwork.CurrentRoom);
 
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                Chat chat = ObjectChat.GetComponent<Chat>();
+                chat.SendChatMenssager(photonView.Owner.NickName, InputFieldMensagem.text);
+                InputFieldMensagem.text = "";
+
+            }
+
+
+
+
+
         }
         if (PhotonNetwork.CountOfPlayersOnMaster == 8)
         {
@@ -106,6 +124,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void JoinScene()
     {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
         PhotonNetwork.LoadLevel(Fase);
     }
 
@@ -113,8 +133,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Fase = fase;
         LoadPanel.gameObject.SetActive(true);
-
-        print(PhotonNetwork.IsMasterClient);
 
         if (PhotonNetwork.IsConnected)
         {
@@ -127,6 +145,8 @@ public class Launcher : MonoBehaviourPunCallbacks
             isConnect = PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = gameVersion;
         }
+
+
     }
     #endregion
 
@@ -136,9 +156,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log("Conectado no servidor Photon");
         if (isConnect)
         {
-            //PhotonNetwork.JoinRandomRoom();
             PhotonNetwork.JoinRoom(Fase);
-            //PhotonNetwork.CurrentRoom.IsOpen = false;
             isConnect = false;
         }
 
