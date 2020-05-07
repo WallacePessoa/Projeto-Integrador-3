@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     }
     public void hudWim(string Name)
     {
-        Time.timeScale = 0;
+        
         Ganhador.text = "O jogador " + Name + " venceu";
 
         Panel.gameObject.SetActive(true);

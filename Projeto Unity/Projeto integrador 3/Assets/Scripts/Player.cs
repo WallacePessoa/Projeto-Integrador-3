@@ -7,6 +7,9 @@ using Cinemachine;
 
 public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
+    public static GameObject LocalPlayerInstance;
+    public static GameObject MinePlayer;
+
     public float Speed;
     public float PowerUpSpeed;
     public float SpeedLocal;
@@ -15,13 +18,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public Text Classificação;
 
+    
     public GameObject FirePadrao;
     public GameObject GunL;
     public GameObject GunR;
     public GameObject PowerFire;
 
-
-    public static GameObject LocalPlayerInstance;
+    public Animator AnimatorBufDebuf;
 
     Rigidbody rb;
     Rigidbody FireRb;
@@ -30,28 +33,22 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     GameObject FireStandart;
     GameObject ObjectSpriteBufDebuf;
 
-    private static GameManager gameManager;
-
-
     CinemachineVirtualCamera Camera;
 
     Image ImageBufDebuf;
-    public Animator AnimatorBufDebuf;
 
     float hori;
-    public float vert;
-
-    public float Aceleração = 0;
+    float vert;
+    float Aceleração = 0;
 
     bool IsFiring;
-
     bool IsFiringAux;
+    bool Slow = false;
+    bool ControlInvert = false;
 
     int Sortear;
-
-    bool Slow = false;
-
-    bool ControlInvert = false;
+    int AuxAnim;
+    int auxWhile = 0;
 
     Vector3 MousePosition;
 
@@ -59,8 +56,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     RaycastHit hit;
 
-    int AuxAnim;
-    int auxWhile = 0;
 
     private void Awake()
     {
@@ -71,7 +66,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Camera.Follow = transform;
             Camera.LookAt = transform;
 
-            CameraWork cameraWork = this.gameObject.GetComponent<CameraWork>();
+            this.gameObject.name = PhotonNetwork.NickName.ToString();
 
             rb = GetComponent<Rigidbody>();
 
@@ -86,7 +81,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             LocalPlayerInstance = this.gameObject;
 
         }
-
     }
 
     void Start()
@@ -105,7 +99,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 hori = Input.GetAxis("Horizontal");
                 vert = Input.GetAxis("Vertical");
 
-
+                MinePlayer = this.gameObject;
 
                 if (!ControlInvert)
                     transform.Rotate(new Vector3(0, hori, 0) * SpeedRotation);
@@ -155,10 +149,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 FireStandart = FirePadrao;
                 StartCoroutine(Acelerar());
 
-                if (gameManager == null)
-                {
-                    gameManager = FindObjectOfType<GameManager>();
-                }
             }
 
         }
@@ -341,12 +331,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
            
         }
-        else if (other != null && other.CompareTag("Chegada"))
-        {
-            GameManager.Instace.hudWim(gameObject.name);
-        }
-
-
+        
     }
 
     private IEnumerator OnTriggerExit(Collider other)

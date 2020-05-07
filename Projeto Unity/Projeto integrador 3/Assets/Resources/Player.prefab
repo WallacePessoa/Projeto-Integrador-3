@@ -196,7 +196,6 @@ GameObject:
   - component: {fileID: 2740450299015454512}
   - component: {fileID: 6857482285305869248}
   - component: {fileID: 1544632765}
-  - component: {fileID: 1544632766}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -278,28 +277,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   "TextClassifica\xE7\xE3o": {fileID: 0}
---- !u!195 &1544632766
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2481770595516501845}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 1
-  m_Speed: 0
-  m_Acceleration: 0
-  avoidancePriority: 50
-  m_AngularSpeed: 0
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.6077785
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &8249837617940376264
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,8 +490,6 @@ MonoBehaviour:
   PowerFire: {fileID: 2135718755163331667, guid: e42e140628a4b1e4bbb75c6dd7fe8fee,
     type: 3}
   AnimatorBufDebuf: {fileID: 0}
-  vert: 0
-  "Acelera\xE7\xE3o": 0
 --- !u!114 &7799820988822163179
 MonoBehaviour:
   m_ObjectHideFlags: 0

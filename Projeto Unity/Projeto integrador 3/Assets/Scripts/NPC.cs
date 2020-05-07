@@ -292,10 +292,7 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
             }
         }
-        else if (other != null && other.CompareTag("Chegada"))
-        {
-            GameManager.Instace.hudWim(gameObject.name);
-        }
+        
 
     }
 
