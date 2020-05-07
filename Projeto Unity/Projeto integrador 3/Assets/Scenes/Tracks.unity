@@ -615,16 +615,16 @@ RectTransform:
   m_GameObject: {fileID: 122837492}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8326488, y: 0.8326488, z: 0.8326488}
+  m_LocalScale: {x: 0.8360825, y: 0.8360825, z: 0.8360825}
   m_Children:
   - {fileID: 617647200}
   m_Father: {fileID: 24100886}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.68500006, y: 0.031000001}
-  m_AnchorMax: {x: 0.68500006, y: 0.031000001}
-  m_AnchoredPosition: {x: 72.97342, y: 12.539032}
-  m_SizeDelta: {x: 168, y: 26}
+  m_AnchorMin: {x: 0.83900005, y: 0.07148021}
+  m_AnchorMax: {x: 0.83900005, y: 0.07148021}
+  m_AnchoredPosition: {x: 70.1698, y: 17.84433}
+  m_SizeDelta: {x: 167.85, y: 39.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &229877908
 GameObject:
@@ -791,7 +791,7 @@ Animator:
   m_GameObject: {fileID: 229877908}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5454811238399d34a99c958a6d206749, type: 2}
+  m_Controller: {fileID: 9100000, guid: b1c6a3154a9043740aa2b5e4882200c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1615,7 +1615,7 @@ Animator:
   m_GameObject: {fileID: 1045330500}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5454811238399d34a99c958a6d206749, type: 2}
+  m_Controller: {fileID: 9100000, guid: b1c6a3154a9043740aa2b5e4882200c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1866,7 +1866,7 @@ Animator:
   m_GameObject: {fileID: 1157278922}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5454811238399d34a99c958a6d206749, type: 2}
+  m_Controller: {fileID: 9100000, guid: b1c6a3154a9043740aa2b5e4882200c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2244,7 +2244,7 @@ Animator:
   m_GameObject: {fileID: 1191541688}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5454811238399d34a99c958a6d206749, type: 2}
+  m_Controller: {fileID: 9100000, guid: b1c6a3154a9043740aa2b5e4882200c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2785,7 +2785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1523106076
 MonoBehaviour:
   m_ObjectHideFlags: 0
