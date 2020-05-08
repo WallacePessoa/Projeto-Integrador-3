@@ -182,6 +182,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         PlayerIndex.instancePlayerIndex.playerId = PhotonNetwork.CurrentRoom.PlayerCount;
 
 
+
         EntrarNaSala = true;
     }
     #endregion

@@ -65,18 +65,23 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
         if (Player.LocalPlayerInstance == null)
         {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, Posiçõeslargada[aux].transform.position, Posiçõeslargada[aux].transform.rotation);
+            GameObject game = PhotonNetwork.Instantiate(PlayerPrefab.name, Posiçõeslargada[aux].transform.position, Posiçõeslargada[aux].transform.rotation);
+            game.name = PhotonNetwork.NickName;
             Debug.Log("Player intanciado em " + Application.loadedLevelName);
             
         }
 
         int x = PhotonNetwork.CurrentRoom.PlayerCount;
         print(x);
-
-        for (int y = x; y < Posiçõeslargada.Length; y++)
+        if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.Instantiate(IA.name, Posiçõeslargada[y].transform.position, Posiçõeslargada[y].transform.rotation);
+            for (int y = x; y < Posiçõeslargada.Length; y++)
+            {
+                PhotonNetwork.Instantiate(IA.name, Posiçõeslargada[y].transform.position, Posiçõeslargada[y].transform.rotation);
+            }
         }
+
+
 
         StartCoroutine(StarTime());
     }

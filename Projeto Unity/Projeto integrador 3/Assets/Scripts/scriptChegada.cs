@@ -22,16 +22,18 @@ public class scriptChegada : MonoBehaviourPun
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Painel.gameObject.active == true || AuxClassificacao)
+        if(Painel.gameObject.activeSelf && AuxClassificacao)
         {
             AuxClassificacao = false;
-            ClassificaçãoJogadores.text = "";
+
             int contador = 1;
             foreach (string name in TextJogadoresClassificados)
             {
-                ClassificaçãoJogadores.text = contador.ToString() + " " + name + "\n" + ClassificaçãoJogadores.text;
+                ClassificaçãoJogadores.text = ClassificaçãoJogadores.text + "\n" + contador.ToString() + " " + name;
                 contador++;
             }
+
+            
             Back.gameObject.SetActive(true);
         }
     }
@@ -46,12 +48,9 @@ public class scriptChegada : MonoBehaviourPun
         if (other.CompareTag("Jogador"))
         {
             AuxClassificacao = true;
+            ClassificaçãoJogadores.text = "";
             TextJogadoresClassificados.Add(other.gameObject.name);
 
-            if(TextJogadoresClassificados.Count == 8)
-            {
-                PhotonNetwork.LoadLevel("Menu");
-            }
 
             if(other.gameObject == Player.MinePlayer)
             {

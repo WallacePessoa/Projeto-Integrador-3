@@ -225,9 +225,9 @@ public class NPC : MonoBehaviourPun, IPunObservable
             //print("A AI " + gameObject.name + " está lenta");
             if (Nav.speed > 5)
             {
-                Nav.speed -= 0.1f;
+                Nav.speed -= 0.1f * Time.deltaTime;
                 yield return new WaitForSeconds(2f);
-                Nav.speed += 0.1f;
+                Nav.speed += 0.1f * Time.deltaTime;
             }
             if(other != null)
                 Destroy(other.gameObject);
@@ -238,9 +238,9 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
             if (Nav.speed > 9)
             {
-                Nav.speed -= 0.1f;
+                Nav.speed -= 0.1f * Time.deltaTime;
                 yield return new WaitForSeconds(2f);
-                Nav.speed += 0.1f;
+                Nav.speed += 0.1f * Time.deltaTime;
             }
 
             
@@ -265,7 +265,7 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
                     while(Nav.speed > 15)
                     {
-                        Nav.speed -= 0.1f;
+                        Nav.speed -= 0.1f * Time.deltaTime;
                         yield return new WaitForSeconds(0.1f);
                     }
 
@@ -273,7 +273,7 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
                     while (Nav.speed < 30)
                     {
-                        Nav.speed += 0.1f;
+                        Nav.speed += 0.1f * Time.deltaTime;
                         yield return new WaitForSeconds(0.1f);
                     }
 
@@ -281,11 +281,11 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
                 case 3:
 
-                    Nav.speed = 40;
+                    Nav.speed = 40 * Time.deltaTime;
 
                     yield return new WaitForSeconds(3f);
 
-                    Nav.speed = 30;
+                    Nav.speed = 30 * Time.deltaTime;
 
                     break;
 
