@@ -265,7 +265,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         } else if (other != null && other.CompareTag("PowerUp"))
         {
-            ObjectSpriteBufDebuf.SetActive(true);
+            if(photonView.IsMine)
+                ObjectSpriteBufDebuf.SetActive(true);
 
             
 
