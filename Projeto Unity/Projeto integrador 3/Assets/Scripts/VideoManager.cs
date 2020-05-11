@@ -1,21 +1,11 @@
-﻿using Microsoft.Azure.Amqp;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.LightWeightPipeline;
 using UnityEngine.Rendering;
 
 
-public class VideoManager : Singleton<VideoManager>
-{
-    public LightWeightRendererPipelineAsset[] quality;
-
-    public static void ChangeQualitySettings(int value)
-    {
-        //QualitySettings.SetQualitySettings(value, true);
-        GraphicsSettings.renderPipelineAsset = VideoManager.Instance.quality[value];
-        PlayerPrefs.SetInt("QualitySettings", value);
-    }
+public class VideoManager : MonoBehaviour
+{ 
 
     public static void ChangeResolutionSettings(int value)
     {
@@ -25,11 +15,6 @@ public class VideoManager : Singleton<VideoManager>
     // Start is called before the first frame update
     void Start()
     {
-        if(PlayerPrefs.HasKey("QualitySettings"))
-        {
-            ChangeQualitySettings(PlayerPrefs.GetInt("QualitySettings"));
-        }
-
         if(PlayerPrefs.HasKey("ResolutionSettings"))
         {
             ChangeResolutionSettings(PlayerPrefs.GetInt("ResolutionSettings"));
