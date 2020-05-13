@@ -5,7 +5,20 @@ using UnityEngine.Rendering;
 
 
 public class VideoManager : MonoBehaviour
-{ 
+{
+    public static VideoManager Instance;
+
+    private void Awake()
+    {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public static void ChangeResolutionSettings(int value)
     {
