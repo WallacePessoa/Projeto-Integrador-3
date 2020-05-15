@@ -32,8 +32,7 @@ public class scriptChegada : MonoBehaviourPun
                 ClassificaçãoJogadores.text = ClassificaçãoJogadores.text + "\n" + contador.ToString() + " " + name;
                 contador++;
             }
-
-            
+                        
             Back.gameObject.SetActive(true);
         }
     }
@@ -50,18 +49,14 @@ public class scriptChegada : MonoBehaviourPun
             AuxClassificacao = true;
             ClassificaçãoJogadores.text = "";
             TextJogadoresClassificados.Add(other.gameObject.name);
-
-
-            if(other.gameObject == Player.MinePlayer)
+            
+            if (other.gameObject == Player.MinePlayer)
             {
                 Painel.gameObject.SetActive(true);
             }
             yield return new WaitForSeconds(1f);
 
-           
-
             other.gameObject.SetActive(false);
-
 
         }
     }

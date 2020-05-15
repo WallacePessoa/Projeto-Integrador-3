@@ -47,15 +47,10 @@ public class jogadorClassificacao : MonoBehaviour
             if (Aux == GameManager.Instace.Classifição[f])
             {
                 GameManager.Instace.Classifição[f] = navMesh.remainingDistance;
-                TextClassificação.text = GameManager.Instace.Classifição.Count.ToString() + "/" + f;
+                TextClassificação.text = GameManager.Instace.Classifição.Count.ToString() + "/" + f;                
             }
-
         }
-
-
-
         
-
         yield return new WaitForSeconds(1f);
 
         StartCoroutine(classificar());
