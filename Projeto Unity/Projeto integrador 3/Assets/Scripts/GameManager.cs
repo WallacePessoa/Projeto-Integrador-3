@@ -52,8 +52,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     private void Awake()
     {
         StartGame = false;
-
-
         if(Instace == null)
         {
             Instace = this;
@@ -67,7 +65,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             GameObject game = PhotonNetwork.Instantiate(PlayerPrefab.name, Posiçõeslargada[aux].transform.position, Posiçõeslargada[aux].transform.rotation);
             game.name = PhotonNetwork.NickName;
-            Debug.Log("Player intanciado em " + Application.loadedLevelName);
             
         }
 
@@ -81,15 +78,24 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-
-
         StartCoroutine(StarTime());
     }
 
     private void FixedUpdate()
     {
 
-         
+        int aux2 = 10;
+        aux2 = int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["start"].ToString());
+        print(aux2);
+        print("Numero de jogadores" + PhotonNetwork.CurrentRoom.PlayerCount);
+        print(PhotonNetwork.CurrentRoom.CustomProperties["start"].ToString());
+
+        if(aux2 == PhotonNetwork.CurrentRoom.PlayerCount)
+        {
+            TextStartTime.gameObject.SetActive(false);
+            StartGame = true;
+        }
+
     }
 
 
@@ -104,11 +110,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         //executa quando outro jogador entra na sala.
         Debug.Log("O player " + newPlayer.NickName + " entrou na sala");
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            Debug.Log("Você é o cliente mestre");
-            LoadArena();
-        }
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
@@ -119,8 +120,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.Log("Você é o cliente mestre!!!");
-
-            //LoadArena();
 
         }
     }
@@ -134,17 +133,29 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         TextStartTime.text = IntStartTime.ToString();
 
+
+
         yield return new WaitForSeconds(1f);
         IntStartTime--;
 
         if(IntStartTime !=0)
         {
+
+
             StartCoroutine(StarTime());
         }
         else
         {
-            TextStartTime.gameObject.SetActive(false);
-            StartGame = true;
+            TextStartTime.text = IntStartTime.ToString();
+
+            ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+
+            int aux = int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["start"].ToString());
+            aux++;
+
+            hash.Add("start", aux);
+
+            PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
         }
 
     }
@@ -160,13 +171,10 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void BackRoom()
     {
+        PhotonNetwork.LeaveRoom();
         PhotonNetwork.LoadLevel("Menu");
     }
 
-    public void LeaveRoom()
-    {
-        PhotonNetwork.LeaveRoom();
-    }
 
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -177,15 +185,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     #region Private Mathods
 
-    void LoadArena()
-    {
 
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            Debug.Log("Você não é o cliente Mestre");
-        }
-        PhotonNetwork.LoadLevel("Fase_" + PhotonNetwork.CurrentRoom.PlayerCount);
-    }
     #endregion
 
 }

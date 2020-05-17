@@ -37,6 +37,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     Image ImageBufDebuf;
 
+    Vector3 PosAnterior;
+    Vector3 PosAnterior2;
+
     float hori;
     float vert;
     float Aceleração = 0;
@@ -45,10 +48,13 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     bool IsFiringAux;
     bool Slow = false;
     bool ControlInvert = false;
+    bool auxVoltar = false;
 
     int Sortear;
     int AuxAnim;
     int auxWhile = 0;
+
+    List<Vector3> Posicoes = new List<Vector3>();
 
     Vector3 MousePosition;
 
@@ -85,6 +91,20 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
+        if (photonView.IsMine)
+        {
+            Camera = GameObject.FindGameObjectWithTag("cine").GetComponent<CinemachineVirtualCamera>();
+            Camera.Follow = transform;
+            Camera.LookAt = transform;
+
+            this.gameObject.name = PhotonNetwork.NickName.ToString();
+
+            rb = GetComponent<Rigidbody>();
+
+            LocalPlayerInstance = this.gameObject;
+
+        }
+        StartCoroutine(Voltar());
         StartCoroutine(StartRun());
     }
 
@@ -134,7 +154,33 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     IsFiringAux = false;
                 }
             }
+
+            if(Physics.Raycast(transform.position,transform.up * -1, out hit))
+            {
+                if (hit.collider == null)
+                {
+                    transform.position = Posicoes[0];
+
+                }
+            }
+            else
+            {
+                transform.position = Posicoes[0];
+                Aceleração = 0;
+            }
+
         }
+    }
+
+    private IEnumerator Voltar()
+    {
+        Posicoes.Add(transform.position);
+        yield return new WaitForSeconds(0.1f);
+        if(Posicoes.Count > 4)
+        {
+            Posicoes.Remove(Posicoes[0]);
+        }
+        StartCoroutine(Voltar());
     }
 
     private IEnumerator StartRun()

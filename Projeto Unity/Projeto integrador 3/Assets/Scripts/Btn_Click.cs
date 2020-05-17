@@ -14,6 +14,8 @@ public class Btn_Click : MonoBehaviour {
     {
         btn = GetComponent<Button>();
     }
+    
+
     public void Click()
     {
         btn.interactable = false;

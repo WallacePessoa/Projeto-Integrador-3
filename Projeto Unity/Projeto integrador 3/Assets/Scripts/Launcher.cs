@@ -126,6 +126,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
+
+        ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+        hash.Add("start", 0);
+        PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
+
         PhotonNetwork.LoadLevel(Fase);
     }
 

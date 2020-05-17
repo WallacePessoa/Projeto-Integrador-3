@@ -92,6 +92,7 @@ MonoBehaviour:
   Speed: 25
   SpeedLocal: 0
   SpeedFire: 70
+  PowerUpSpeed: 40
   PosDestino: {x: 0, y: 0, z: 0}
   PontoFixo: {fileID: 2255831551703699797}
   Positions: []
@@ -103,6 +104,7 @@ MonoBehaviour:
   GunR: {fileID: 7813674770118650268}
   "Acelera\xE7\xE3o": 0
   Estado: 0
+  Slow: 0
 --- !u!64 &-7072817052824365751
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ TagManager:
   - FX
   - Master
   - cine
+  - chao
   layers:
   - Default
   - TransparentFX

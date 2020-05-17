@@ -11,6 +11,7 @@ public class NPC : MonoBehaviourPun, IPunObservable
     public float Speed;
     public float SpeedLocal;
     public float SpeedFire;
+    public float PowerUpSpeed;
 
     public Vector3 PosDestino;
 
@@ -59,10 +60,15 @@ public class NPC : MonoBehaviourPun, IPunObservable
     }
 
     public StateMachine Estado;
+    private int auxWhile;
+    public bool Slow = false;
 
     void Start()
     {
         StartCoroutine(StartRun());
+
+        SpeedLocal = Speed;
+
     }
 
     // Update is called once per frame
@@ -93,6 +99,8 @@ public class NPC : MonoBehaviourPun, IPunObservable
                     IsFiring = false;
                     StopCoroutine(atirar());
                 }
+
+                Nav.speed = SpeedLocal;
 
             }
 
@@ -166,7 +174,7 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
             FireStandart = FirePadrao;
 
-            Nav.speed = Speed;
+            Nav.speed = SpeedLocal;
             AuxStart = true;
         }
         else
@@ -198,16 +206,16 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
     private IEnumerator Acelerar()
     {
-        if (Aceleração < Speed)
+        if (Aceleração < SpeedLocal)
         {
-            Aceleração += 1f;
+            Aceleração += 0.1f;
 
             yield return new WaitForSeconds(0.05f);
 
         }
         else
         {
-            Nav.speed = Speed;
+            Nav.speed = SpeedLocal * Time.deltaTime;
             StopCoroutine(Acelerar());
         }
 
@@ -223,29 +231,31 @@ public class NPC : MonoBehaviourPun, IPunObservable
         {
             //print(other.gameObject != null);
             //print("A AI " + gameObject.name + " está lenta");
-            if (Nav.speed > 5)
+            if (SpeedLocal > 5)
             {
-                Nav.speed -= 0.1f * Time.deltaTime;
+                SpeedLocal -= 0.1f * Time.deltaTime;
                 yield return new WaitForSeconds(2f);
-                Nav.speed += 0.1f * Time.deltaTime;
+                SpeedLocal += 0.1f * Time.deltaTime;
             }
-            if(other != null)
+            if (other != null)
                 Destroy(other.gameObject);
 
 
-        }else if (other != null && other.CompareTag("PowerLaser"))
+        }
+        else if (other != null && other.CompareTag("PowerLaser"))
         {
 
-            if (Nav.speed > 9)
+            if (SpeedLocal > 9)
             {
-                Nav.speed -= 0.1f * Time.deltaTime;
+                SpeedLocal -= 0.1f * Time.deltaTime;
                 yield return new WaitForSeconds(2f);
-                Nav.speed += 0.1f * Time.deltaTime;
+                SpeedLocal += 0.1f * Time.deltaTime;
             }
 
-            
 
-        }else if (other != null && other.CompareTag("PowerUp"))
+
+        }
+        else if (other != null && other.CompareTag("PowerUp"))
         {
             Sortear = Random.Range(1, 5);
 
@@ -263,19 +273,11 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
                 case 2:
 
-                    while(Nav.speed > 15)
-                    {
-                        Nav.speed -= 0.1f * Time.deltaTime;
-                        yield return new WaitForSeconds(0.1f);
-                    }
+                    SpeedLocal = 10;
 
                     yield return new WaitForSeconds(3f);
 
-                    while (Nav.speed < 30)
-                    {
-                        Nav.speed += 0.1f * Time.deltaTime;
-                        yield return new WaitForSeconds(0.1f);
-                    }
+                    SpeedLocal = Speed;
 
                     break;
 
@@ -285,15 +287,55 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
                     yield return new WaitForSeconds(3f);
 
-                    Nav.speed = 30 * Time.deltaTime;
+                    SpeedLocal = Speed * Time.deltaTime;
 
                     break;
 
 
             }
         }
-        
+        else if (other != null && other.CompareTag("PowerUpSpeed"))
+        {
 
+            SpeedLocal = PowerUpSpeed;
+            while (SpeedLocal > Speed)
+            {
+                //rb.velocity = new Vector3(-hori, 0, -vert) * SpeedLocal;
+                Nav.speed = SpeedLocal * Time.deltaTime;
+                SpeedLocal -= 1;
+                yield return new WaitForSeconds(0.01f);
+
+                if (auxWhile > 100)
+                {
+                    break;
+                }
+                auxWhile++;
+            }
+        }
+        else if (other != null && other.CompareTag("Obstaculo"))
+        {
+            Slow = true;
+            print("entrou aui");
+            SpeedLocal = 5;
+            while (Slow == true)
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            SpeedLocal = Speed;
+        }
+
+
+
+    }
+
+    private IEnumerator OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Obstaculo"))
+        {
+            Slow = false;
+            yield return null;
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
