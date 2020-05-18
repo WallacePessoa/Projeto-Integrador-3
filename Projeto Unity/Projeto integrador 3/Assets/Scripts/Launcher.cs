@@ -95,10 +95,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 
             Debug.Log("Conectado na sala: " + PhotonNetwork.CurrentRoom);
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.Return))
             {
                 Chat chat = ObjectChat.GetComponent<Chat>();
-                chat.SendChatMenssager(photonView.Owner.NickName, InputFieldMensagem.text);
+                chat.SendChatMenssager(PhotonNetwork.NickName, InputFieldMensagem.text);
                 InputFieldMensagem.text = "";
 
             }

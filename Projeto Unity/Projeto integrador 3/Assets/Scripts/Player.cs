@@ -62,6 +62,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     RaycastHit hit;
 
+    ClassificacaoController classificacao;
+
 
     private void Awake()
     {
@@ -71,8 +73,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Camera = GameObject.FindGameObjectWithTag("cine").GetComponent<CinemachineVirtualCamera>();
             Camera.Follow = transform;
             Camera.LookAt = transform;
-
-            this.gameObject.name = PhotonNetwork.NickName.ToString();
 
             rb = GetComponent<Rigidbody>();
 
@@ -102,6 +102,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             rb = GetComponent<Rigidbody>();
 
             LocalPlayerInstance = this.gameObject;
+
+            classificacao = GameObject.Find("AuxClas").GetComponent<ClassificacaoController>();
 
         }
         StartCoroutine(Voltar());
@@ -140,6 +142,17 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     IsFiring = false;
                     StopCoroutine(Atirar());
                 }
+
+                for (int x = 0;x < classificacao.Jogadores.Count; x++){
+
+                    if (classificacao.Jogadores[x] == gameObject)
+                    {
+                        // coloque aqui o text classificação;
+                    }
+
+                }
+
+
             }
             else
             {
