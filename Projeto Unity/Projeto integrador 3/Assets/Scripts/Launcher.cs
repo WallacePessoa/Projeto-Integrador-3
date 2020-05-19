@@ -27,6 +27,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     private InputField InputFieldMensagem;
     [SerializeField]
     private GameObject ObjectChat;
+    [SerializeField]
+    private GameObject ChatPanel;
 
 
     #endregion
@@ -38,6 +40,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     bool isConnect;
     string Fase;
     bool EntrarNaSala = false;
+    bool AuxInput = true;
     #endregion
 
     #region MonoBehaviour Callbacks
@@ -95,32 +98,29 @@ public class Launcher : MonoBehaviourPunCallbacks
 
             Debug.Log("Conectado na sala: " + PhotonNetwork.CurrentRoom);
 
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return) && AuxInput)
             {
-                Chat chat = ObjectChat.GetComponent<Chat>();
-                chat.SendChatMenssager(PhotonNetwork.NickName, InputFieldMensagem.text);
-                InputFieldMensagem.text = "";
-
+                AuxInput = false;
+                StartCoroutine(Inputs());
             }
-
-
-
-
-
         }
         if (PhotonNetwork.CountOfPlayersOnMaster == 8)
         {
             OnJoinedRoom();
         }
-
-
-
-
-
     }
     #endregion
 
     #region Public Methods
+
+    public IEnumerator Inputs()
+    {
+        Chat chat = ObjectChat.GetComponent<Chat>();
+        chat.SendChatMenssager(PhotonNetwork.NickName, InputFieldMensagem.text);
+        InputFieldMensagem.text = "";
+        yield return new WaitForSeconds(0.5f);
+        AuxInput = true;
+    }
 
     public void JoinScene()
     {
@@ -180,12 +180,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-
-
         Debug.Log("Conectado na sala: " + PhotonNetwork.CurrentRoom);
 
         PlayerIndex.instancePlayerIndex.playerId = PhotonNetwork.CurrentRoom.PlayerCount;
-
+        ChatPanel.SetActive(true);
 
 
         EntrarNaSala = true;

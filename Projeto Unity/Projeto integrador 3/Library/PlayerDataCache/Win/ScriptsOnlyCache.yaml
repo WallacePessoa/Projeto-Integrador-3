@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - Btn_Click
     - Chat
+    - ClassificacaoController
     - ControlVol
     - GameManager
     - Laser
@@ -22,6 +23,7 @@ ScriptsOnlyBuild:
     - Cinemachine.CinemachineTransposer
     - Cinemachine.CinemachineVirtualCamera
     PathCreator.dll:
+    - PathCreation.GlobalDisplaySettings
     - PathCreation.PathCreator
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
@@ -120,7 +122,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13794}
     - Class: 114
-      Script: {instanceID: 13842}
+      Script: {instanceID: 13844}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -179,8 +181,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11212}
     - Class: 114
-      Script: {instanceID: 11428}
-    - Class: 114
       Script: {instanceID: 11446}
     - Class: 114
       Script: {instanceID: 11498}
@@ -222,6 +222,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13758}
     - Class: 114
       Script: {instanceID: 13794}
+    - Class: 114
+      Script: {instanceID: 13826}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -275,11 +277,19 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 82
       Script: {instanceID: 0}
     - Class: 83
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 96
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -294,11 +304,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12032}
     - Class: 114
+      Script: {instanceID: 12190}
+    - Class: 114
       Script: {instanceID: 12338}
     - Class: 114
       Script: {instanceID: 12422}
     - Class: 114
       Script: {instanceID: 12468}
+    - Class: 114
+      Script: {instanceID: 12472}
     - Class: 114
       Script: {instanceID: 12616}
     - Class: 114
@@ -325,6 +339,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13758}
     - Class: 114
       Script: {instanceID: 13794}
+    - Class: 114
+      Script: {instanceID: 13826}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -378,11 +394,19 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 82
       Script: {instanceID: 0}
     - Class: 83
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 96
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -397,11 +421,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12032}
     - Class: 114
+      Script: {instanceID: 12190}
+    - Class: 114
       Script: {instanceID: 12338}
     - Class: 114
       Script: {instanceID: 12422}
     - Class: 114
       Script: {instanceID: 12468}
+    - Class: 114
+      Script: {instanceID: 12472}
     - Class: 114
       Script: {instanceID: 12616}
     - Class: 114
@@ -428,6 +456,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13758}
     - Class: 114
       Script: {instanceID: 13794}
+    - Class: 114
+      Script: {instanceID: 13826}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -481,11 +511,19 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 82
       Script: {instanceID: 0}
     - Class: 83
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 96
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -500,11 +538,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12032}
     - Class: 114
+      Script: {instanceID: 12190}
+    - Class: 114
       Script: {instanceID: 12338}
     - Class: 114
       Script: {instanceID: 12422}
     - Class: 114
       Script: {instanceID: 12468}
+    - Class: 114
+      Script: {instanceID: 12472}
     - Class: 114
       Script: {instanceID: 12616}
     - Class: 114
@@ -531,6 +573,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13758}
     - Class: 114
       Script: {instanceID: 13794}
+    - Class: 114
+      Script: {instanceID: 13826}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -665,9 +709,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13794}
     - Class: 114
-      Script: {instanceID: 13834}
+      Script: {instanceID: 13836}
     - Class: 114
-      Script: {instanceID: 13842}
+      Script: {instanceID: 13844}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -949,7 +993,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13816}
     - Class: 114
-      Script: {instanceID: 13842}
+      Script: {instanceID: 13844}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1741,7 +1785,7 @@ ScriptsOnlyBuild:
     className: CinemachinePOV
   - hash:
       serializedVersion: 2
-      Hash: 4f300cb9d244f118a7818000d911f08e
+      Hash: 93a4c089c69de5e19628945d90a0bc6a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: scriptChegada
@@ -1963,7 +2007,7 @@ ScriptsOnlyBuild:
     className: CinemachinePipeline
   - hash:
       serializedVersion: 2
-      Hash: 724181c6882652a8fbdfb48d08b6798e
+      Hash: 781dd148179a9d1fa4257d25db2f95ce
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -2497,7 +2541,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 310c20cb73e538e268f8ee7a8096fd33
+      Hash: 20ee09f2f3b683d31d5857e0ed0aaee4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Launcher
@@ -2569,7 +2613,7 @@ ScriptsOnlyBuild:
     className: IsConnectedAndReadyProperty
   - hash:
       serializedVersion: 2
-      Hash: ef71acf71d46094756cd25192152ab54
+      Hash: c0a83a5817af8294faafa8b6edf51913
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -2839,6 +2883,12 @@ ScriptsOnlyBuild:
     className: WorldGenerator
   - hash:
       serializedVersion: 2
+      Hash: 5f5916cbdcb7fc8d71b2ad34a4943cf1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ClassificacaoController
+  - hash:
+      serializedVersion: 2
       Hash: 2792936179724025482dc04d68a47ca7
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
@@ -2929,5 +2979,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/ControlVolum.unity
   - Assets/Scenes/Tutorial.unity
   - Assets/Scenes/Screen.unity
-  playerPath: C:/Users/Wallace/Desktop/Projeto integrador 2020/build/2.0/2.2/Projeto
+  playerPath: C:/Users/Wallace/Desktop/Projeto integrador 2020/build/3.0/3.1/Projeto
     integrador.exe

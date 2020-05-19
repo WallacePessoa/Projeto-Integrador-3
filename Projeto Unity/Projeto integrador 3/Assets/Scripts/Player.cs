@@ -15,9 +15,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public float SpeedLocal;
     public float SpeedRotation;
     public float SpeedFire;
-
-    public Text Classificação;
-
     
     public GameObject FirePadrao;
     public GameObject GunL;
@@ -64,6 +61,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
     ClassificacaoController classificacao;
 
+    Text Classificação;
 
     private void Awake()
     {
@@ -104,6 +102,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             LocalPlayerInstance = this.gameObject;
 
             classificacao = GameObject.Find("AuxClas").GetComponent<ClassificacaoController>();
+            Classificação = GameObject.Find("TextClass").GetComponent<Text>();
 
         }
         StartCoroutine(Voltar());
@@ -148,6 +147,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     if (classificacao.Jogadores[x] == gameObject)
                     {
                         // coloque aqui o text classificação;
+                        Classificação.text = (1 + x).ToString();
                     }
 
                 }
@@ -221,10 +221,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public IEnumerator Atirar()
     {
 
-        fireLocal = Instantiate(FirePadrao, GunL.transform.position, transform.rotation);
+        fireLocal = Instantiate(FireStandart, GunL.transform.position, transform.rotation);
         FireRb = fireLocal.GetComponent<Rigidbody>();
         FireRb.velocity = fireLocal.transform.forward * SpeedFire;
-        fireLocal = Instantiate(FirePadrao, GunR.transform.position, transform.rotation);
+        fireLocal = Instantiate(FireStandart, GunR.transform.position, transform.rotation);
         FireRb = fireLocal.GetComponent<Rigidbody>();
         FireRb.velocity = fireLocal.transform.forward * SpeedFire;
 

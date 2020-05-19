@@ -5,7 +5,6 @@ using UnityEngine;
 public class ClassificacaoController : MonoBehaviour
 {
     public GameObject PontoFixo;
-
     public GameObject ObjectAux;
 
     public List<GameObject> Jogadores = new List<GameObject>();
@@ -49,8 +48,6 @@ public class ClassificacaoController : MonoBehaviour
 
 
             Jogadores.Sort((a, b) => (Vector3.Distance(a.transform.position, PontoFixo.transform.position).CompareTo(Vector3.Distance( b.transform.position, PontoFixo.transform.position))));
-            
-
 
         }
 

@@ -32,12 +32,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     GameObject MeuPlayer;
 
-    [SerializeField]
-    private Text Ganhador;
-    [SerializeField]
-    private Image Panel;
-    [SerializeField]
-    private Button Back;
+
     [SerializeField]
     private Text TextStartTime;
 
@@ -159,15 +154,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
         }
 
     }
-    public void hudWim(string Name)
-    {
-        
-        Ganhador.text = "O jogador " + Name + " venceu";
 
-        Panel.gameObject.SetActive(true);
-        Back.gameObject.SetActive(true);
-        Ganhador.gameObject.SetActive(true);
-    }
 
     public void BackRoom()
     {

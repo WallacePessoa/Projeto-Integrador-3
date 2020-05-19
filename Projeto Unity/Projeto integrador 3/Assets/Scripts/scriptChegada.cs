@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class scriptChegada : MonoBehaviourPun
 {
-    public Image Painel;
+    public GameObject GamePainel;
     public Text ClassificaçãoJogadores;
-    public Button Back;
 
     private List<string> TextJogadoresClassificados = new List<string>();
 
@@ -22,24 +21,25 @@ public class scriptChegada : MonoBehaviourPun
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Painel.gameObject.activeSelf && AuxClassificacao)
+        if(GamePainel.activeSelf && AuxClassificacao)
         {
             AuxClassificacao = false;
 
             int contador = 1;
             foreach (string name in TextJogadoresClassificados)
             {
-                ClassificaçãoJogadores.text = ClassificaçãoJogadores.text + "\n" + contador.ToString() + " " + name;
+                ClassificaçãoJogadores.text = ClassificaçãoJogadores.text + "\n\n" + contador.ToString() + " " + name;
                 contador++;
             }
                         
-            Back.gameObject.SetActive(true);
         }
     }
 
     public void back()
     {
         PhotonNetwork.LoadLevel("Menu");
+        PhotonNetwork.LeaveRoom();
+        print("saiu da sala");
     }
 
     private IEnumerator OnTriggerEnter(Collider other)
@@ -52,7 +52,7 @@ public class scriptChegada : MonoBehaviourPun
             
             if (other.gameObject == Player.MinePlayer)
             {
-                Painel.gameObject.SetActive(true);
+                GamePainel.SetActive(true);
             }
             yield return new WaitForSeconds(1f);
 

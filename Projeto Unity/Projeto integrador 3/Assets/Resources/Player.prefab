@@ -478,12 +478,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749b51f7211cae44b8669b8a98d7e2e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 40
+  Speed: 25
   PowerUpSpeed: 40
   SpeedLocal: 0
   SpeedRotation: 5
   SpeedFire: 70
-  "Classifica\xE7\xE3o": {fileID: 0}
   FirePadrao: {fileID: 8963159288441548168, guid: 59e29afd88f84bb41bdf2038c3248e75,
     type: 3}
   GunL: {fileID: 98132017443840179}
