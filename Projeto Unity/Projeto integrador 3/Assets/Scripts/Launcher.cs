@@ -116,7 +116,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public IEnumerator Inputs()
     {
         Chat chat = ObjectChat.GetComponent<Chat>();
-        chat.SendChatMenssager(PhotonNetwork.NickName, InputFieldMensagem.text);
+        chat.SendChatMenssager(PhotonNetwork.LocalPlayer.NickName, InputFieldMensagem.text);
         InputFieldMensagem.text = "";
         yield return new WaitForSeconds(0.5f);
         AuxInput = true;
