@@ -84,6 +84,9 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
             LocalPlayerInstance = this.gameObject;
 
+
+            this.gameObject.name = PhotonNetwork.NickName.ToString();
+
         }
     }
 
@@ -95,7 +98,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Camera.Follow = transform;
             Camera.LookAt = transform;
 
-            this.gameObject.name = PhotonNetwork.NickName.ToString();
 
             rb = GetComponent<Rigidbody>();
 

@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - GameManager
     - Laser
     - Launcher
+    - MiniMap
     - NPC
     - PathCreation.Examples.RoadMeshCreator
     - Player
@@ -18,7 +19,6 @@ ScriptsOnlyBuild:
     - scriptChegada
     Cinemachine.dll:
     - Cinemachine.CinemachineBrain
-    - Cinemachine.CinemachineComposer
     - Cinemachine.CinemachinePipeline
     - Cinemachine.CinemachineTransposer
     - Cinemachine.CinemachineVirtualCamera
@@ -169,6 +169,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -190,8 +192,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12190}
     - Class: 114
-      Script: {instanceID: 12338}
-    - Class: 114
       Script: {instanceID: 12422}
     - Class: 114
       Script: {instanceID: 12468}
@@ -199,6 +199,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12472}
     - Class: 114
       Script: {instanceID: 12616}
+    - Class: 114
+      Script: {instanceID: 12640}
     - Class: 114
       Script: {instanceID: 12776}
     - Class: 114
@@ -225,6 +227,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13794}
     - Class: 114
       Script: {instanceID: 13826}
+    - Class: 114
+      Script: {instanceID: 20004}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -286,6 +290,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 83
       Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -307,8 +313,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12190}
     - Class: 114
-      Script: {instanceID: 12338}
-    - Class: 114
       Script: {instanceID: 12422}
     - Class: 114
       Script: {instanceID: 12468}
@@ -316,6 +320,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12472}
     - Class: 114
       Script: {instanceID: 12616}
+    - Class: 114
+      Script: {instanceID: 12640}
     - Class: 114
       Script: {instanceID: 12776}
     - Class: 114
@@ -342,6 +348,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13794}
     - Class: 114
       Script: {instanceID: 13826}
+    - Class: 114
+      Script: {instanceID: 20004}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -403,6 +411,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 83
       Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -424,8 +434,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12190}
     - Class: 114
-      Script: {instanceID: 12338}
-    - Class: 114
       Script: {instanceID: 12422}
     - Class: 114
       Script: {instanceID: 12468}
@@ -433,6 +441,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12472}
     - Class: 114
       Script: {instanceID: 12616}
+    - Class: 114
+      Script: {instanceID: 12640}
     - Class: 114
       Script: {instanceID: 12776}
     - Class: 114
@@ -459,6 +469,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13794}
     - Class: 114
       Script: {instanceID: 13826}
+    - Class: 114
+      Script: {instanceID: 20004}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -520,6 +532,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 83
       Script: {instanceID: 0}
+    - Class: 84
+      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -541,8 +555,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12190}
     - Class: 114
-      Script: {instanceID: 12338}
-    - Class: 114
       Script: {instanceID: 12422}
     - Class: 114
       Script: {instanceID: 12468}
@@ -550,6 +562,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12472}
     - Class: 114
       Script: {instanceID: 12616}
+    - Class: 114
+      Script: {instanceID: 12640}
     - Class: 114
       Script: {instanceID: 12776}
     - Class: 114
@@ -576,6 +590,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13794}
     - Class: 114
       Script: {instanceID: 13826}
+    - Class: 114
+      Script: {instanceID: 20004}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -2966,6 +2982,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 89a44993c9b29de3b95b46594f142b42
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MiniMap
   platform: 5
   scenePathNames:
   - Assets/Scenes/Lobby.unity
@@ -2980,5 +3002,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/ControlVolum.unity
   - Assets/Scenes/Tutorial.unity
   - Assets/Scenes/Screen.unity
-  playerPath: C:/Users/Wallace/Desktop/Projeto integrador 2020/build/3.0/3.1/Projeto
-    integrador.exe
+  playerPath: C:/Users/Wallace/Desktop/Projeto integrador 2020/build/Projeto integrador.exe
