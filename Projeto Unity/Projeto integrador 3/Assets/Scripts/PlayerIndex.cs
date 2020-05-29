@@ -8,6 +8,7 @@ public class PlayerIndex : MonoBehaviour
 
 
     public int playerId;
+    public List<string> nomes = new List<string>();
 
     void Start()
     {

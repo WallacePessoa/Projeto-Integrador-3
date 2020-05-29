@@ -24,11 +24,15 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField]
     private Text TextJogadores;
     [SerializeField]
+    private Text NomeJogadores;
+    [SerializeField]
     private InputField InputFieldMensagem;
     [SerializeField]
     private GameObject ObjectChat;
     [SerializeField]
     private GameObject ChatPanel;
+    [SerializeField]
+    private GameObject ObjectNome;
 
 
     #endregion
@@ -81,8 +85,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     void FixedUpdate()
     {
 
-
-
         if (PhotonNetwork.IsConnected)
         {
             //Está conectado... entra em uma sala
@@ -103,6 +105,16 @@ public class Launcher : MonoBehaviourPunCallbacks
                 AuxInput = false;
                 StartCoroutine(Inputs());
             }
+
+            //NomeJogadores.text = "";
+
+            //foreach (string i in PlayerIndex.instancePlayerIndex.nomes)
+            //{
+            //    NomeJogadores.text = NomeJogadores.text + "\n" + i;
+            //}
+
+
+
         }
         if (PhotonNetwork.CountOfPlayersOnMaster == 8)
         {
@@ -175,7 +187,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Falhou ao se conectar com uma sala... Criando nova sala");
         PhotonNetwork.CreateRoom(Fase, new RoomOptions { MaxPlayers = maxPlayers });
-
+        PlayerIndex.instancePlayerIndex.nomes.Add(PhotonNetwork.NickName);
+        SetNomescontroller setNomescontroller = ObjectNome.GetComponent<SetNomescontroller>();
+        setNomescontroller.SendNomesMenssager(PhotonNetwork.NickName);
     }
 
     public override void OnJoinedRoom()
@@ -187,6 +201,27 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 
         EntrarNaSala = true;
+    }
+
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
+    {
+        PlayerIndex.instancePlayerIndex.nomes.Add(newPlayer.NickName);
+
+
+        SetNomescontroller setNomescontroller = ObjectNome.GetComponent<SetNomescontroller>();
+        setNomescontroller.SendNomesMenssager(newPlayer.NickName);
+
+
+        //ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+
+        //hash.Add("NomeJogadores", PlayerIndex.instancePlayerIndex.nomes);
+
+        //PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
+
+        //List<string> test = new List<string>();
+        //test = (List<string>)PhotonNetwork.CurrentRoom.CustomProperties["NomeJogadores"];
+        //PlayerIndex.instancePlayerIndex.nomes = test;
+        //print(test.Count);
     }
     #endregion
 }

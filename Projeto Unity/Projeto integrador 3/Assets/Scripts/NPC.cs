@@ -6,7 +6,6 @@ using Photon.Pun;
 
 public class NPC : MonoBehaviourPun, IPunObservable
 {
-    public Camera Camera;
 
     public float Speed;
     public float SpeedLocal;
@@ -15,34 +14,32 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
     public Vector3 PosDestino;
 
-
-    public GameObject PontoFixo;
-    public GameObject[] Positions;
+    public GameObject[] QtdPositions;
 
     public GameObject FirePadrao;
     public GameObject PowerFire;
     public GameObject GunL;
     public GameObject GunR;
+    public GameObject PontoEscolhido;
 
     GameObject fireLocal;
     GameObject FireStandart;
-
-    //Vector3[] Posiçoes;
+    GameObject Position;
 
     Rigidbody FireRb;
 
 
     float hori;
     float vert;
-    public float Aceleração = 0;
-    int Destino = 0;
+    public float Aceleração;
+    public int Destino;
     int Sortear;
 
     bool IsFiring;
 
     bool IsFiringAux;
 
-    bool AuxStart = false;
+    bool AuxStart;
 
 
     NavMeshAgent Nav;
@@ -51,6 +48,7 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
     RaycastHit hit;
 
+    public List<GameObject> Pos = new List<GameObject>();
 
     public enum StateMachine
     {
@@ -65,9 +63,40 @@ public class NPC : MonoBehaviourPun, IPunObservable
 
     void Start()
     {
+
+        QtdPositions = GameObject.FindGameObjectsWithTag("Nodes");
+        int aux = 0;
+        int aux2 = 0;
+        while(QtdPositions.Length != Pos.Count)
+        {
+            Position = GameObject.Find("Node (" + aux + ")");
+            Pos.Add(Position);
+            aux++;
+
+            if (aux2 > 100)
+            {
+                Debug.LogError("<Color=Red>excedeu</Color>");
+                break;
+            }
+            else
+                aux2++;
+
+        }
+       
+
+        Nav = GetComponent<NavMeshAgent>();
+        Estado = StateMachine.Correr;
+
+        PosDestino = Vector3.zero;
+
         StartCoroutine(StartRun());
 
         SpeedLocal = Speed;
+        Destino = 0;
+        AuxStart = false;
+        Nav.speed = 0;
+        Aceleração = 0;
+        PosDestino = new Vector3(Pos[Destino].transform.position.x + Random.Range(-10, 10), Pos[Destino].transform.position.y, Pos[Destino].transform.position.z + Random.Range(-10, 10));
 
     }
 
@@ -100,7 +129,50 @@ public class NPC : MonoBehaviourPun, IPunObservable
                     StopCoroutine(atirar());
                 }
 
-                Nav.speed = SpeedLocal;
+                //Nav.speed = SpeedLocal;
+
+                switch (Estado)
+                {
+                    case StateMachine.Correr:
+
+
+
+                        Nav.destination = PosDestino;
+
+                        Nav.speed = SpeedLocal;
+
+                        if (Vector3.Distance(transform.position, PosDestino) < 5)
+                        {
+                            Estado = StateMachine.Curva;
+                        }
+                        break;
+
+                    case StateMachine.Curva:
+
+                        if (Destino + 1 < Pos.Count)
+                        {
+                            Destino++;
+                        }
+
+
+                        PosDestino = new Vector3(Pos[Destino].transform.position.x + Random.Range(-10,10), Pos[Destino].transform.position.y, Pos[Destino].transform.position.z + Random.Range(-10,10));
+                        Estado = StateMachine.Correr;
+
+                        break;
+
+                    case StateMachine.Atirar:
+
+                        //Nav.destination = PosDestino;
+
+
+
+                        if (Vector3.Distance(transform.position, PosDestino) < 5)
+                        {
+                            Estado = StateMachine.Curva;
+                        }
+
+                        break;
+                }
 
             }
 
@@ -116,65 +188,25 @@ public class NPC : MonoBehaviourPun, IPunObservable
                 StopCoroutine(atirar());
             }
 
-            switch (Estado)
-            {
-                case StateMachine.Correr:
+           
 
 
-                    Nav.destination = PosDestino;
-
-                    if (Vector3.Distance(transform.position, PosDestino) < 5)
-                    {
-                        Estado = StateMachine.Curva;
-                    }
-                    break;
-
-                case StateMachine.Curva:
-
-                    if (Destino + 1 < Positions.Length)
-                    {
-                        Destino++;
-                    }
-
-
-
-                    PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
-                    Estado = StateMachine.Correr;
-
-                    break;
-
-                case StateMachine.Atirar:
-
-                    Nav.destination = PosDestino;
-
-
-
-                    if (Vector3.Distance(transform.position, PosDestino) < 5)
-                    {
-                        Estado = StateMachine.Curva;
-                    }
-
-                    break;
-            }
         }
+
+
+
+
     }
 
     private IEnumerator StartRun()
     {
         if (GameManager.Instace.StartGame == true)
         {
-
-            Nav = GetComponent<NavMeshAgent>();
-            Estado = StateMachine.Correr;
-
-            Positions = GameObject.FindGameObjectsWithTag("Nodes");
-
-
-            PosDestino = new Vector3(Positions[Destino].transform.position.x + Random.Range(-10, 10), Positions[Destino].transform.position.y, Positions[Destino].transform.position.z + Random.Range(-10, 10));
+            //PontoEscolhido = Positions[Destino];
 
             FireStandart = FirePadrao;
 
-            Nav.speed = SpeedLocal;
+            
             AuxStart = true;
         }
         else
@@ -215,7 +247,7 @@ public class NPC : MonoBehaviourPun, IPunObservable
         }
         else
         {
-            Nav.speed = SpeedLocal * Time.deltaTime;
+            //Nav.speed = SpeedLocal * Time.deltaTime;
             StopCoroutine(Acelerar());
         }
 
