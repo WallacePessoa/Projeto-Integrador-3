@@ -489,6 +489,8 @@ MonoBehaviour:
   GunR: {fileID: 98132017951745463}
   PowerFire: {fileID: 2135718755163331667, guid: e42e140628a4b1e4bbb75c6dd7fe8fee,
     type: 3}
+  PrefabPlayerUI: {fileID: 5502007239344709385, guid: 760b2f150afd37a40ae059e2873bc81b,
+    type: 3}
   AnimatorBufDebuf: {fileID: 0}
 --- !u!114 &7799820988822163179
 MonoBehaviour:
@@ -504,7 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PositionModel:
     SynchronizeEnabled: 1
-    TeleportEnabled: 1
+    TeleportEnabled: 0
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 2
     InterpolateMoveTowardsSpeed: 1

@@ -74,8 +74,6 @@ public class Launcher : MonoBehaviourPunCallbacks
             FloatTime += 1f;
             TextTime.text = "Tempo de espera: " + IntTime.ToString();
 
-
-
             PlayerCont.text = "Jogadores online " + PhotonNetwork.CurrentRoom.PlayerCount.ToString();
         }
         yield return new WaitForSeconds(1f);
@@ -190,6 +188,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         PlayerIndex.instancePlayerIndex.nomes.Add(PhotonNetwork.NickName);
         SetNomescontroller setNomescontroller = ObjectNome.GetComponent<SetNomescontroller>();
         setNomescontroller.SendNomesMenssager(PhotonNetwork.NickName);
+        setNomescontroller.Nome.Add(PhotonNetwork.NickName);
     }
 
     public override void OnJoinedRoom()
@@ -199,29 +198,15 @@ public class Launcher : MonoBehaviourPunCallbacks
         PlayerIndex.instancePlayerIndex.playerId = PhotonNetwork.CurrentRoom.PlayerCount;
         ChatPanel.SetActive(true);
 
-
         EntrarNaSala = true;
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         PlayerIndex.instancePlayerIndex.nomes.Add(newPlayer.NickName);
-
-
         SetNomescontroller setNomescontroller = ObjectNome.GetComponent<SetNomescontroller>();
+        setNomescontroller.Nome.Add(newPlayer.NickName);
         setNomescontroller.SendNomesMenssager(newPlayer.NickName);
-
-
-        //ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
-
-        //hash.Add("NomeJogadores", PlayerIndex.instancePlayerIndex.nomes);
-
-        //PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
-
-        //List<string> test = new List<string>();
-        //test = (List<string>)PhotonNetwork.CurrentRoom.CustomProperties["NomeJogadores"];
-        //PlayerIndex.instancePlayerIndex.nomes = test;
-        //print(test.Count);
     }
     #endregion
 }

@@ -347,7 +347,7 @@ public class NPC : MonoBehaviourPun, IPunObservable
         else if (other != null && other.CompareTag("Obstaculo"))
         {
             Slow = true;
-            print("entrou aui");
+            //print("entrou aui");
             SpeedLocal = 5;
             while (Slow == true)
             {

@@ -9,6 +9,7 @@ public class SetNomescontroller : MonoBehaviourPun
 
     public Text TextNomes;
 
+    public List<string> Nome = new List<string>();
 
     [PunRPC]
     void NomesMenssager(string Nomes)
@@ -21,7 +22,13 @@ public class SetNomescontroller : MonoBehaviourPun
 
     public void SendNomesMenssager(string Nomes)
     {
-        photonView.RPC("NomesMenssager", RpcTarget.All, Nomes);
+        TextNomes.text = "";
+        foreach (string i in Nome)
+        {
+            photonView.RPC("NomesMenssager", RpcTarget.All, i);
+            print("aa");
+        }
+
     }
 
 

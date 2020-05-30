@@ -81,9 +81,9 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
         int aux2 = 10;
         aux2 = int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["start"].ToString());
-        print(aux2);
-        print("Numero de jogadores" + PhotonNetwork.CurrentRoom.PlayerCount);
-        print(PhotonNetwork.CurrentRoom.CustomProperties["start"].ToString());
+        //print(aux2);
+        //print("Numero de jogadores" + PhotonNetwork.CurrentRoom.PlayerCount);
+        //print(PhotonNetwork.CurrentRoom.CustomProperties["start"].ToString());
 
         if(aux2 == PhotonNetwork.CurrentRoom.PlayerCount)
         {

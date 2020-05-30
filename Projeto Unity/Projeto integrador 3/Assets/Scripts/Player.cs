@@ -20,6 +20,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject GunL;
     public GameObject GunR;
     public GameObject PowerFire;
+    public GameObject PrefabPlayerUI;
 
     public Animator AnimatorBufDebuf;
 
@@ -107,6 +108,10 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             Classificação = GameObject.Find("TextClass").GetComponent<Text>();
 
         }
+
+        GameObject playerUI = Instantiate(PrefabPlayerUI);
+        playerUI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+
         StartCoroutine(Voltar());
         StartCoroutine(StartRun());
     }
@@ -174,14 +179,18 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (hit.collider == null)
                 {
-                    transform.position = Posicoes[0];
+                    //transform.position = Posicoes[0];
 
                 }
+
+                SpeedLocal = Speed;
             }
             else
             {
-                transform.position = Posicoes[0];
-                Aceleração = 0;
+                SpeedLocal = 10;
+
+                //transform.position = Posicoes[0];
+                //Aceleração = 0;
             }
 
         }
