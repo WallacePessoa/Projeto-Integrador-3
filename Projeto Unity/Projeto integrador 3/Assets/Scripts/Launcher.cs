@@ -36,6 +36,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 
     #endregion
+
     #region Private Fields
 
     int IntTime = 0;
@@ -74,7 +75,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             FloatTime += 1f;
             TextTime.text = "Tempo de espera: " + IntTime.ToString();
 
-            PlayerCont.text = "Jogadores online " + PhotonNetwork.CurrentRoom.PlayerCount.ToString();
+            PlayerCont.text = "Jogadores online: " + PhotonNetwork.CurrentRoom.PlayerCount.ToString();
         }
         yield return new WaitForSeconds(1f);
         StartCoroutine(contar());
