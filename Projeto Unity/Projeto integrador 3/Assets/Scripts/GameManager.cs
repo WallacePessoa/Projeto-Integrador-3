@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IPunObservable
     private void FixedUpdate()
     {
 
-        int aux2 = 10;
+        int aux2;
         aux2 = int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["start"].ToString());
         //print(aux2);
         //print("Numero de jogadores" + PhotonNetwork.CurrentRoom.PlayerCount);
