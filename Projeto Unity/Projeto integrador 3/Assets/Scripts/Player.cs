@@ -21,6 +21,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject GunR;
     public GameObject PowerFire;
     public GameObject PrefabPlayerUI;
+    public GameObject PrefabPlayerName;
 
     public Animator AnimatorBufDebuf;
 
@@ -111,6 +112,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         GameObject playerUI = Instantiate(PrefabPlayerUI);
         playerUI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+        GameObject playerName = Instantiate(PrefabPlayerName);
+        playerName.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
 
         StartCoroutine(Voltar());
         StartCoroutine(StartRun());

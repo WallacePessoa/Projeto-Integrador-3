@@ -491,6 +491,8 @@ MonoBehaviour:
     type: 3}
   PrefabPlayerUI: {fileID: 5502007239344709385, guid: 760b2f150afd37a40ae059e2873bc81b,
     type: 3}
+  PrefabPlayerName: {fileID: 5294183267291227147, guid: e00e754733e836a43aa653f4bc7aa055,
+    type: 3}
   AnimatorBufDebuf: {fileID: 0}
 --- !u!114 &7799820988822163179
 MonoBehaviour:

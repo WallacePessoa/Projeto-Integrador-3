@@ -2,17 +2,29 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - Btn_Click
+    - ChannelSelector
     - Chat
+    - ChatAppIdCheckerUI
+    - ChatGui
     - ClassificacaoController
     - ControlVol
+    - FriendItem
     - GameManager
+    - IgnoreUiRaycastWhenInactive
     - Laser
     - Launcher
     - MiniMap
     - NPC
+    - NamePickGui
     - PathCreation.Examples.RoadMeshCreator
+    - Photon.Chat.UtilityScripts.EventSystemSpawner
+    - Photon.Chat.UtilityScripts.OnStartDelete
+    - Photon.Chat.UtilityScripts.TextButtonTransition
+    - Photon.Chat.UtilityScripts.TextToggleIsOnTransition
+    - Photon.Realtime.Demo.ConnectAndJoinRandomLb
     - Player
     - PlayerIndex
+    - PlayerName
     - PlayerNameInputField
     - PlayerUI
     - ResolutionDrop
@@ -25,16 +37,108 @@ ScriptsOnlyBuild:
     - Cinemachine.CinemachineVirtualCamera
     PathCreator.dll:
     - PathCreation.PathCreator
+    PhotonRealtime.dll:
+    - Photon.Realtime.ConnectionHandler
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
+    - Photon.Pun.Demo.Asteroids.AsteroidsGameManager
     - Photon.Pun.Demo.Asteroids.Bullet
+    - Photon.Pun.Demo.Asteroids.LobbyMainPanel
+    - Photon.Pun.Demo.Asteroids.LobbyTopPanel
+    - Photon.Pun.Demo.Asteroids.PlayerListEntry
+    - Photon.Pun.Demo.Asteroids.PlayerOverviewPanel
+    - Photon.Pun.Demo.Asteroids.RoomListEntry
     - Photon.Pun.Demo.Asteroids.Spaceship
+    - Photon.Pun.Demo.Cockpit.AppVersionProperty
+    - Photon.Pun.Demo.Cockpit.AutoSyncSceneToggle
+    - Photon.Pun.Demo.Cockpit.BackgroundTimeOutField
+    - Photon.Pun.Demo.Cockpit.BestRegionInPrefsProperty
+    - Photon.Pun.Demo.Cockpit.BoolInputField
+    - Photon.Pun.Demo.Cockpit.CloudRegionProperty
+    - Photon.Pun.Demo.Cockpit.CountOfPlayersInRoomProperty
+    - Photon.Pun.Demo.Cockpit.CountOfPlayersOnMasterProperty
+    - Photon.Pun.Demo.Cockpit.CountOfPlayersProperty
+    - Photon.Pun.Demo.Cockpit.CountOfRoomsProperty
+    - Photon.Pun.Demo.Cockpit.CrcCheckToggle
+    - Photon.Pun.Demo.Cockpit.CurrentRoomAutoCleanupProperty
+    - Photon.Pun.Demo.Cockpit.CurrentRoomEmptyRoomTtlProperty
+    - Photon.Pun.Demo.Cockpit.CurrentRoomExpectedUsersProperty
+    - Photon.Pun.Demo.Cockpit.CurrentRoomIsOfflineProperty
+    - Photon.Pun.Demo.Cockpit.CurrentRoomIsOpenProperty
+    - Photon.Pun.Demo.Cockpit.CurrentRoomIsOpenToggle
+    - Photon.Pun.Demo.Cockpit.CurrentRoomIsVisibleProperty
+    - Photon.Pun.Demo.Cockpit.CurrentRoomIsVisibleToggle
+    - Photon.Pun.Demo.Cockpit.CurrentRoomMasterClientIdProperty
+    - Photon.Pun.Demo.Cockpit.CurrentRoomMaxPlayersProperty
+    - Photon.Pun.Demo.Cockpit.CurrentRoomNameProperty
+    - Photon.Pun.Demo.Cockpit.CurrentRoomPlayerCountProperty
+    - Photon.Pun.Demo.Cockpit.CurrentRoomPropertiesListedInLobbyProperty
+    - Photon.Pun.Demo.Cockpit.DocLinkButton
+    - Photon.Pun.Demo.Cockpit.Forms.ConnectToRegionUIForm
+    - Photon.Pun.Demo.Cockpit.Forms.CreateRoomUiForm
+    - Photon.Pun.Demo.Cockpit.Forms.LoadLevelUIForm
+    - Photon.Pun.Demo.Cockpit.Forms.SetRoomCustomPropertyUIForm
+    - Photon.Pun.Demo.Cockpit.Forms.UserIdUiForm
+    - Photon.Pun.Demo.Cockpit.FriendListCell
+    - Photon.Pun.Demo.Cockpit.FriendListView
+    - Photon.Pun.Demo.Cockpit.GameVersionField
+    - Photon.Pun.Demo.Cockpit.GameVersionProperty
+    - Photon.Pun.Demo.Cockpit.InfosPanelPlaceholder
+    - Photon.Pun.Demo.Cockpit.IntInputField
+    - Photon.Pun.Demo.Cockpit.IsConnectedAndReadyProperty
+    - Photon.Pun.Demo.Cockpit.IsConnectedProperty
+    - Photon.Pun.Demo.Cockpit.LayoutElementMatchSize
+    - Photon.Pun.Demo.Cockpit.NickNameField
+    - Photon.Pun.Demo.Cockpit.OfflineModeProperty
+    - Photon.Pun.Demo.Cockpit.PingProperty
+    - Photon.Pun.Demo.Cockpit.PlayerDetailsController
+    - Photon.Pun.Demo.Cockpit.PlayerListCell
+    - Photon.Pun.Demo.Cockpit.PlayerListView
+    - Photon.Pun.Demo.Cockpit.PropertyCell
+    - Photon.Pun.Demo.Cockpit.PunCockpit
+    - Photon.Pun.Demo.Cockpit.PunCockpitEmbed
+    - Photon.Pun.Demo.Cockpit.RegionListCell
+    - Photon.Pun.Demo.Cockpit.RegionListView
+    - Photon.Pun.Demo.Cockpit.RoomListCell
+    - Photon.Pun.Demo.Cockpit.RoomListView
+    - Photon.Pun.Demo.Cockpit.SendRateField
+    - Photon.Pun.Demo.Cockpit.SendRateOnSerializeField
+    - Photon.Pun.Demo.Cockpit.ServerAddressProperty
+    - Photon.Pun.Demo.Cockpit.ServerProperty
+    - Photon.Pun.Demo.Cockpit.StringInputField
+    - Photon.Pun.Demo.Cockpit.ToggleExpand
+    - Photon.Pun.Demo.Cockpit.UserIdField
+    - Photon.Pun.Demo.Hub.DemoHubManager
+    - Photon.Pun.Demo.Hub.ToDemoHubButton
+    - Photon.Pun.Demo.Procedural.IngameControlPanel
+    - Photon.Pun.Demo.Procedural.ProceduralController
+    - Photon.Pun.Demo.Procedural.WorldGenerator
     - Photon.Pun.Demo.PunBasics.CameraWork
+    - Photon.Pun.Demo.PunBasics.GameManager
+    - Photon.Pun.Demo.PunBasics.Launcher
+    - Photon.Pun.Demo.PunBasics.LoaderAnime
     - Photon.Pun.Demo.PunBasics.PlayerAnimatorManager
     - Photon.Pun.Demo.PunBasics.PlayerManager
+    - Photon.Pun.Demo.PunBasics.PlayerNameInputField
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
+    - Photon.Pun.Demo.SlotRacer.SlotLanes
+    - Photon.Pun.Demo.SlotRacer.SlotRacerSplashScreen
+    - Photon.Pun.Demo.SlotRacer.Utils.BezierSpline
+    - Photon.Pun.Demo.SlotRacer.Utils.SplinePosition
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
+    PhotonUnityNetworking.Utilities.dll:
+    - Photon.Pun.UtilityScripts.ButtonInsideScrollList
+    - Photon.Pun.UtilityScripts.ConnectAndJoinRandom
+    - Photon.Pun.UtilityScripts.CountdownTimer
+    - Photon.Pun.UtilityScripts.EventSystemSpawner
+    - Photon.Pun.UtilityScripts.GraphicToggleIsOnTransition
+    - Photon.Pun.UtilityScripts.OnJoinedInstantiate
+    - Photon.Pun.UtilityScripts.OnStartDelete
+    - Photon.Pun.UtilityScripts.PlayerNumbering
+    - Photon.Pun.UtilityScripts.TabViewManager
+    - Photon.Pun.UtilityScripts.TextButtonTransition
+    - Photon.Pun.UtilityScripts.TextToggleIsOnTransition
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -44,6 +148,12 @@ ScriptsOnlyBuild:
     - Photon.Pun.ServerSettings
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    Unity.TextMeshPro.dll:
+    - TMPro.TMP_FontAsset
+    - TMPro.TMP_Settings
+    - TMPro.TMP_SpriteAsset
+    - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshPro
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -54,18 +164,22 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
-    UnityEditor.UI.dll:
-    - UnityEditor.UI.TextEditor
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.EventTrigger
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.Dropdown
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.GridLayoutGroup
+    - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
     - UnityEngine.UI.InputField
+    - UnityEngine.UI.LayoutElement
     - UnityEngine.UI.Mask
+    - UnityEngine.UI.Outline
     - UnityEngine.UI.RawImage
     - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Scrollbar
@@ -73,8 +187,10 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
+    - UnityEngine.UI.ToggleGroup
+    - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
-    Assets/Scenes/ControlVolum.unity:
+    Assets/Photon/PhotonChat/Demos/DemoChat/DemoChat-Scene.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -87,13 +203,611 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11338}
+    - Class: 114
+      Script: {instanceID: 11410}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11638}
+    - Class: 114
+      Script: {instanceID: 11664}
+    - Class: 114
+      Script: {instanceID: 11906}
+    - Class: 114
+      Script: {instanceID: 11936}
+    - Class: 114
+      Script: {instanceID: 11966}
+    - Class: 114
+      Script: {instanceID: 12274}
+    - Class: 114
+      Script: {instanceID: 12292}
+    - Class: 114
+      Script: {instanceID: 12352}
+    - Class: 114
+      Script: {instanceID: 12368}
+    - Class: 114
+      Script: {instanceID: 12372}
+    - Class: 114
+      Script: {instanceID: 12620}
+    - Class: 114
+      Script: {instanceID: 12738}
+    - Class: 114
+      Script: {instanceID: 12766}
+    - Class: 114
+      Script: {instanceID: 12896}
+    - Class: 114
+      Script: {instanceID: 13034}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13468}
+    - Class: 114
+      Script: {instanceID: 13714}
+    - Class: 114
+      Script: {instanceID: 13822}
+    - Class: 114
+      Script: {instanceID: 13868}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonRealtime/Demos/DemoLoadBalancing/DemoLoadBalancing-Scene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11586}
+    - Class: 114
+      Script: {instanceID: 12036}
+    - Class: 114
+      Script: {instanceID: 12394}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13800}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 258
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-GameScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11578}
+    - Class: 114
+      Script: {instanceID: 11814}
+    - Class: 114
+      Script: {instanceID: 12326}
+    - Class: 114
+      Script: {instanceID: 12362}
+    - Class: 114
+      Script: {instanceID: 13176}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13706}
+    - Class: 114
+      Script: {instanceID: 13870}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 136
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 258
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-LobbyScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11450}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11578}
+    - Class: 114
+      Script: {instanceID: 11664}
+    - Class: 114
+      Script: {instanceID: 11906}
+    - Class: 114
+      Script: {instanceID: 12292}
+    - Class: 114
+      Script: {instanceID: 12620}
+    - Class: 114
+      Script: {instanceID: 12746}
+    - Class: 114
+      Script: {instanceID: 12766}
+    - Class: 114
+      Script: {instanceID: 12896}
+    - Class: 114
+      Script: {instanceID: 12916}
+    - Class: 114
+      Script: {instanceID: 12934}
+    - Class: 114
+      Script: {instanceID: 13064}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13750}
+    - Class: 114
+      Script: {instanceID: 13756}
+    - Class: 114
+      Script: {instanceID: 13884}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 258
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/DemoHub/DemoHub-Scene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11422}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11450}
+    - Class: 114
+      Script: {instanceID: 11490}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11638}
+    - Class: 114
+      Script: {instanceID: 11664}
+    - Class: 114
+      Script: {instanceID: 11700}
+    - Class: 114
+      Script: {instanceID: 11906}
+    - Class: 114
+      Script: {instanceID: 11936}
+    - Class: 114
+      Script: {instanceID: 11952}
+    - Class: 114
+      Script: {instanceID: 12292}
+    - Class: 114
+      Script: {instanceID: 12620}
+    - Class: 114
+      Script: {instanceID: 12746}
+    - Class: 114
+      Script: {instanceID: 12766}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13714}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/DemoProcedural/Procedural-Scene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11450}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11578}
+    - Class: 114
+      Script: {instanceID: 11662}
+    - Class: 114
+      Script: {instanceID: 11906}
+    - Class: 114
+      Script: {instanceID: 11998}
+    - Class: 114
+      Script: {instanceID: 12292}
+    - Class: 114
+      Script: {instanceID: 12620}
+    - Class: 114
+      Script: {instanceID: 12896}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13384}
+    - Class: 114
+      Script: {instanceID: 13778}
+    - Class: 114
+      Script: {instanceID: 13822}
+    - Class: 114
+      Script: {instanceID: 13826}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 258
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/DemoSlotRacer/SlotCar-Scene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 64
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 90
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11568}
+    - Class: 114
+      Script: {instanceID: 11936}
+    - Class: 114
+      Script: {instanceID: 11998}
+    - Class: 114
+      Script: {instanceID: 12004}
+    - Class: 114
+      Script: {instanceID: 12124}
+    - Class: 114
+      Script: {instanceID: 12884}
+    - Class: 114
+      Script: {instanceID: 13226}
+    - Class: 114
+      Script: {instanceID: 13270}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13622}
+    - Class: 114
+      Script: {instanceID: 13650}
+    - Class: 114
+      Script: {instanceID: 13706}
+    - Class: 114
+      Script: {instanceID: 13714}
+    - Class: 114
+      Script: {instanceID: 13756}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Launcher.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11952}
+    - Class: 114
+      Script: {instanceID: 12620}
+    - Class: 114
+      Script: {instanceID: 12724}
+    - Class: 114
+      Script: {instanceID: 12896}
+    - Class: 114
+      Script: {instanceID: 13236}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13578}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Room for 1.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
-    - Class: 82
-      Script: {instanceID: 0}
-    - Class: 83
+    - Class: 90
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -106,25 +820,531 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11214}
     - Class: 114
-      Script: {instanceID: 11430}
+      Script: {instanceID: 11380}
+    - Class: 114
+      Script: {instanceID: 11404}
     - Class: 114
       Script: {instanceID: 11448}
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11936}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 11952}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12446}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 12780}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13142}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13160}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13630}
+    - Class: 114
+      Script: {instanceID: 13706}
+    - Class: 114
+      Script: {instanceID: 13850}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 137
+      Script: {instanceID: 0}
+    - Class: 143
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Room for 2.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 90
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11380}
+    - Class: 114
+      Script: {instanceID: 11404}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11936}
+    - Class: 114
+      Script: {instanceID: 11952}
+    - Class: 114
+      Script: {instanceID: 12446}
+    - Class: 114
+      Script: {instanceID: 12620}
+    - Class: 114
+      Script: {instanceID: 12780}
+    - Class: 114
+      Script: {instanceID: 13142}
+    - Class: 114
+      Script: {instanceID: 13160}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13630}
+    - Class: 114
+      Script: {instanceID: 13706}
+    - Class: 114
+      Script: {instanceID: 13850}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 137
+      Script: {instanceID: 0}
+    - Class: 143
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Room for 3.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 90
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11380}
+    - Class: 114
+      Script: {instanceID: 11404}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11936}
+    - Class: 114
+      Script: {instanceID: 11952}
+    - Class: 114
+      Script: {instanceID: 12446}
+    - Class: 114
+      Script: {instanceID: 12620}
+    - Class: 114
+      Script: {instanceID: 12780}
+    - Class: 114
+      Script: {instanceID: 13142}
+    - Class: 114
+      Script: {instanceID: 13160}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13630}
+    - Class: 114
+      Script: {instanceID: 13706}
+    - Class: 114
+      Script: {instanceID: 13850}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 137
+      Script: {instanceID: 0}
+    - Class: 143
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Room for 4.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 54
+      Script: {instanceID: 0}
+    - Class: 65
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 90
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11380}
+    - Class: 114
+      Script: {instanceID: 11404}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11936}
+    - Class: 114
+      Script: {instanceID: 11952}
+    - Class: 114
+      Script: {instanceID: 12446}
+    - Class: 114
+      Script: {instanceID: 12620}
+    - Class: 114
+      Script: {instanceID: 12780}
+    - Class: 114
+      Script: {instanceID: 13142}
+    - Class: 114
+      Script: {instanceID: 13160}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13630}
+    - Class: 114
+      Script: {instanceID: 13706}
+    - Class: 114
+      Script: {instanceID: 13850}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 137
+      Script: {instanceID: 0}
+    - Class: 143
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
+      Script: {instanceID: 0}
+    Assets/Photon/PhotonUnityNetworking/Demos/PunCockpit/PunCockpit-Scene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11208}
+    - Class: 114
+      Script: {instanceID: 11214}
+    - Class: 114
+      Script: {instanceID: 11222}
+    - Class: 114
+      Script: {instanceID: 11262}
+    - Class: 114
+      Script: {instanceID: 11302}
+    - Class: 114
+      Script: {instanceID: 11308}
+    - Class: 114
+      Script: {instanceID: 11310}
+    - Class: 114
+      Script: {instanceID: 11320}
+    - Class: 114
+      Script: {instanceID: 11356}
+    - Class: 114
+      Script: {instanceID: 11396}
+    - Class: 114
+      Script: {instanceID: 11412}
+    - Class: 114
+      Script: {instanceID: 11422}
+    - Class: 114
+      Script: {instanceID: 11448}
+    - Class: 114
+      Script: {instanceID: 11450}
+    - Class: 114
+      Script: {instanceID: 11500}
+    - Class: 114
+      Script: {instanceID: 11574}
+    - Class: 114
+      Script: {instanceID: 11584}
+    - Class: 114
+      Script: {instanceID: 11638}
+    - Class: 114
+      Script: {instanceID: 11648}
+    - Class: 114
+      Script: {instanceID: 11652}
+    - Class: 114
+      Script: {instanceID: 11664}
+    - Class: 114
+      Script: {instanceID: 11666}
+    - Class: 114
+      Script: {instanceID: 11756}
+    - Class: 114
+      Script: {instanceID: 11778}
+    - Class: 114
+      Script: {instanceID: 11906}
+    - Class: 114
+      Script: {instanceID: 11936}
+    - Class: 114
+      Script: {instanceID: 11952}
+    - Class: 114
+      Script: {instanceID: 12070}
+    - Class: 114
+      Script: {instanceID: 12074}
+    - Class: 114
+      Script: {instanceID: 12096}
+    - Class: 114
+      Script: {instanceID: 12142}
+    - Class: 114
+      Script: {instanceID: 12196}
+    - Class: 114
+      Script: {instanceID: 12218}
+    - Class: 114
+      Script: {instanceID: 12292}
+    - Class: 114
+      Script: {instanceID: 12322}
+    - Class: 114
+      Script: {instanceID: 12392}
+    - Class: 114
+      Script: {instanceID: 12404}
+    - Class: 114
+      Script: {instanceID: 12418}
+    - Class: 114
+      Script: {instanceID: 12450}
+    - Class: 114
+      Script: {instanceID: 12488}
+    - Class: 114
+      Script: {instanceID: 12492}
+    - Class: 114
+      Script: {instanceID: 12510}
+    - Class: 114
+      Script: {instanceID: 12554}
+    - Class: 114
+      Script: {instanceID: 12570}
+    - Class: 114
+      Script: {instanceID: 12620}
+    - Class: 114
+      Script: {instanceID: 12666}
+    - Class: 114
+      Script: {instanceID: 12684}
+    - Class: 114
+      Script: {instanceID: 12702}
+    - Class: 114
+      Script: {instanceID: 12728}
+    - Class: 114
+      Script: {instanceID: 12746}
+    - Class: 114
+      Script: {instanceID: 12748}
+    - Class: 114
+      Script: {instanceID: 12766}
+    - Class: 114
+      Script: {instanceID: 12776}
+    - Class: 114
+      Script: {instanceID: 12864}
+    - Class: 114
+      Script: {instanceID: 12896}
+    - Class: 114
+      Script: {instanceID: 12934}
+    - Class: 114
+      Script: {instanceID: 13018}
+    - Class: 114
+      Script: {instanceID: 13070}
+    - Class: 114
+      Script: {instanceID: 13090}
+    - Class: 114
+      Script: {instanceID: 13110}
+    - Class: 114
+      Script: {instanceID: 13118}
+    - Class: 114
+      Script: {instanceID: 13126}
+    - Class: 114
+      Script: {instanceID: 13304}
+    - Class: 114
+      Script: {instanceID: 13318}
+    - Class: 114
+      Script: {instanceID: 13328}
+    - Class: 114
+      Script: {instanceID: 13358}
+    - Class: 114
+      Script: {instanceID: 13456}
+    - Class: 114
+      Script: {instanceID: 13488}
+    - Class: 114
+      Script: {instanceID: 13594}
+    - Class: 114
+      Script: {instanceID: 13672}
+    - Class: 114
+      Script: {instanceID: 13696}
+    - Class: 114
+      Script: {instanceID: 13698}
+    - Class: 114
+      Script: {instanceID: 13714}
+    - Class: 114
+      Script: {instanceID: 13722}
+    - Class: 114
+      Script: {instanceID: 13742}
+    - Class: 114
+      Script: {instanceID: 13756}
+    - Class: 114
+      Script: {instanceID: 13778}
+    - Class: 114
+      Script: {instanceID: 13782}
+    - Class: 114
+      Script: {instanceID: 13786}
+    - Class: 114
+      Script: {instanceID: 13822}
+    - Class: 114
+      Script: {instanceID: 13846}
+    - Class: 114
+      Script: {instanceID: 13862}
+    - Class: 114
+      Script: {instanceID: 13868}
+    - Class: 114
+      Script: {instanceID: 13872}
+    - Class: 114
+      Script: {instanceID: 13876}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -140,6 +1360,8 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
+      Script: {instanceID: 0}
+    - Class: 225
       Script: {instanceID: 0}
     Assets/Scenes/Level_1.unity:
     - Class: 1
@@ -191,45 +1413,51 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 11576}
     - Class: 114
-      Script: {instanceID: 12192}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12424}
+      Script: {instanceID: 12194}
     - Class: 114
-      Script: {instanceID: 12470}
+      Script: {instanceID: 12426}
     - Class: 114
-      Script: {instanceID: 12474}
+      Script: {instanceID: 12472}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12476}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12780}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 13012}
+      Script: {instanceID: 12782}
     - Class: 114
-      Script: {instanceID: 13026}
+      Script: {instanceID: 12938}
     - Class: 114
-      Script: {instanceID: 13104}
+      Script: {instanceID: 13014}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13028}
     - Class: 114
-      Script: {instanceID: 13438}
+      Script: {instanceID: 13106}
     - Class: 114
-      Script: {instanceID: 13490}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13590}
+      Script: {instanceID: 13440}
     - Class: 114
-      Script: {instanceID: 13704}
+      Script: {instanceID: 13492}
     - Class: 114
-      Script: {instanceID: 13762}
+      Script: {instanceID: 13592}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13652}
     - Class: 114
-      Script: {instanceID: 13830}
+      Script: {instanceID: 13706}
     - Class: 114
-      Script: {instanceID: 46088}
+      Script: {instanceID: 13764}
+    - Class: 114
+      Script: {instanceID: 13800}
+    - Class: 114
+      Script: {instanceID: 13832}
+    - Class: 114
+      Script: {instanceID: 20426}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -312,45 +1540,51 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 11576}
     - Class: 114
-      Script: {instanceID: 12192}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12424}
+      Script: {instanceID: 12194}
     - Class: 114
-      Script: {instanceID: 12470}
+      Script: {instanceID: 12426}
     - Class: 114
-      Script: {instanceID: 12474}
+      Script: {instanceID: 12472}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12476}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12780}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 13012}
+      Script: {instanceID: 12782}
     - Class: 114
-      Script: {instanceID: 13026}
+      Script: {instanceID: 12938}
     - Class: 114
-      Script: {instanceID: 13104}
+      Script: {instanceID: 13014}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13028}
     - Class: 114
-      Script: {instanceID: 13438}
+      Script: {instanceID: 13106}
     - Class: 114
-      Script: {instanceID: 13490}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13590}
+      Script: {instanceID: 13440}
     - Class: 114
-      Script: {instanceID: 13704}
+      Script: {instanceID: 13492}
     - Class: 114
-      Script: {instanceID: 13762}
+      Script: {instanceID: 13592}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13652}
     - Class: 114
-      Script: {instanceID: 13830}
+      Script: {instanceID: 13706}
     - Class: 114
-      Script: {instanceID: 46088}
+      Script: {instanceID: 13764}
+    - Class: 114
+      Script: {instanceID: 13800}
+    - Class: 114
+      Script: {instanceID: 13832}
+    - Class: 114
+      Script: {instanceID: 20426}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -433,45 +1667,51 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 11576}
     - Class: 114
-      Script: {instanceID: 12192}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12424}
+      Script: {instanceID: 12194}
     - Class: 114
-      Script: {instanceID: 12470}
+      Script: {instanceID: 12426}
     - Class: 114
-      Script: {instanceID: 12474}
+      Script: {instanceID: 12472}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12476}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12780}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 13012}
+      Script: {instanceID: 12782}
     - Class: 114
-      Script: {instanceID: 13026}
+      Script: {instanceID: 12938}
     - Class: 114
-      Script: {instanceID: 13104}
+      Script: {instanceID: 13014}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13028}
     - Class: 114
-      Script: {instanceID: 13438}
+      Script: {instanceID: 13106}
     - Class: 114
-      Script: {instanceID: 13490}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13590}
+      Script: {instanceID: 13440}
     - Class: 114
-      Script: {instanceID: 13704}
+      Script: {instanceID: 13492}
     - Class: 114
-      Script: {instanceID: 13762}
+      Script: {instanceID: 13592}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13652}
     - Class: 114
-      Script: {instanceID: 13830}
+      Script: {instanceID: 13706}
     - Class: 114
-      Script: {instanceID: 46088}
+      Script: {instanceID: 13764}
+    - Class: 114
+      Script: {instanceID: 13800}
+    - Class: 114
+      Script: {instanceID: 13832}
+    - Class: 114
+      Script: {instanceID: 20426}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -554,45 +1794,51 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 11576}
     - Class: 114
-      Script: {instanceID: 12192}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12424}
+      Script: {instanceID: 12194}
     - Class: 114
-      Script: {instanceID: 12470}
+      Script: {instanceID: 12426}
     - Class: 114
-      Script: {instanceID: 12474}
+      Script: {instanceID: 12472}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12476}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12780}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 13012}
+      Script: {instanceID: 12782}
     - Class: 114
-      Script: {instanceID: 13026}
+      Script: {instanceID: 12938}
     - Class: 114
-      Script: {instanceID: 13104}
+      Script: {instanceID: 13014}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13028}
     - Class: 114
-      Script: {instanceID: 13438}
+      Script: {instanceID: 13106}
     - Class: 114
-      Script: {instanceID: 13490}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13590}
+      Script: {instanceID: 13440}
     - Class: 114
-      Script: {instanceID: 13704}
+      Script: {instanceID: 13492}
     - Class: 114
-      Script: {instanceID: 13762}
+      Script: {instanceID: 13592}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13652}
     - Class: 114
-      Script: {instanceID: 13830}
+      Script: {instanceID: 13706}
     - Class: 114
-      Script: {instanceID: 46088}
+      Script: {instanceID: 13764}
+    - Class: 114
+      Script: {instanceID: 13800}
+    - Class: 114
+      Script: {instanceID: 13832}
+    - Class: 114
+      Script: {instanceID: 20426}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -640,6 +1886,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
     - Class: 54
       Script: {instanceID: 0}
     - Class: 64
@@ -666,6 +1914,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
+    - Class: 109
+      Script: {instanceID: 0}
     - Class: 114
       Script: {instanceID: 11214}
     - Class: 114
@@ -679,57 +1929,69 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 11934}
+      Script: {instanceID: 11576}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 11936}
     - Class: 114
-      Script: {instanceID: 12122}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12286}
+      Script: {instanceID: 12078}
     - Class: 114
-      Script: {instanceID: 12360}
+      Script: {instanceID: 12124}
     - Class: 114
-      Script: {instanceID: 12444}
+      Script: {instanceID: 12288}
     - Class: 114
-      Script: {instanceID: 12474}
+      Script: {instanceID: 12362}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12446}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12476}
     - Class: 114
-      Script: {instanceID: 12690}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12778}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 12870}
+      Script: {instanceID: 12692}
     - Class: 114
-      Script: {instanceID: 12882}
+      Script: {instanceID: 12780}
     - Class: 114
-      Script: {instanceID: 12894}
+      Script: {instanceID: 12872}
     - Class: 114
-      Script: {instanceID: 13012}
+      Script: {instanceID: 12884}
     - Class: 114
-      Script: {instanceID: 13140}
+      Script: {instanceID: 12896}
     - Class: 114
-      Script: {instanceID: 13158}
+      Script: {instanceID: 12938}
     - Class: 114
-      Script: {instanceID: 13174}
+      Script: {instanceID: 12956}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13014}
     - Class: 114
-      Script: {instanceID: 13438}
+      Script: {instanceID: 13142}
     - Class: 114
-      Script: {instanceID: 13590}
+      Script: {instanceID: 13160}
     - Class: 114
-      Script: {instanceID: 13704}
+      Script: {instanceID: 13176}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13840}
+      Script: {instanceID: 13440}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13526}
     - Class: 114
-      Script: {instanceID: 46088}
+      Script: {instanceID: 13592}
+    - Class: 114
+      Script: {instanceID: 13652}
+    - Class: 114
+      Script: {instanceID: 13706}
+    - Class: 114
+      Script: {instanceID: 13800}
+    - Class: 114
+      Script: {instanceID: 13842}
+    - Class: 114
+      Script: {instanceID: 13850}
+    - Class: 114
+      Script: {instanceID: 20426}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -800,15 +2062,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -865,15 +2127,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11518}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -928,15 +2190,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -991,27 +2253,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 11904}
+      Script: {instanceID: 11906}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12290}
+      Script: {instanceID: 12292}
     - Class: 114
-      Script: {instanceID: 12462}
+      Script: {instanceID: 12464}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13776}
+      Script: {instanceID: 13778}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13800}
     - Class: 114
-      Script: {instanceID: 13820}
+      Script: {instanceID: 13822}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13850}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1066,27 +2328,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 12650}
+      Script: {instanceID: 12652}
     - Class: 114
-      Script: {instanceID: 12894}
+      Script: {instanceID: 12896}
     - Class: 114
-      Script: {instanceID: 12924}
+      Script: {instanceID: 12926}
     - Class: 114
-      Script: {instanceID: 13204}
+      Script: {instanceID: 13206}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13350}
+      Script: {instanceID: 13352}
     - Class: 114
-      Script: {instanceID: 13704}
+      Script: {instanceID: 13706}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1141,15 +2403,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11500}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 12036}
     - Class: 114
-      Script: {instanceID: 12618}
+      Script: {instanceID: 12620}
     - Class: 114
-      Script: {instanceID: 12642}
+      Script: {instanceID: 12644}
     - Class: 114
-      Script: {instanceID: 13326}
+      Script: {instanceID: 13328}
     - Class: 114
-      Script: {instanceID: 13798}
+      Script: {instanceID: 13800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1169,7 +2431,7 @@ ScriptsOnlyBuild:
   scriptHashData:
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 2d0b1139bb174366ee5a725458c2fa09
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MiniMap
@@ -1461,6 +2723,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
     className: CountOfPlayersOnMasterProperty
+  - hash:
+      serializedVersion: 2
+      Hash: e667db0712b58c66ac24dd5693768377
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerUI
   - hash:
       serializedVersion: 2
       Hash: 7ab0e790220bdca831fdd886b339039d
@@ -2033,7 +3301,7 @@ ScriptsOnlyBuild:
     className: CinemachinePipeline
   - hash:
       serializedVersion: 2
-      Hash: 61fb92e14b95241bb81ec81a37517334
+      Hash: 6c5815c76f83e18b301c57936cdfa267
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -2999,23 +4267,40 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: e667db0712b58c66ac24dd5693768377
+      Hash: e814575bb96bc8f385bad08ca9d59ba5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: PlayerUI
+    className: PlayerName
   platform: 5
   scenePathNames:
   - Assets/Scenes/Lobby.unity
-  - Assets/Scenes/Menu.unity
   - Assets/Scenes/Tracks.unity
+  - Assets/Scenes/Menu.unity
   - Assets/Scenes/Options.unity
-  - Assets/Scenes/Ranking.unity
   - Assets/Scenes/Level_1.unity
   - Assets/Scenes/Level_2.unity
   - Assets/Scenes/Level_3.unity
   - Assets/Scenes/Level_4.unity
-  - Assets/Scenes/ControlVolum.unity
-  - Assets/Scenes/Tutorial.unity
+  - Assets/Scenes/Ranking.unity
   - Assets/Scenes/Screen.unity
-  playerPath: C:/Users/Wallace/Desktop/Projeto integrador 2020/build/6.0/6.4/Projeto
+  - Assets/Scenes/Tutorial.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/DemoHub/DemoHub-Scene.unity
+  - Assets/Photon/PhotonChat/Demos/DemoChat/DemoChat-Scene.unity
+  - Assets/Photon/PhotonRealtime/Demos/DemoLoadBalancing/DemoLoadBalancing-Scene.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-GameScene.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-LobbyScene.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/DemoProcedural/Procedural-Scene.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/DemoSlotRacer/SlotCar-Scene.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Launcher.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Room
+    for 1.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Room
+    for 2.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Room
+    for 3.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/PunBasics-Tutorial/Scenes/PunBasics-Room
+    for 4.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/PunCockpit/PunCockpit-Scene.unity
+  - Assets/Photon/PhotonUnityNetworking/Demos/DemoSlotRacer/SlotCar-Scene.unity
+  playerPath: C:/Users/Wallace/Desktop/Projeto integrador 2020/build/6.0/6.6/6.1/Projeto
     integrador.exe
