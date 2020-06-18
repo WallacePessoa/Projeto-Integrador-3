@@ -20,7 +20,6 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject GunL;
     public GameObject GunR;
     public GameObject PowerFire;
-    public GameObject PrefabPlayerUI;
     public GameObject PrefabPlayerName;
 
     public Animator AnimatorBufDebuf;
@@ -43,11 +42,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     float vert;
     float Aceleração = 0;
 
+
+
     bool IsFiring;
     bool IsFiringAux;
     bool Slow = false;
     bool ControlInvert = false;
     bool auxVoltar = false;
+    bool auxSpeed = false;
 
     int Sortear;
     int AuxAnim;
@@ -90,15 +92,20 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             this.gameObject.name = PhotonNetwork.NickName.ToString();
 
         }
+
+        this.gameObject.name = this.photonView.Owner.NickName;
     }
 
     void Start()
     {
+
         if (photonView.IsMine)
         {
             Camera = GameObject.FindGameObjectWithTag("cine").GetComponent<CinemachineVirtualCamera>();
+
             Camera.Follow = transform;
             Camera.LookAt = transform;
+
 
 
             rb = GetComponent<Rigidbody>();
@@ -110,8 +117,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         }
 
-        GameObject playerUI = Instantiate(PrefabPlayerUI);
-        playerUI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+        //GameObject playerUI = Instantiate(PrefabPlayerUI);
+        //playerUI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
         GameObject playerName = Instantiate(PrefabPlayerName);
         playerName.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
 
@@ -124,6 +131,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(GameManager.Instace.StartGame == true)
         {
+
+
             if (photonView.IsMine)
             {
 
@@ -140,7 +149,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
                 rb.velocity = transform.forward * Aceleração * SpeedLocal;
 
-                if (Input.GetKeyDown(KeyCode.Mouse0) && !IsFiring)
+                if (Input.GetKeyDown(KeyCode.Space) && !IsFiring)
                 {
                     IsFiring = true;
                     StartCoroutine(Atirar());
@@ -157,7 +166,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     if (classificacao.Jogadores[x] == gameObject)
                     {
                         // coloque aqui o text classificação;
-                        Classificação.text = (1 + x).ToString();
+                        Classificação.text = (1 + x).ToString() + "/" + classificacao.Jogadores.Count;
                     }
 
                 }
@@ -185,8 +194,8 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                     //transform.position = Posicoes[0];
 
                 }
-
-                SpeedLocal = Speed;
+                if(!auxSpeed)
+                    SpeedLocal = Speed;
             }
             else
             {
@@ -292,18 +301,19 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         }else if (other != null && other.CompareTag("Obstaculo"))
         {
             Slow = true;
+            auxSpeed = true;
             while(SpeedLocal > 5)
             {
 
                 SpeedLocal--; 
             }
-//            yield return new WaitForSeconds(0.5f);
             Slow = false;
             while (SpeedLocal < 20)
             {
                 yield return new WaitForSeconds(0.2f);
                 SpeedLocal++;
             }
+            auxSpeed = false;
 
         } else if (other != null && other.CompareTag("PowerLaser"))
         {
@@ -320,12 +330,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
         }else if (other != null && other.CompareTag("PowerUpSpeed"))
         {
-
+            print("aqui");
+            auxSpeed = true;
             SpeedLocal = PowerUpSpeed;
             while(SpeedLocal > Speed)
             {
-                //rb.velocity = new Vector3(-hori, 0, -vert) * SpeedLocal;
-                rb.velocity = transform.forward * vert * SpeedLocal;
                 SpeedLocal -= 1;
                 yield return new WaitForSeconds(0.01f);
 
@@ -335,6 +344,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 auxWhile++;
             }
+            auxSpeed = false;
 
         } else if (other != null && other.CompareTag("PowerUp"))
         {
@@ -363,23 +373,28 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
             }
             else if (AuxAnim == 2)
             {
+                auxSpeed = true;
                 SpeedLocal = 10;
 
                 yield return new WaitForSeconds(3f);
 
                 SpeedLocal = Speed;
+                auxSpeed = false;
 
                 yield return new WaitForSeconds(1f);
 
                 ObjectSpriteBufDebuf.SetActive(false);
+
             }
             else if (AuxAnim == 1)
             {
+                auxSpeed = true;
                 SpeedLocal = 40;
 
                 yield return new WaitForSeconds(3f);
 
                 SpeedLocal = 20;
+                auxSpeed = false;
 
                 yield return new WaitForSeconds(1f);
 
@@ -405,7 +420,14 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
 
            
         }
-        
+        else if (other != null && other.CompareTag("chegada"))
+        {
+            
+
+
+        }
+
+
     }
 
     private IEnumerator OnTriggerExit(Collider other)

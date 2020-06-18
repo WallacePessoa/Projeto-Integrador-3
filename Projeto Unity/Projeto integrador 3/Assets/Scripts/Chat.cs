@@ -11,7 +11,7 @@ public class Chat : MonoBehaviourPun
     [PunRPC]
     void ChatMenssager(string Usuario, string mensagem)
     {
-        TextChat.text = Usuario + ": " + mensagem + "\n" + TextChat.text;
+        TextChat.text = Usuario + ": " + mensagem + "\n" + "\n" + TextChat.text;
     }
 
     public void SendChatMenssager(string usuario, string mensagem)

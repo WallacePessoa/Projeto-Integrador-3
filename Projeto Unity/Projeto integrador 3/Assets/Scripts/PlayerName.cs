@@ -24,8 +24,6 @@ public class PlayerName : MonoBehaviour
         if(Target != null)
             transform.position = Target.transform.position + offSet;
     }
-
-
     public void SetTarget(Player player)
     {
         Target = player.gameObject;

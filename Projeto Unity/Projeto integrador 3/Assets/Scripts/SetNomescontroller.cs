@@ -15,14 +15,14 @@ public class SetNomescontroller : MonoBehaviourPun
     void NomesMenssager(string Nomes)
     {
 
-        TextNomes.text = TextNomes.text + "\n" + Nomes;
+        TextNomes.text = TextNomes.text + "\n" + "\n" + Nomes;
         
         
     }
 
     public void SendNomesMenssager(string Nomes)
     {
-        TextNomes.text = "";
+        TextNomes.text = "players: ";
         foreach (string i in Nome)
         {
             photonView.RPC("NomesMenssager", RpcTarget.All, i);

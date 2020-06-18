@@ -73,9 +73,9 @@ public class Launcher : MonoBehaviourPunCallbacks
                 IntTime++;
             }
             FloatTime += 1f;
-            TextTime.text = "Tempo de espera: " + IntTime.ToString();
+            TextTime.text = "Waiting time: " + IntTime.ToString();
 
-            PlayerCont.text = "Jogadores online: " + PhotonNetwork.CurrentRoom.PlayerCount.ToString();
+            PlayerCont.text = "Online players: " + PhotonNetwork.CurrentRoom.PlayerCount.ToString();
         }
         yield return new WaitForSeconds(1f);
         StartCoroutine(contar());
@@ -208,6 +208,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         SetNomescontroller setNomescontroller = ObjectNome.GetComponent<SetNomescontroller>();
         setNomescontroller.Nome.Add(newPlayer.NickName);
         setNomescontroller.SendNomesMenssager(newPlayer.NickName);
+        EntrarNaSala = true;
     }
     #endregion
 }

@@ -10,8 +10,11 @@ public class scriptChegada : MonoBehaviourPun
     public Text ClassificaçãoJogadores;
 
     private List<string> TextJogadoresClassificados = new List<string>();
+    private List<float> TimeJogadoresClassificados = new List<float>();
 
     bool AuxClassificacao;
+
+    float TimePlayer;
 
     void Start()
     {
@@ -42,6 +45,11 @@ public class scriptChegada : MonoBehaviourPun
         print("saiu da sala");
     }
 
+    public void tempo(float time)
+    {
+        TimePlayer = time;
+    }
+
     private IEnumerator OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Jogador"))
@@ -49,6 +57,8 @@ public class scriptChegada : MonoBehaviourPun
             AuxClassificacao = true;
             ClassificaçãoJogadores.text = "";
             TextJogadoresClassificados.Add(other.gameObject.name);
+            
+            
             
             if (other.gameObject == Player.MinePlayer)
             {
